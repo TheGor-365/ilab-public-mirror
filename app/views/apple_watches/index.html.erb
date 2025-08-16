@@ -1,0 +1,64 @@
+<% provide :page_title, 'Apple Watches' %>
+<% currently_at 'Apple Watches' %>
+
+<div class="container pt-5 pb-5">
+  <div class="bg-white shadow p-4 col-12">
+
+    <h4 class="display-3 mb-5">Apple Watches</h4>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Title</th>
+          <th>Diagonal</th>
+          <th>Model</th>
+          <th>Version</th>
+          <th>Series</th>
+          <th>Production period</th>
+          <th>Full title</th>
+          <th>Overview</th>
+          <th>Images</th>
+          <th>Videos</th>
+          <th colspan="3">Controls</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @apple_watches.each do |apple_watch| %>
+          <tr>
+            <td class="align-middle"><%= apple_watch.id %></td>
+
+            <td class="align-middle"><%= apple_watch.title %></td>
+            <td class="align-middle"><%= apple_watch.diagonal %></td>
+            <td class="align-middle"><%= apple_watch.model %></td>
+            <td class="align-middle"><%= apple_watch.version %></td>
+            <td class="align-middle"><%= apple_watch.series %></td>
+            <td class="align-middle"><%= apple_watch.production_period %></td>
+            <td class="align-middle"><%= apple_watch.full_title %></td>
+            <td class="align-middle"><%= apple_watch.overview %></td>
+
+            <td class="align-middle">
+              <% apple_watch.images.each do |image| %>
+                <%= image_tag(image.url, width: '30', class: 'rounded') %>
+              <% end %>
+            </td>
+
+            <td class="align-middle">
+              <% apple_watch.videos.each do |video| %>
+                <%= video_tag(video.url, width: '40', height: '40', controls: true, class: 'rounded') %>
+              <% end %>
+            </td>
+
+            <td class="align-middle"><%= link_to 'Show', apple_watch, class: 'text-decoration-none' %></td>
+            <td class="align-middle"><%= link_to 'Edit', edit_apple_watch_path(apple_watch), class: 'text-decoration-none' %></td>
+            <td class="align-middle"><%= link_to 'Destroy', apple_watch, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-decoration-none' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+
+    <%= link_to 'New Apple Watch', new_apple_watch_path, class: 'text-decoration-none' %>
+  </div>
+</div>

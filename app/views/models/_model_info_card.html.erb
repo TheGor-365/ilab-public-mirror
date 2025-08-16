@@ -1,0 +1,8 @@
+<div class="fixed-right shadow bg-white p-4 pe-3 col-3 m-3 mt-5">
+  <h4 class="text-center">
+    Photo <span class="text-muted"><%= @model.title %></span>
+  </h4>
+  <br>
+
+  <%= image_tag(@model.avatar.url, width: '420') if @model.avatar.present? %>
+</div>

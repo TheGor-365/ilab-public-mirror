@@ -1,0 +1,12 @@
+<% @phone = Phone.find(params[:id]) if @phone.present? %>
+
+<% @phone.images.each_with_index do |image, index| %>
+
+  <small class="text-muted mb-5">
+    <%= image.identifier %>
+  </small>
+
+  <div class="mb-5 mt-5">
+    <%= image_tag(image.url, width: '420', class: 'rounded shadow') if image.present? %>
+  </div>
+<% end %>

@@ -1,0 +1,31 @@
+<% provide :page_title, 'Edit iMac' %>
+<% currently_at 'iMacs' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'imac_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+    <div class="row p-5 shadow bg-white mb-5">
+      <h1 class="display-6">
+        Editing
+        <span class="anchorjs-link text-muted" id='gadget'>
+          <%= @imac.title %>
+        </span>
+      </h1>
+    </div>
+
+    <%= render 'form', imac: @imac %>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Show', @imac, class: 'text-decoration-none me-3' %>
+      <%= link_to 'Back', imacs_path, class: 'text-decoration-none' %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <%= render 'imac_info_card' %>
+  </div>
+</div>

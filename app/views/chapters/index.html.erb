@@ -1,0 +1,54 @@
+<% provide :page_title, 'Chapters' %>
+<% currently_at 'Chapters' %>
+
+<div class="container pt-5 pb-5">
+
+  <div class="bg-white shadow p-4 col-12">
+
+    <h4 class="display-3 mb-5">Chapters</h4>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Title</th>
+          <th>Cource</th>
+          <th>Images</th>
+          <th>Videos</th>
+          <th colspan="3">Controls</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @chapters.each do |chapter| %>
+          <tr>
+            <td class="align-middle"><%= chapter.id %></td>
+            <td class="align-middle"><%= chapter.title %></td>
+            <td class="align-middle"><%= chapter.cource_id %></td>
+
+            <td class="align-middle">
+              <% chapter.images.each do |image| %>
+                <%= image_tag(image.url, width: '30', class: 'rounded') %>
+              <% end %>
+            </td>
+
+            <td class="align-middle">
+              <% chapter.videos.each do |video| %>
+                <%= video_tag(video.url, width: '40', height: '40', controls: true, class: 'rounded') %>
+              <% end %>
+            </td>
+
+            <td class="align-middle"><%= link_to 'Show', chapter, class: 'text-decoration-none' %></td>
+            <td class="align-middle"><%= link_to 'Edit', edit_chapter_path(chapter), class: 'text-decoration-none' %></td>
+            <td class="align-middle"><%= link_to 'Destroy', chapter, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-decoration-none' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%= link_to 'New Chapter', new_chapter_path, class: 'text-decoration-none' %>
+
+  </div>
+</div>

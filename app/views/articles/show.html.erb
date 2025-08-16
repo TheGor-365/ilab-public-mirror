@@ -1,0 +1,37 @@
+<% provide :page_title, @article.name %>
+<% currently_at 'Articles' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'article_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="name" class="anchorjs-link display-5">
+        <span class="text-muted display-5">
+          <strong>Article</strong> <%= @article.name %>
+        </span>
+      </span>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="name" class="anchorjs-link display-5">
+        <span class="text-muted display-5">
+          <%= @article.content %>
+        </span>
+      </span>
+    </div>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Edit', edit_article_path(@article), class: 'text-decoration-none' %>
+      <%= link_to 'Back', articles_path, class: 'text-decoration-none' %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <%= render 'article_info_card' %>
+  </div>
+</div>

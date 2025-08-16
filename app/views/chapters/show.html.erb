@@ -1,0 +1,32 @@
+<% provide :page_title, @chapter.title %>
+<% currently_at 'Chapters' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'chapter_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+
+    <div class="row p-5 shadow bg-white mb-5">
+
+      Chapter id <%= @chapter.cource_id %>
+
+      <span id="title" class="anchorjs-link display-5">Chapter
+        <span class="text-muted display-5">
+          <strong><%= @chapter.title %></strong>
+        </span>
+      </span>
+    </div>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Edit', edit_chapter_path(@chapter), class: 'text-decoration-none me-3' %>
+      <%= link_to 'Back', chapters_path, class: 'text-decoration-none' %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <%= render 'chapter_info_card' %>
+  </div>
+</div>

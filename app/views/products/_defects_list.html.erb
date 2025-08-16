@@ -1,0 +1,16 @@
+<h5 class="text-muted">Типовые неисправности</h5>
+<% @mod.phone.repairs.each do |repair| %>
+  <p class="text-success">
+    <%= repair.title %>
+  </p><hr>
+  <%= repair.defects.each do |defect| %>
+    <div class="col-sm-1 col-lg-1">
+      <p>
+        Defects: <% defect.title %>
+      </p>
+    </div>
+    <small class="text-muted">
+      <%= defect.description %>
+    </small>
+  <% end %>
+<% end %>

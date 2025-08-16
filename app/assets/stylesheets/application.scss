@@ -1,0 +1,38 @@
+@import "./at.scss";
+@import 'daterangepicker/daterangepicker.css';
+@import "custom";
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+.btn:focus,
+.btn:active {
+  outline: none;
+  box-shadow: none;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  box-shadow: none;
+  background: transparent;
+  cursor: text;
+}
+
+#image-preview[src="#"] {
+  display: none;
+}
+
+.accordion-button {
+  padding-left: 0;
+}
+
+.success-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1050;
+}

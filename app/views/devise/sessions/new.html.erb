@@ -1,0 +1,53 @@
+<% provide :page_title, 'Sign In' %>
+<% currently_at 'Sign In' %>
+
+<div class="sign_in-page pt-3 pb-5">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-10">
+        <div class="bp-5 shadow bg-white mt-5 p-5">
+
+          <h5 class="mb-5">
+            Sign in
+          </h5>
+
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+            <div class="mb-3 bg-white shadow mt-5 p-5 col-10">
+              <%= f.label :login %>
+              <%= f.text_field :login, class: 'form-control' %>
+            </div>
+
+            <div class="mb-3 bg-white shadow mt-5 p-5 col-10">
+              <%= f.label :password %>
+              <%= f.password_field :password, class: 'form-control' %>
+            </div>
+
+            <% if devise_mapping.rememberable? %>
+              <div class="mb-3 bg-white shadow mt-5 p-5 col-10">
+                <%= f.check_box :remember_me %>
+                <%= f.label :remember_me %>
+              </div>
+            <% end %>
+
+            <div class="mb-3 bg-white shadow mt-5 p-5 col-10">
+              <div class="row ml-1">
+                <%= f.submit "Sign in", class: 'btn btn-success btn-sm mr-2' %>
+              </div>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-10">
+        <div class="mb-3 bg-white shadow mt-5 p-5">
+          <small><%= render "devise/shared/links" %></small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
