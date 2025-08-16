@@ -1,0 +1,18 @@
+<% phone = Phone.find_by_id(params[:id]) %>
+
+<%= form_with(model: phone, html: { multipart: true }) do |form| %>
+
+  <% if phone.images.size > 0 %>
+    <div class="row p-5 shadow bg-white mb-5">
+
+      <%= form.label "Delete images for #{phone.model_title}", class: 'display-6 mb-5' %>
+
+      <% phone.images.each_with_index do |image, index| %>
+        <div class="mt-2 mb-1 col text-center">
+          <%= image_tag(image.url, width: '100', class: 'rounded img-thumbnail shadow') %>
+          <%= link_to "Delete", phone_image_path(phone, index), method: :delete, data:{ confirm: "Are you sure you want to delete this image?" }, class: 'btn btn-sm btn-danger' %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

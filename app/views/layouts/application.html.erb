@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= full_title(yield(:page_title)) %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload" %>
+    <%= javascript_pack_tag "application", "data-turbo-track": "reload" %>
+
+  </head>
+
+  <body class="d-flex flex-column vh-100">
+
+    <header class="bg-white shadow-sm">
+      <%= toastr_flash %>
+      <%= yield :nav %>
+    </header>
+
+    <main class="flex-shrink-0">
+      <div class="container">
+        <% if notice.present? %>
+          <div class="alert alert-success">
+            <%= notice %>
+          </div>
+        <% end %>
+
+        <% if alert.present? %>
+          <div class="alert alert-danger">
+            <%= alert %>
+          </div>
+        <% end %>
+
+        <%= yield %>
+      </div>
+    </main>
+  </body>
+</html>

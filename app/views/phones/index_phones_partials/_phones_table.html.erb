@@ -1,0 +1,100 @@
+<% @phones = Phone.order('id ASC').all %>
+
+<div class="pb-4 shadow contents-table">
+
+  <div class="row px-0 pt-2 pb-1 bg-white text-center header-nav">
+
+    <div class="col-5"></div>
+
+    <div class="col-2">
+      <p class="text-muted display-6">
+        iPhones
+      </p>
+    </div>
+
+    <div class="col-3"></div>
+
+    <div class="col-2 mb-1 p-2 shadow toggler">
+
+      <%= link_to phones_block_path, remote: true, class: 'text-decoration-none text-muted' do %>
+        <i class="far fa-square"></i>
+        <br>
+
+        <small class="text-muted">
+          block
+        </small>
+      <% end %>
+    </div>
+  </div>
+
+  <table class="table table-borderless shadow bg-white">
+
+    <thead class="shadow mb-4">
+      <tr>
+        <th class="text-center px-3 text-muted"><i class="fas fa-2x fa-mobile-alt"></i> <br><small>model</small></th> <!-- phone.title -->
+        <th class="text-center px-3 text-muted"><i class="fas fa-2x fa-images"></i>     <br><small>images</small></th>
+        <th class="text-center px-3 text-muted"><i class="fab fa-2x fa-youtube"></i>    <br><small>videos</small></th>
+        <th class="text-center px-3 text-muted"><i class="fas fa-2x fa-binoculars"></i> <br><small>overview</small></th>
+        <th class="text-center px-3 text-muted"><i class="fas fa-2x fa-ellipsis-h"></i> <br><small>controls</small></th>
+      </tr>
+    </thead>
+
+    <% @phones.each_with_index do |phone, index| %>
+
+      <tbody class="shadow-sm pb-5 my-5">
+        <tr>
+          <td class="py-5 px-3 shadow-sm text-center title">
+            <span id="<%= phone.model_title %>" class="title anchorjs-link">
+              <small class="h5 text-muted">
+                <%= link_to phone_title_path(phone), remote: true, class: 'text-decoration-none text-muted' do %>
+                  <%= phone.model_title %>
+                <% end %>
+              </small>
+            </span>
+          </td>
+
+          <td class="py-5 shadow-sm text-center">
+            <%= link_to phone_photo_path(phone), remote: true, class: 'text-decoration-none text-muted' do %>
+              <span class="images">
+                <% phone.images.each do |image| %>
+                  <%= image_tag(image.url, width: '80', class: 'shadow rounded mb-3 p-1') %>
+                <% end %>
+              </span>
+            <% end %>
+          </td>
+
+          <td class="py-5 shadow-sm text-center">
+            <%= link_to phone_video_path(phone), remote: true, class: 'text-decoration-none text-muted' do %>
+              <span class="videos">
+                <% phone.videos.each do |video| %>
+                  <%= video_tag(video.url, width: '80', height: '40', controls: false, class: 'shadow rounded mb-3 p-1') %>
+                <% end %>
+              </span>
+            <% end %>
+          </td>
+
+          <td id="<%= phone.model_title %>" class="py-5 px-3 shadow-sm overview">
+            <%= link_to phone_overview_path(phone), remote: true, class: 'text-decoration-none text-muted' do %>
+              <small class="text-muted">
+                <%= phone.model_overview %>
+              </small>
+            <% end %>
+          </td>
+
+          <td class="py-5 px-4 shadow-sm">
+            <small>
+              <div class="btn-group-vertical controls">
+                <%= link_to 'Show', phone, class: 'btn btn-sm btn-secondary' %>
+                <%= link_to 'Edit', edit_phone_path(phone), class: 'btn btn-sm btn-secondary' %>
+                <%= link_to 'Destroy', phone, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-secondary' %>
+              </div>
+            </small>
+          </td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+  <br>
+
+  <%= link_to 'New Phone', new_phone_path, class: 'btn btn-sm btn-outline-secondary' %>
+</div>

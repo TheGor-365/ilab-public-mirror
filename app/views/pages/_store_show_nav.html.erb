@@ -1,0 +1,38 @@
+<div class="list-group list-group-flush bg-white">
+  <% categories = @products_by_category.keys.compact %>
+  <% categories = categories.sort_by { |c|
+       if c.respond_to?(:heading) && c.heading.present?
+         c.heading
+       elsif c.respond_to?(:title)
+         c.title.to_s
+       else
+         c.to_s
+       end
+     } %>
+
+  <% categories.each do |category| %>
+    <% anchor_id =
+         if category.respond_to?(:to_key) && category.to_key.present?
+           dom_id(category) # например, generation_125
+         else
+           "category-#{category.object_id}"
+         end
+    %>
+
+    <% text =
+         if category.respond_to?(:heading) && category.heading.present?
+           category.heading
+         elsif category.respond_to?(:title)
+           category.title
+         else
+           'Без категории'
+         end %>
+
+    <a href="#<%= anchor_id %>"
+       class="list-group-item list-group-item-action word-break store-nav-link"
+       data-bs-dismiss="offcanvas"
+       data-bs-target="#storeOffcanvasNav">
+      <%= text %>
+    </a>
+  <% end %>
+</div>

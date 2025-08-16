@@ -1,0 +1,8 @@
+<div class="fixed-right shadow bg-white p-4 pe-3 col-3 m-3 mt-5">
+  <h5 class="text-center">
+    Photo <span class="text-muted">repair <%= @repair.title %></span>
+  </h5>
+  <br>
+
+  <%= image_tag(@repair.avatar.url, width: '420') if @repair.avatar.present? %>
+</div>

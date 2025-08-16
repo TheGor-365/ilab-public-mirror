@@ -1,0 +1,31 @@
+<% provide :page_title, 'Edit Quiz Question' %>
+<% currently_at 'Quiz Questions' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'quiz_question_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+    <div class="row p-5 shadow bg-white mb-5">
+      <h1 class="display-6">
+        Editing Quiz Question
+        <span class="text-muted">
+          <%= @question.content %>
+        </span>
+      </h1>
+    </div>
+
+    <%= render 'form', quiz_question: @quiz_question %>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Show', @quiz_question, class: 'text-decoration-none' %>
+      <%= link_to 'Back', quiz_questions_path, class: 'text-decoration-none' %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <%= render 'quiz_question_info_card' %>
+  </div>
+</div>

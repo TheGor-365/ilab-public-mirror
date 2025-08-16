@@ -1,0 +1,83 @@
+<% provide :page_title, @defect.title %>
+<% currently_at 'iPhone Defects' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'defect_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="title" class="anchorjs-link display-5"><%= @defect.title %>
+        <span class="text-muted display-5">
+          <strong>Title</strong>
+        </span>
+      </span>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="title" class="anchorjs-link display-5"><%= @defect.title %>
+        <span class="text-muted display-5">
+          <strong>info</strong>
+        </span>
+      </span>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="spare_parts" class="anchorjs-link display-6 mb-3">Broken modules</span>
+      <% @defect.modules.each do |spare_part| %>
+        <small>
+          <%= spare_part %>
+        </small>
+      <% end %>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="description" class="anchorjs-link display-6 mb-3">
+        <%= @defect.title %> description
+      </span>
+      <%= @defect.description %>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="photos" class="anchorjs-link display-6 mb-5">
+        broken modules photos
+        <span class="text-muted display-6">
+          <%= @defect.title %>
+        </span>
+      </span>
+      <br>
+
+      <% @defect.images.each do |image| %>
+        <div class="col text-center mb-5">
+          <%= image_tag(image.url, width: '300', class: 'rounded img-thumbnail shadow') %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="videos" class="anchorjs-link display-6 mb-3">videos</span>
+
+      <% @defect.videos.each do |video| %>
+        <small class="text-muted mb-5">
+          <%= video.identifier %>
+        </small>
+      <% end %>
+
+      <div class="col">
+        <%= video_tag(@defect.videos, width: '640', height: '380', controls: true, class: 'rounded card p-1 shadow mx-auto mb-5') if @defect.videos.present? %>
+      </div>
+    </div>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Edit', edit_defect_path(@defect), class: 'text-decoration-none me-3' %>
+      <%= link_to 'Back', defects_path, class: 'text-decoration-none' %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <%= render 'defect_info_card' %>
+  </div>
+</div>

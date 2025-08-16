@@ -1,0 +1,20 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  username: postgres
+  host: localhost
+  port: 5432
+
+development:
+  <<: *default
+  database: ilab
+
+test:
+  <<: *default
+  database: ilab_test
+
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>

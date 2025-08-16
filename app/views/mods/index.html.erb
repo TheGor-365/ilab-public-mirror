@@ -1,0 +1,63 @@
+<% provide :page_title, 'iPhone Modules' %>
+<% currently_at 'iPhone Modules' %>
+
+<div class="container pt-5 pb-5">
+
+  <div class="bg-white shadow p-4 col-12">
+
+    <h4 class="display-3 mb-5">Modules</h4>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Generation</th>
+          <th>Phone</th>
+          <th>Model</th>
+          <th>Name</th>
+          <th>Manufacturers</th>
+          <th>Images</th>
+          <th>Videos</th>
+          <th colspan="3">Controls</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @mods.each do |mod| %>
+          <tr>
+            <td class="align-middle"><%= mod.id %></td>
+            <td class="align-middle"><%= mod.generation_id %></td>
+            <td class="align-middle"><%= mod.phone_id %></td>
+            <td class="align-middle"><%= mod.model_id %></td>
+            <td class="align-middle"><%= mod.name %></td>
+
+            <td class="align-middle">
+              <% mod.manufacturers.each_with_index do |manufacturer, index| %>
+                <small class="text-muted"><%= "#{index + 1}. #{manufacturer}" %></small><br>
+              <% end %>
+            </td>
+
+            <td class="align-middle">
+              <% mod.images.each do |image| %>
+                <%= image_tag(image.url, width: '30', class: 'rounded') %>
+              <% end %>
+            </td>
+
+            <td class="align-middle">
+              <% mod.videos.each do |video| %>
+                <%= video_tag(video.url, width: '40', height: '40', controls: true, class: 'rounded') %>
+              <% end %>
+            </td>
+
+            <td class="align-middle"><%= link_to 'Show', mod, class: 'text-decoration-none' %></td>
+            <td class="align-middle"><%= link_to 'Edit', edit_mod_path(mod), class: 'text-decoration-none' %></td>
+            <td class="align-middle"><%= link_to 'Destroy', mod, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-decoration-none' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+
+    <%= link_to 'New module', new_mod_path, class: 'text-decoration-none' %>
+  </div>
+</div>

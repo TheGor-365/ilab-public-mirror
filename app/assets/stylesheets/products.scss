@@ -1,0 +1,30 @@
+.product-details {
+  .info-section {
+    border-left: 4px solid #28a745;
+    padding-left: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 768px) {
+    .row {
+      flex-direction: column;
+    }
+
+    .col-lg-6 {
+      width: 100%;
+    }
+  }
+}
+
+#product-details-panel .accordion-button {
+  gap: .5rem;
+}
+
+#product-details-panel dl dt { color: #6c757d; }
+#product-details-panel .accordion-button { gap: .5rem; }
+#product-details-panel dl dt { color: #6c757d; }

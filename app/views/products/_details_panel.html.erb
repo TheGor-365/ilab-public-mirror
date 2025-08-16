@@ -1,0 +1,227 @@
+<div id="product-details-panel" data-controller="details">
+  <div class="card shadow-sm mb-3">
+    <div class="card-body">
+      <h5 class="card-title mb-3 d-flex align-items-center gap-2">
+        <i class="bi bi-info-circle"></i> Детали товара
+      </h5>
+
+      <!-- Основное -->
+      <dl class="row small">
+        <dt class="col-5 col-md-3">Название</dt>
+        <dd class="col-7 col-md-9"><%= product.name.presence || "—" %></dd>
+
+        <dt class="col-5 col-md-3">Категория</dt>
+        <dd class="col-7 col-md-9"><%= smart_label(category, :name, :title, :label, :slug) %></dd>
+
+        <dt class="col-5 col-md-3">Состояние</dt>
+        <dd class="col-7 col-md-9"><%= product.condition_human || "—" %></dd>
+
+        <dt class="col-5 col-md-3">Статус</dt>
+        <dd class="col-7 col-md-9"><%= product.state_human || "—" %></dd>
+
+        <dt class="col-5 col-md-3">Цена</dt>
+        <dd class="col-7 col-md-9">
+          <% if product.respond_to?(:price) && product.price.present? %>
+            <%= number_to_currency(product.price, unit: (product.currency || "₽")) %>
+          <% else %>
+            —
+          <% end %>
+        </dd>
+
+        <dt class="col-5 col-md-3">Остаток</dt>
+        <dd class="col-7 col-md-9"><%= product.try(:stock) || "—" %></dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- Аккордеон -->
+  <div class="accordion" id="detailsAccordion">
+    <!-- Модель -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="hdrModel">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#colModel" aria-expanded="false" aria-controls="colModel">
+          <i class="bi bi-phone me-2"></i> Модель
+        </button>
+      </h2>
+      <div id="colModel" class="accordion-collapse collapse" aria-labelledby="hdrModel" data-bs-parent="#detailsAccordion">
+        <div class="accordion-body">
+          <% if model.present? %>
+            <dl class="row small mb-0">
+              <dt class="col-5 col-md-3">Название</dt><dd class="col-7 col-md-9"><%= model.title %></dd>
+              <% if model.respond_to?(:vendor) %>
+                <dt class="col-5 col-md-3">Вендор</dt><dd class="col-7 col-md-9"><%= model.vendor %></dd>
+              <% end %>
+              <% if model.respond_to?(:released_on) %>
+                <dt class="col-5 col-md-3">Релиз</dt><dd class="col-7 col-md-9"><%= model.released_on %></dd>
+              <% end %>
+            </dl>
+          <% else %>
+            <em class="text-muted">Модель не найдена.</em>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Телефон -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="hdrPhone">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#colPhone" aria-expanded="false" aria-controls="colPhone">
+          <i class="bi bi-hdd-network me-2"></i> Телефон (Device)
+        </button>
+      </h2>
+      <div id="colPhone" class="accordion-collapse collapse" aria-labelledby="hdrPhone" data-bs-parent="#detailsAccordion">
+        <div class="accordion-body">
+          <% if phone.present? %>
+            <dl class="row small mb-0">
+              <dt class="col-5 col-md-3">Модель</dt><dd class="col-7 col-md-9"><%= phone.model_title %></dd>
+              <% if phone.respond_to?(:cpu) %>
+                <dt class="col-5 col-md-3">CPU</dt><dd class="col-7 col-md-9"><%= phone.cpu %></dd>
+              <% end %>
+              <% if phone.respond_to?(:ram) %>
+                <dt class="col-5 col-md-3">RAM</dt><dd class="col-7 col-md-9"><%= phone.ram %></dd>
+              <% end %>
+            </dl>
+          <% else %>
+            <em class="text-muted">Телефон не найден.</em>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Поколение -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="hdrGeneration">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#colGeneration" aria-expanded="false" aria-controls="colGeneration">
+          <i class="bi bi-layers me-2"></i> Поколение
+        </button>
+      </h2>
+      <div id="colGeneration" class="accordion-collapse collapse" aria-labelledby="hdrGeneration" data-bs-parent="#detailsAccordion">
+        <div class="accordion-body">
+          <% if generation.present? %>
+            <dl class="row small mb-0">
+              <dt class="col-5 col-md-3">Название</dt><dd class="col-7 col-md-9"><%= generation.title %></dd>
+              <% if generation.respond_to?(:storage_gb) %>
+                <dt class="col-5 col-md-3">Память</dt><dd class="col-7 col-md-9"><%= "#{generation.storage_gb} GB" %></dd>
+              <% end %>
+              <% if generation.respond_to?(:color) %>
+                <dt class="col-5 col-md-3">Цвет</dt><dd class="col-7 col-md-9"><%= generation.color %></dd>
+              <% end %>
+              <% if generation.respond_to?(:code) %>
+                <dt class="col-5 col-md-3">Код</dt><dd class="col-7 col-md-9"><%= generation.code %></dd>
+              <% end %>
+            </dl>
+          <% else %>
+            <em class="text-muted">Поколение не найдено.</em>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Запчасти -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="hdrParts">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#colParts" aria-expanded="false" aria-controls="colParts">
+          <i class="bi bi-gear me-2"></i> Запчасти
+        </button>
+      </h2>
+      <div id="colParts" class="accordion-collapse collapse" aria-labelledby="hdrParts" data-bs-parent="#detailsAccordion">
+        <div class="accordion-body">
+          <% if spare_parts.any? %>
+            <ul class="list-unstyled small mb-0" data-details-target="list" data-initial="10">
+              <% spare_parts.each_with_index do |p, idx| %>
+                <li class="mb-1 d-flex justify-content-between" data-index="<%= idx %>">
+                  <span><%= p.name %></span>
+                  <% if p.respond_to?(:price) %>
+                    <span class="text-muted"><%= number_to_currency(p.price, unit: "₽") %></span>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+            <button class="btn btn-sm btn-outline-secondary mt-2" data-action="click->details#toggleMore">
+              Показать ещё
+            </button>
+          <% else %>
+            <em class="text-muted">Нет данных для этого поколения.</em>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ремонты -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="hdrRepairs">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#colRepairs" aria-expanded="false" aria-controls="colRepairs">
+          <i class="bi bi-tools me-2"></i> Ремонты
+        </button>
+      </h2>
+      <div id="colRepairs" class="accordion-collapse collapse" aria-labelledby="hdrRepairs" data-bs-parent="#detailsAccordion">
+        <div class="accordion-body">
+          <% if repairs.any? %>
+            <ul class="list-unstyled small mb-0" data-details-target="list" data-initial="10">
+              <% repairs.each_with_index do |r, idx| %>
+                <li class="mb-1" data-index="<%= idx %>">
+                  <%= r.title %> <span class="text-muted">· <%= r.user&.email %></span>
+                </li>
+              <% end %>
+            </ul>
+            <button class="btn btn-sm btn-outline-secondary mt-2" data-action="click->details#toggleMore">
+              Показать ещё
+            </button>
+          <% else %>
+            <em class="text-muted">Пока нет.</em>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Дефекты -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="hdrDefects">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#colDefects" aria-expanded="false" aria-controls="colDefects">
+          <i class="bi bi-exclamation-triangle me-2"></i> Дефекты
+        </button>
+      </h2>
+      <div id="colDefects" class="accordion-collapse collapse" aria-labelledby="hdrDefects" data-bs-parent="#detailsAccordion">
+        <div class="accordion-body">
+          <% if defects.any? %>
+            <ul class="list-unstyled small mb-0" data-details-target="list" data-initial="10">
+              <% defects.each_with_index do |d, idx| %>
+                <li class="mb-1" data-index="<%= idx %>"><%= d.title %></li>
+              <% end %>
+            </ul>
+            <button class="btn btn-sm btn-outline-secondary mt-2" data-action="click->details#toggleMore">
+              Показать ещё
+            </button>
+          <% else %>
+            <em class="text-muted">Нет данных.</em>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Моды/тюнинг -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="hdrMods">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#colMods" aria-expanded="false" aria-controls="colMods">
+          <i class="bi bi-magic me-2"></i> Модификации (Mods)
+        </button>
+      </h2>
+      <div id="colMods" class="accordion-collapse collapse" aria-labelledby="hdrMods" data-bs-parent="#detailsAccordion">
+        <div class="accordion-body">
+          <% if mods.any? %>
+            <ul class="list-unstyled small mb-0" data-details-target="list" data-initial="10">
+              <% mods.each_with_index do |m, idx| %>
+                <li class="mb-1" data-index="<%= idx %>"><%= m.title %></li>
+              <% end %>
+            </ul>
+            <button class="btn btn-sm btn-outline-secondary mt-2" data-action="click->details#toggleMore">
+              Показать ещё
+            </button>
+          <% else %>
+            <em class="text-muted">Нет данных.</em>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<% provide :page_title, 'Cart' %>
+<% currently_at 'Cart' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'cart_show_nav' %>
+  </div>
+
+  <% if @order_items.size > 0 %>
+    <div class="col-6 m-5">
+      <%= render 'full_cart' %>
+    </div>
+  <% else %>
+    <div class="col-6 m-5">
+      <%= render 'empty_cart' %>
+    </div>
+  <% end %>
+
+  <div class="col-3">
+    <%= render 'cart_info_card' %>
+  </div>
+</div>
