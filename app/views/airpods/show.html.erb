@@ -1,0 +1,103 @@
+<% provide :page_title, @airpod.title %>
+<% currently_at 'AirPods' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'airpod_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <p class="align-middle">
+        <span id="gadget" class="anchorjs-link display-1"><%= @airpod.title %>
+          <span class="text-muted display-1">
+            <strong>show room</strong>
+          </span>
+        </span>
+      </p>
+    </div>
+
+    <div class="row mt-5 mb-2 p-5 shadow bg-white">
+      <span class="display-6 mb-3"><%= @airpod.title %>
+        <span id="overview" class="anchorjs-link text-muted display-6">
+          info
+        </span>
+      </span>
+
+      <small>
+        <div class="row">
+          <div class="col-4">
+            <span class="text-muted">
+              Diagonal:<br>
+              Model:<br>
+              Version:<br>
+              Series:<br>
+              Production period:<br>
+              Full title:<br>
+            </span>
+          </div>
+          <div class="col-6">
+            <%= @airpod.diagonal.size == 0 ? "#{'no info'}" : @airpod.diagonal %><br>
+            <%= @airpod.model.size == 0 ? "#{'no info'}" : @airpod.model %><br>
+            <%= @airpod.version.size == 0 ? "#{'no info'}" : @airpod.version %><br>
+            <%= @airpod.series.size == 0 ? "#{'no info'}" : @airpod.series %><br>
+            <%= @airpod.production_period %><br>
+            <%= @airpod.full_title.size == 0 ? "#{'no info'}" : @airpod.full_title %>
+          </div>
+        </div>
+      </small>
+    </div>
+
+    <div class="row p-5 shadow bg-white">
+      <span class="display-6 mb-3"><%= @airpod.title %>
+        <span id="photos" class="anchorjs-link text-muted display-6">
+          photos
+          <a href="#photos"></a>
+        </span>
+      </span>
+      <br>
+
+      <% @airpod.images.each do |image| %>
+        <div class="col text-center mb-5">
+          <%= image_tag(image.url, width: '300', class: 'rounded img-thumbnail shadow') %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="row mt-5 mb-2 p-5 shadow bg-white">
+      <span class="display-6 mb-3"><%= @airpod.title %>
+        <span id="overview" class="anchorjs-link text-muted display-6">
+          overview
+        </span>
+      </span>
+      <%= @airpod.overview %>
+    </div>
+
+    <div class="row mt-5 p-5 mb-4 bg-white shadow">
+      <span class="display-6 mb-3"><%= @airpod.title %>
+        <span id="videos" class="anchorjs-link text-muted display-6">
+          videos
+        </span>
+      </span>
+
+      <% @airpod.videos.each do |video| %>
+        <small class="text-muted mb-5"><%= video.identifier %></small>
+      <% end %>
+
+      <div class="col">
+        <%= video_tag(@airpod.videos, width: '640', height: '380', controls: true, class: 'rounded card p-1 shadow mx-auto mb-5') if @airpod.videos.present? %>
+      </div>
+    </div>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Edit', edit_airpod_path(@airpod), class: 'text-decoration-none me-2' %>
+      <%= link_to 'Back', airpods_path, class: 'text-decoration-none' %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <%= render 'airpod_info_card' %>
+  </div>
+</div>

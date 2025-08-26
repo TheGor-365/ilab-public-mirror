@@ -1,0 +1,24 @@
+<div class="row p-5 shadow bg-white mb-5">
+  <p class="align-middle">
+    <span id="cart" class="anchorjs-link display-1"><%= current_user.username %>'s
+      <span class="text-muted display-1">
+        <strong>cart</strong>
+      </span>
+    </span>
+  </p>
+</div>
+
+<div class="row p-5 shadow bg-white mb-5">
+
+  <p class="align-middle mb-5">
+    <span id="cart" class="anchorjs-link display-5"><%= current_user.username %>'s
+      <span class="text-muted display-5">
+        <strong>cart is empty now</strong>
+      </span>
+    </span>
+  </p>
+
+  <div class="d-grid gap-2 col-6 mx-auto">
+    <%= button_to 'Go to store and buy something', store_path, class: 'btn-success mt-5 px-5 py-5' %>
+  </div>
+</div>

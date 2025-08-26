@@ -1,0 +1,45 @@
+<div data-controller="products-form">
+  <div class="row g-3">
+    <div class="col-md-3">
+      <label class="form-label">Семейство</label>
+      <select class="form-select" data-products-form-target="family"
+              data-action="change->products-form#onFamilyChange">
+        <option value="">— выберите семейство —</option>
+        <option value="iPhone">iPhone</option>
+        <!-- Другие семейства добавим позже (iPad, MacBook, …) -->
+      </select>
+    </div>
+
+    <div class="col-md-5">
+      <label class="form-label">Поколение (модель)</label>
+      <select class="form-select" data-products-form-target="generation"
+              data-action="change->products-form#onGenerationChange">
+        <option value="">— выберите поколение —</option>
+      </select>
+      <input type="hidden" name="product[generation_id]" data-products-form-target="generationHidden">
+      <input type="hidden" name="product[phone_id]"      data-products-form-target="phoneId">
+      <input type="hidden" name="product[model_id]"      data-products-form-target="modelId">
+    </div>
+
+    <div class="col-md-2">
+      <label class="form-label">Память</label>
+      <select class="form-select" name="product[storage]" data-products-form-target="storage"
+              data-action="change->products-form#updateDisplayName">
+        <option value="">—</option>
+      </select>
+    </div>
+
+    <div class="col-md-2">
+      <label class="form-label">Цвет</label>
+      <select class="form-select" name="product[color]" data-products-form-target="color"
+              data-action="change->products-form#updateDisplayName">
+        <option value="">—</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <label class="form-label">Итоговое название</label>
+    <input class="form-control" data-products-form-target="displayName" readonly>
+  </div>
+</div>

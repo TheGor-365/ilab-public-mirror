@@ -1,0 +1,114 @@
+<% provide :page_title, @repair.title %>
+<% currently_at 'iPhone Repairs' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'repair_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="" class="anchorjs-link display-6">
+        iPhone generation <%= @repair.generation_id %>
+        <span class="text-muted display-6">
+          <strong>info</strong>
+        </span>
+      </span>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="" class="anchorjs-link display-6">
+        iPhone id <%= @repair.phone_id %>
+        <span class="text-muted display-6">
+          <strong>info</strong>
+        </span>
+      </span>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="" class="anchorjs-link display-6">
+        iPhone defect id <%= @repair.phone_id %>
+        <span class="text-muted display-6">
+          <strong>info</strong>
+        </span>
+      </span>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="title" class="anchorjs-link display-6 mb-3">
+        Repair title
+      </span>
+      <%= @repair.title %>
+    </div>
+
+    <div class="row mt-5 mb-2 p-5 shadow bg-white">
+      <span id="spare_parts" class="anchorjs-link display-6 mb-3">
+        Spare parts
+      </span>
+
+      <% @repair.spare_parts.each do |spare_part| %>
+      <small>
+        <%= spare_part %>
+      </small>
+      <% end %>
+    </div>
+
+    <div class="row mt-5 mb-5 p-5 shadow bg-white">
+      <span id="description" class="anchorjs-link display-6 mb-3">
+        Description
+      </span>
+      <%= @repair.description %>
+    </div>
+
+    <div class="row mt-5 mb-5 p-5 shadow bg-white">
+      <span id="overview" class="anchorjs-link display-6 mb-3">
+        Overview
+      </span>
+      <%= @repair.overview %>
+    </div>
+
+    <div class="row p-5 shadow bg-white">
+      <span id="photos" class="anchorjs-link display-6 mb-5">
+        Broken spare parts photos
+        <span class="text-muted display-6">
+          <%= @repair.title %>
+        </span>
+      </span>
+      <br>
+
+      <% @repair.images.each do |image| %>
+      <div class="col text-center mb-5">
+        <%= image_tag(image.url, width: '300', class: 'rounded img-thumbnail shadow') %>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="row mt-5 p-5 mb-4 bg-white shadow">
+      <span id="videos" class="anchorjs-link display-6 mb-3">
+        Repair videos
+      </span>
+
+      <% @repair.videos.each do |video| %>
+      <small class="text-muted mb-5">
+        <%= video.identifier %>
+      </small>
+      <% end %>
+
+      <div class="col">
+        <%= video_tag(@repair.videos, width: '640', height: '380', controls: true, class: 'rounded card p-1 shadow mx-auto mb-5') if @repair.videos.present? %>
+      </div>
+    </div>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Edit', edit_repair_path(@repair), class: 'text-decoration-none me-3' %>
+      <%= link_to 'Back', repairs_path, class: 'text-decoration-none' %>
+    </div>
+  </div>
+
+
+  <div class="col-3">
+    <%= render 'repair_info_card' %>
+  </div>
+</div>

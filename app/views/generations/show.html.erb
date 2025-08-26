@@ -1,0 +1,119 @@
+<% provide :page_title, @generation.title %>
+<% currently_at 'iPhone Generations' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'generations/show_generation_partials/generation_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5 contents-show">
+
+    <div class="row pt-4 pb-5 shadow bg-white mb-5 text-center header-nav">
+      <p class="align-middle">
+        <span id="gadget" class="anchorjs-link display-6 text-muted"><%= @generation.title %>
+          <span class="text-muted display-6">
+            <strong>show room</strong>
+          </span>
+        </span>
+      </p>
+
+      <i class="fas fa-2x fa-book-open text-muted pt-2"></i>
+    </div>
+
+    <div class="row mt-5 p-5 mb-4 bg-white shadow">
+      <span id="production_period" class="anchorjs-link display-6 mb-5">Generation <%= @generation.title %>
+        <span class="text-muted display-6">
+          production period
+        </span>
+      </span>
+      <br>
+
+
+      <%= link_to generation_production_period_path(@generation), remote: true, class: 'text-decoration-none text-muted' do %>
+        <small>
+          <%= @generation.production_period %>
+        </small>
+      <% end %>
+    </div>
+
+    <div class="row mt-5 p-5 mb-4 bg-white shadow">
+      <span id="features" class="anchorjs-link display-6 mb-5">Generation <%= @generation.title %>
+        <span class="text-muted display-6">
+          features
+        </span>
+      </span>
+      <br>
+
+      <%= link_to generation_features_path(@generation), remote: true, class: 'text-decoration-none text-muted' do %>
+        <small>
+          <%= @generation.features %>
+        </small>
+      <% end %>
+    </div>
+
+    <div class="row mt-5 p-5 mb-4 bg-white shadow">
+      <span id="vulnerability" class="anchorjs-link display-6 mb-5">Generation <%= @generation.title %>
+        <span class="text-muted display-6">
+          vulnerability
+        </span>
+      </span>
+      <br>
+
+      <%= link_to generation_vulnerability_path(@generation), remote: true, class: 'text-decoration-none text-muted' do %>
+        <small>
+          <%= @generation.vulnerability %>
+        </small>
+      <% end %>
+    </div>
+
+    <div class="row mt-5 p-5 mb-4 bg-white shadow">
+      <span id="photos" class="anchorjs-link display-6 mb-5">Generation <%= @generation.title %>
+        <span class="text-muted display-6">
+          photos
+        </span>
+      </span>
+      <br>
+
+      <%= link_to generation_images_path(@generation), remote: true, class: 'text-decoration-none text-muted' do %>
+
+        <% @generation.images.each do |image| %>
+          <div class="col text-center mb-5">
+            <%= image_tag(image.url, width: '300', class: 'rounded img-thumbnail shadow') %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="row mt-5 p-5 mb-4 bg-white shadow">
+      <span id="videos" class="anchorjs-link display-6 mb-3">Generation <%= @generation.title %>
+        <span class="text-muted display-6">
+          videos
+        </span>
+      </span>
+      <br>
+
+      <%= link_to generation_video_path(@generation), remote: true, class: 'text-decoration-none text-muted' do %>
+
+        <% @generation.videos.each do |video| %>
+          <small class="text-muted mb-5">
+            <%= video.identifier %>
+          </small>
+        <% end %>
+      <% end %>
+
+      <div class="col">
+        <%= video_tag(@generation.videos, width: '640', height: '380', controls: true, class: 'rounded card p-1 shadow mx-auto mb-5') if @generation.videos.present? %>
+      </div>
+    </div>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Edit', edit_generation_path(@generation), class: 'text-decoration-none me-2' %>
+      <%= link_to 'Back', generations_path, class: 'text-decoration-none' %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <%= render 'generations/show_generation_partials/generation_info_card' %>
+  </div>
+</div>

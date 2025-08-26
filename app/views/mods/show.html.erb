@@ -1,0 +1,115 @@
+<% provide :page_title, @mod.name %>
+<% currently_at 'iPhone Modules' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'module_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="module" class="anchorjs-link display-4"><%= @mod.name %>
+        <span class="text-muted display-4">
+          <strong>show room</strong>
+        </span>
+      </span>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="" class="anchorjs-link display-6"><%= @mod.name %>
+        <span class="text-muted display-6">
+          <strong>generation id</strong>
+          <%= @mod.generation_id %>
+        </span>
+      </span>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="" class="anchorjs-link display-6"><%= @mod.name %>
+        <span class="text-muted display-6">
+          <strong>phone id</strong>
+          <%= @mod.phone_id %>
+        </span>
+      </span>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="" class="anchorjs-link display-6"><%= @mod.name %>
+        <span class="text-muted display-6 align-middle">
+          <strong>model id</strong>
+          <%= @mod.model_id %>
+        </span>
+      </span>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="title" class="anchorjs-link display-6"><%= @mod.name %>
+        <span class="text-muted display-6">
+          <strong>name</strong>
+          <%= @mod.name %>
+        </span>
+      </span>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="manufacturers" class="anchorjs-link display-6"><%= @mod.name %>
+        <span class="text-muted display-6">
+          <strong>manufacturers</strong>
+        </span>
+      </span>
+      <br>
+
+      <div class="mt-5">
+        <% @mod.manufacturers.each_with_index do |manufacturer, index| %>
+          <small class="text-muted">
+            <%= "#{index + 1}. #{manufacturer}" %>
+            <br>
+          </small>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="photos" class="anchorjs-link display-6 mb-3"><%= @mod.name %>
+        <span class="text-muted display-6">
+          module photos
+        </span>
+      </span>
+      <br>
+
+      <% @mod.images.each do |image| %>
+        <div class="col text-center mb-5">
+          <%= image_tag(image.url, width: '300', class: 'rounded img-thumbnail shadow') %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="videos" class="anchorjs-link display-6 mb-3"><%= @mod.name %>
+        <span class="text-muted display-6">
+          module videos
+        </span>
+      </span>
+
+      <% @mod.videos.each do |video| %>
+        <small class="text-muted mb-5">
+          <%= video.identifier %>
+        </small>
+      <% end %>
+
+      <div class="col">
+        <%= video_tag(@mod.videos, width: '640', height: '380', controls: true, class: 'rounded card p-1 shadow mx-auto mb-5') if @mod.videos.present? %>
+      </div>
+    </div>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Edit', edit_mod_path(@mod), class: 'text-decoration-none me-3' %>
+      <%= link_to 'Back', mods_path, class: 'text-decoration-none' %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <%= render 'module_info_card' %>
+  </div>
+</div>

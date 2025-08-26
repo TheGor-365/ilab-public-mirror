@@ -1,0 +1,41 @@
+{
+  "application.js": "/packs/js/application-5720dc26da97a2e187ed.js",
+  "application.js.map": "/packs/js/application-5720dc26da97a2e187ed.js.map",
+  "entrypoints": {
+    "application": {
+      "js": [
+        "/packs/js/application-5720dc26da97a2e187ed.js"
+      ],
+      "js.map": [
+        "/packs/js/application-5720dc26da97a2e187ed.js.map"
+      ]
+    },
+    "rails_admin": {
+      "js": [
+        "/packs/js/rails_admin-3ab9679558854fad131d.js"
+      ],
+      "js.map": [
+        "/packs/js/rails_admin-3ab9679558854fad131d.js.map"
+      ]
+    }
+  },
+  "media/webfonts/fa-brands-400.eot": "/packs/media/webfonts/fa-brands-400-89a52ae1.eot",
+  "media/webfonts/fa-brands-400.svg": "/packs/media/webfonts/fa-brands-400-216edb96.svg",
+  "media/webfonts/fa-brands-400.ttf": "/packs/media/webfonts/fa-brands-400-9e138496.ttf",
+  "media/webfonts/fa-brands-400.woff": "/packs/media/webfonts/fa-brands-400-329a95a9.woff",
+  "media/webfonts/fa-brands-400.woff2": "/packs/media/webfonts/fa-brands-400-c1210e5e.woff2",
+  "media/webfonts/fa-regular-400.eot": "/packs/media/webfonts/fa-regular-400-4079ae2d.eot",
+  "media/webfonts/fa-regular-400.svg": "/packs/media/webfonts/fa-regular-400-19e27d34.svg",
+  "media/webfonts/fa-regular-400.ttf": "/packs/media/webfonts/fa-regular-400-1017bce8.ttf",
+  "media/webfonts/fa-regular-400.woff": "/packs/media/webfonts/fa-regular-400-36722648.woff",
+  "media/webfonts/fa-regular-400.woff2": "/packs/media/webfonts/fa-regular-400-68c5af1f.woff2",
+  "media/webfonts/fa-solid-900.eot": "/packs/media/webfonts/fa-solid-900-efbd5d20.eot",
+  "media/webfonts/fa-solid-900.svg": "/packs/media/webfonts/fa-solid-900-13de59f1.svg",
+  "media/webfonts/fa-solid-900.ttf": "/packs/media/webfonts/fa-solid-900-07c3313b.ttf",
+  "media/webfonts/fa-solid-900.woff": "/packs/media/webfonts/fa-solid-900-c6ec0800.woff",
+  "media/webfonts/fa-solid-900.woff2": "/packs/media/webfonts/fa-solid-900-ada6e6df.woff2",
+  "rails_admin.js": "/packs/js/rails_admin-3ab9679558854fad131d.js",
+  "rails_admin.js.map": "/packs/js/rails_admin-3ab9679558854fad131d.js.map",
+  "vendors~actioncable.js": "/packs/js/vendors~actioncable-5f910329c16a7601db87.chunk.js",
+  "vendors~actioncable.js.map": "/packs/js/vendors~actioncable-5f910329c16a7601db87.chunk.js.map"
+}

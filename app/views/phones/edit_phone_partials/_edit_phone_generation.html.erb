@@ -1,0 +1,18 @@
+<% @phone = Phone.find(params[:id]) if @phone.present? %>
+
+<%= form_with(model: @phone, html: { multipart: true }) do |form| %>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <%= form.label :generation %><br>
+
+    <div class="form-check">
+      <%= form.radio_button(:generation_id, '1', class: 'form-check-input') %>
+      <%= form.label :generation_5 %>
+    </div>
+
+    <div class="form-check">
+      <%= form.radio_button(:generation_id, '2', class: 'form-check-input') %>
+      <%= form.label :generation_6 %>
+    </div>
+  </div>
+<% end %>

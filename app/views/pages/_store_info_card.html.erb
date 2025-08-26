@@ -1,0 +1,16 @@
+<div class="p-3 bg-white h-100 text-center text-muted">
+  <p class="border rounded p-2">
+    Product count: <span class="text-primary"><%= @products.count %></span>
+  </p>
+  <% @categories.each do |category| %>
+    <p class="text-success">
+      <%= category.heading %>
+    </p>
+    <% category.products.each do |product| %>
+      <small>
+        <%= product.name %>
+      </small><br>
+    <% end %>
+    <hr class="text-primary">
+  <% end %>
+</div>

@@ -1,0 +1,48 @@
+<%# ✅ desktop: заменяем правую панель в фрейме %>
+<%= turbo_stream.replace "product_details_frame" do %>
+  <turbo-frame id="product_details_frame">
+    <%= render "products/details_panel",
+        product: @product,
+        model: @model,
+        phone: @phone,
+        generation: @generation,
+        category: @category,
+        repairs: @repairs,
+        defects: @defects,
+        spare_parts: @spare_parts,
+        mods: @mods,
+        mod: @mod %>
+  </turbo-frame>
+<% end %>
+
+<%# (опционально) если где-то есть старый div с таким id — тоже обновим %>
+<%= turbo_stream.replace "product-details-panel" do %>
+  <%= render "products/details_panel",
+      product: @product,
+      model: @model,
+      phone: @phone,
+      generation: @generation,
+      category: @category,
+      repairs: @repairs,
+      defects: @defects,
+      spare_parts: @spare_parts,
+      mods: @mods,
+      mod: @mod %>
+<% end %>
+
+<%# ✅ mobile: обновляем содержимое модалки %>
+<%= turbo_stream.update "product-details-modal-body" do %>
+  <div data-controller="modal-opener">
+    <%= render "products/details_panel",
+        product: @product,
+        model: @model,
+        phone: @phone,
+        generation: @generation,
+        category: @category,
+        repairs: @repairs,
+        defects: @defects,
+        spare_parts: @spare_parts,
+        mods: @mods,
+        mod: @mod %>
+  </div>
+<% end %>
