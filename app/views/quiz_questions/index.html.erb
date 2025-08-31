@@ -1,0 +1,52 @@
+<% provide :page_title, 'Quiz Questions' %>
+<% currently_at 'Quiz Questions' %>
+
+<div class="container">
+
+  <div class="bg-white shadow p-4 col-12">
+
+    <h4 class="display-3 mb-5">
+      Quiz Questions
+    </h4>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Content</th>
+          <th>Quiz</th>
+          <th colspan="3">Controls</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @quiz_questions.each do |quiz_question| %>
+          <tr>
+            <td class="align-middle"><%= quiz_question.id %></td>
+            <td class="align-middle"><%= quiz_question.content %></td>
+            <td class="align-middle"><%= quiz_question.quiz_id %></td>
+
+            <td class="align-middle">
+              <% quiz_question.images.each do |image| %>
+                <%= image_tag(image.url, width: '30', class: 'rounded') %>
+              <% end %>
+            </td>
+
+            <td class="align-middle">
+              <% quiz_question.videos.each do |video| %>
+                <%= video_tag(video.url, width: '40', height: '40', controls: true, class: 'rounded') %>
+              <% end %>
+            </td>
+
+            <td class="align-middle"><%= link_to 'Show', quiz_question, class: 'text-decoration-none' %></td>
+            <td class="align-middle"><%= link_to 'Edit', edit_quiz_question_path(quiz_question), class: 'text-decoration-none' %></td>
+            <td class="align-middle"><%= link_to 'Destroy', quiz_question, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-decoration-none' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+
+    <%= link_to 'New Quiz Question', new_quiz_question_path, class: 'text-decoration-none' %>
+  </div>
+</div>

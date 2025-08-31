@@ -1,0 +1,44 @@
+<%# Блок краткой сводки: иконка сверху, ниже бейджи. Адаптив:
+    - мобайл: 1 ряд из 4 бейджей
+    - десктоп: 2 ряда по 2 бейджа
+%>
+<% product = local_assigns[:product] || @product %>
+<% gen     = product&.generation %>
+
+<%
+  # Считаем по реально существующим связям у Generation
+  repairs_count = safe_assoc_count(gen, :repairs)
+  defects_count = safe_assoc_count(gen, :defects)
+  mods_count    = safe_assoc_count(gen, :mods)
+
+  # У Generation нет связи :spare_parts — показываем честный 0, пока не добавим связь/сиды
+  spares_count  = 0
+%>
+
+<div class="pd-summary">
+  <div class="pd-summary__icon" aria-label="Краткая сводка">
+    <i class="bi bi-collection"></i>
+  </div>
+
+  <div class="pd-summary__badges">
+    <div class="pd-summary__badge">
+      <span class="pd-summary__badge-label">Запчасти</span>
+      <span class="pd-summary__badge-num"><%= spares_count %></span>
+    </div>
+
+    <div class="pd-summary__badge">
+      <span class="pd-summary__badge-label">Ремонты</span>
+      <span class="pd-summary__badge-num"><%= repairs_count %></span>
+    </div>
+
+    <div class="pd-summary__badge">
+      <span class="pd-summary__badge-label">Дефекты</span>
+      <span class="pd-summary__badge-num"><%= defects_count %></span>
+    </div>
+
+    <div class="pd-summary__badge">
+      <span class="pd-summary__badge-label">Модули</span>
+      <span class="pd-summary__badge-num"><%= mods_count %></span>
+    </div>
+  </div>
+</div>

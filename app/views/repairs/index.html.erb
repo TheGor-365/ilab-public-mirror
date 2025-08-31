@@ -1,0 +1,62 @@
+<% provide :page_title, 'iPhone Repairs' %>
+<% currently_at 'iPhone Repairs' %>
+
+<div class="container pt-5 pb-5">
+
+  <div class="bg-white shadow p-4 col-12">
+
+    <h4 class="display-3 mb-5">Repairs</h4>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Generation id</th>
+          <th>Phone id</th>
+          <th>Defect id</th>
+          <th>Title</th>
+          <th>Spare parts</th>
+          <th>Description</th>
+          <th>Overview</th>
+          <th>Images</th>
+          <th>Videos</th>
+          <th colspan="3">Controls</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @repairs.each do |repair| %>
+          <tr>
+            <td class="align-middle"><%= repair.id %></td>
+            <td class="align-middle"><%= repair.generation_id %></td>
+            <td class="align-middle"><%= repair.phone_id %></td>
+            <td class="align-middle"><%= repair.defect_id %></td>
+            <td class="align-middle"><%= repair.title %></td>
+            <td class="align-middle"><%= repair.spare_parts %></td>
+            <td class="align-middle"><%= repair.description %></td>
+            <td class="align-middle"><%= repair.overview %></td>
+
+            <td class="align-middle">
+              <% repair.images.each do |image| %>
+                <%= image_tag(image.url, width: '30', class: 'rounded') %>
+              <% end %>
+            </td>
+
+            <td class="align-middle">
+              <% repair.videos.each do |video| %>
+                <%= video_tag(video.url, width: '40', height: '40', controls: true, class: 'rounded') %>
+              <% end %>
+            </td>
+
+            <td class="align-middle"><%= link_to 'Show', repair, class: 'text-decoration-none' %></td>
+            <td class="align-middle"><%= link_to 'Edit', edit_repair_path(repair), class: 'text-decoration-none' %></td>
+            <td class="align-middle"><%= link_to 'Destroy', repair, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-decoration-none' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+
+    <%= link_to 'New Repair', new_repair_path, class: 'text-decoration-none' %>
+  </div>
+</div>

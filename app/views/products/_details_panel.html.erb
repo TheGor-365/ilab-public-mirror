@@ -1,0 +1,27 @@
+<%# Панель деталей товара (правый сайдбар + модалка на мобиле) %>
+<% product = local_assigns[:product] || @product %>
+
+<div id="product-details-panel" class="product-details">
+  <div class="accordion" id="pd-accordion">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="pd-acc-1-h">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#pd-acc-1" aria-expanded="true" aria-controls="pd-acc-1">
+          <i class="bi bi-info-circle me-3"></i>
+          <span>Ключевые параметры</span>
+        </button>
+      </h2>
+      <div id="pd-acc-1" class="accordion-collapse collapse show" aria-labelledby="pd-acc-1-h" data-bs-parent="#pd-accordion">
+        <div class="accordion-body">
+          <%= render "products/details_kv", product: product %>
+        </div>
+      </div>
+    </div>
+
+    <%# если у тебя есть другие секции-аккордеоны — оставь их тут как есть %>
+  </div>
+
+  <%# ⤵️ СВОДКИ ПЕРЕНЕСЕНЫ В НИЗ ПАНЕЛИ, ОТДЕЛЕНЫ РАМКОЙ %>
+  <div class="pd-summaries-box mt-3">
+    <%= render "products/generation_summaries", product: product %>
+  </div>
+</div>

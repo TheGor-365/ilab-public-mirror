@@ -1,0 +1,44 @@
+<div class="p-3">
+
+  <h5 class="text-center mb-3"><%= @product.name %></h5>
+
+  <% if @product.avatar.present? %>
+    <div class="text-center mb-3">
+      <%= image_tag @product.avatar.url, class: 'img-fluid rounded shadow-sm', style: 'max-height: 180px;' %>
+    </div>
+  <% end %>
+
+  <p class="text-muted small"><%= simple_format(@product.description) %></p>
+  <p class="fw-bold text-success text-end">$<%= @product.price %></p>
+
+  <hr>
+
+  <h6 class="text-muted mb-2">Модель</h6>
+  <%= render 'products/phone_info', phone: @phone %>
+
+  <h6 class="text-muted mb-2">Поколение</h6>
+  <%= render 'products/generation_info', generation: @generation %>
+
+  <h6 class="text-muted mb-2">Неисправности</h6>
+  <%= render 'products/defects_list', defects: @defects %>
+
+  <h6 class="text-muted mb-2">Ремонты</h6>
+  <%= render 'products/repairs_list', repairs: @repairs %>
+
+  <h6 class="text-muted mb-2">Запчасти</h6>
+  <%= render 'products/spare_parts_list', spare_parts: @spare_parts %>
+
+  <h6 class="text-muted mb-2">Модификации</h6>
+  <%= render 'products/mods_list', mods: @mods %>
+
+  <hr>
+
+  <%= form_with model: @order_item, url: order_items_path do |f| %>
+    <%= f.hidden_field :product_id, value: @product.id %>
+    <div class="input-group mb-2">
+      <%= f.number_field :quantity, value: 1, min: 1, class: 'form-control form-control-sm' %>
+      <%= f.submit "В корзину", class: "btn btn-sm btn-primary" %>
+    </div>
+  <% end %>
+
+</div>

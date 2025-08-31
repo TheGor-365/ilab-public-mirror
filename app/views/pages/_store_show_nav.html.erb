@@ -1,0 +1,65 @@
+<% offcanvas = local_assigns[:offcanvas].present? %>
+
+<div class="store-nav">
+  <!-- Фильтр семейств (Все / iPhone / iPad / …) -->
+  <div class="store-nav__families">
+    <%= link_to "Все", store_path, class: "pill#{' active' unless @family.present?}" %>
+    <% @families.each do |fam| %>
+      <%= link_to fam, store_path(family: fam), class: "pill#{' active' if @family == fam}" %>
+    <% end %>
+  </div>
+
+  <!-- Секции категорий/поколений -->
+  <div class="store-nav__list">
+    <% categories = @products_by_category.keys.compact %>
+    <% categories = categories.sort_by { |c|
+         if c.respond_to?(:heading) && c.heading.present?
+           c.heading
+         elsif c.respond_to?(:title)
+           c.title.to_s
+         else
+           c.to_s
+         end
+       } %>
+
+    <% categories.each do |category| %>
+      <% anchor_id =
+           if category.respond_to?(:to_key) && category.to_key.present?
+             dom_id(category)
+           else
+             "category-#{category.object_id}"
+           end
+      %>
+      <% text =
+           if category.respond_to?(:heading) && category.heading.present?
+             category.heading
+           elsif category.respond_to?(:title)
+             category.title
+           else
+             'Без категории'
+           end %>
+      <% anchor_href = "##{anchor_id}" %>
+
+      <div class="store-nav__section">
+        <div class="store-nav__section-title"><%= text %></div>
+        <ul class="store-nav__ul">
+          <% (@products_by_category[category] || []).sort_by { |p| p.display_name }.each do |p| %>
+            <li class="store-nav__li">
+              <a
+                href="<%= anchor_href %>"
+                class="store-nav__anchor"
+                data-store-anchor="<%= anchor_href %>"
+                <% if offcanvas %>
+                  data-offcanvas="true"
+                  data-bs-dismiss="offcanvas"
+                  data-bs-target="#storeOffcanvasNav"
+                <% end %>>
+                <%= p.display_name %>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+</div>

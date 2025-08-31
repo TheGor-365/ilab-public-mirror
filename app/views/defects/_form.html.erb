@@ -1,0 +1,202 @@
+<%= form_with(model: defect, html: { multipart: true }) do |form| %>
+
+  <% if defect.errors.any? %>
+    <div class="row p-5 shadow bg-white mb-5 border border-danger">
+      <div id="error_explanation" class="danger">
+        <h5><%= pluralize(defect.errors.count, "error") %> <span class="text-muted">prohibited this defect from being saved:</span></h5>
+        <br>
+        <ul>
+          <% defect.errors.each do |error| %>
+            <li>
+              <small class="text-muted">
+                <%= error.full_message %>
+              </small>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row p-5 shadow bg-white mb-5 mt-5">
+    <%= form.label :generation %><br>
+
+    <div class="form-check">
+      <%= form.radio_button(:generation_id, '1', class: 'form-check-input') %>
+      <%= form.label :generation_4 %>
+    </div>
+
+    <div class="form-check">
+      <%= form.radio_button(:generation_id, '2', class: 'form-check-input') %>
+      <%= form.label :generation_5 %>
+    </div>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <%= form.label :iphone_model %><br>
+
+    <div class="form-check">
+      <%= form.radio_button(:phone_id, '1', class: 'form-check-input') %>
+      <%= form.label 'iphone 4' %>
+    </div>
+
+    <div class="form-check">
+      <%= form.radio_button(:phone_id, '2', class: 'form-check-input') %>
+      <%= form.label 'iphone 4s' %>
+    </div>
+
+    <div class="form-check">
+      <%= form.radio_button(:phone_id, '3', class: 'form-check-input') %>
+      <%= form.label 'iphone 5' %>
+    </div>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <%= form.label :defect_title %>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <div class="mb-3">
+      <%= form.label :product_avatar, class: 'form-label mb-3' %><br>
+      <%= form.file_field :avatar, id: 'new-avatar-field', type: 'file', class: 'form-control' %>
+      <%= form.hidden_field :avatar_cache %>
+    </div>
+
+    <div class="row">
+      <div class="mt-3 mb-3 col">
+        <%= form.label "Current product avatar", class: 'form-label mb-3' %><br>
+
+        <% if defect.avatar.present? %>
+          <%= image_tag(defect.avatar.url, width: '300', class: 'img-thumbnail') %>
+        <% else %>
+          <%= image_tag('default_product_avatar.jpg', width: '300', class: 'img-thumbnail') %>
+        <% end %>
+      </div>
+
+      <div class="mt-3 mb-3 col">
+        <%= form.label "New product avatar preview", class: 'form-label mb-3' %><br>
+        <img id="image-preview" src="#" width="300" height="200" class="img-thumbnail" />
+      </div>
+    </div>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <%= form.label :defect_modules %><br>
+
+
+    <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+
+      <% if defect.modules.present? %>
+        <%= form.check_box( { modules: [0] }, autocomplete: 'off', class: 'btn-check align-middle', id: 'module_1') %>
+        <%= form.label defect.modules[0], for: 'module_1', class: 'btn btn-outline-primary' %>
+
+        <%= form.check_box( { modules: [1] }, autocomplete: 'off', class: 'btn-check align-middle', id: 'module_2') %>
+        <%= form.label defect.modules[1], for: 'module_2', class: 'btn btn-outline-primary' %>
+
+        <%= form.check_box( { modules: [2] }, autocomplete: 'off', class: 'btn-check align-middle', id: 'module_3') %>
+        <%= form.label defect.modules[2], for: 'module_3', class: 'btn btn-outline-primary' %>
+
+        <%= form.check_box( { modules: [3] }, autocomplete: 'off', class: 'btn-check align-middle', id: 'module_4') %>
+        <%= form.label defect.modules[3], for: 'module_4', class: 'btn btn-outline-primary' %>
+
+        <%= form.check_box( { modules: [4] }, autocomplete: 'off', class: 'btn-check align-middle', id: 'module_5') %>
+        <%= form.label defect.modules[4], for: 'module_5', class: 'btn btn-outline-primary' %>
+
+        <%= form.check_box( { modules: [5] }, autocomplete: 'off', class: 'btn-check align-middle', id: 'module_6') %>
+        <%= form.label defect.modules[5], for: 'module_6', class: 'btn btn-outline-primary' %>
+
+        <%= form.check_box( { modules: [6] }, autocomplete: 'off', class: 'btn-check align-middle', id: 'module_7') %>
+        <%= form.label defect.modules[6], for: 'module_7', class: 'btn btn-outline-primary' %>
+
+        <%= form.check_box( { modules: [7] }, autocomplete: 'off', class: 'btn-check align-middle', id: 'module_8') %>
+        <%= form.label defect.modules[7], for: 'module_8', class: 'btn btn-outline-primary' %>
+
+        <%= form.check_box( { modules: [8] }, autocomplete: 'off', class: 'btn-check align-middle', id: 'module_9') %>
+        <%= form.label defect.modules[8], for: 'module_9', class: 'btn btn-outline-primary' %>
+
+        <%= form.check_box( { modules: [9] }, autocomplete: 'off', class: 'btn-check align-middle', id: 'module_10') %>
+        <%= form.label defect.modules[9], for: 'module_10', class: 'btn btn-outline-primary' %>
+      <% end %>
+    </div>
+    <br>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <%= form.label :defect_description, class: 'mb-5' %>
+    <%= form.rich_text_area :description, class: 'form-control' %>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <div class="mb-3">
+      <%= form.label "Change iphone modules images", class: 'form-label mb-3' %><br>
+      <%= form.file_field :images, type: 'file', multiple: true, class: 'form-control' %>
+      <%= form.hidden_field :images_cache %>
+    </div>
+
+    <div class="mt-3 mb-3">
+      <% if defect.images? %>
+        <% defect.images.each do |image| %>
+          <%= image_tag(image.url, width: '100') %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="mt-3 mb-3 col">
+      <%= form.label "Choosed images", class: 'form-label mb-3' %><br>
+      <img id="image-preview" src="#" width="300" height="200" class="img-thumbnail" />
+    </div>
+  </div>
+
+  <% if defect.images.size > 0 %>
+    <div class="row p-5 shadow bg-white mb-5">
+      <%= form.label "Add more images for iphone modules", class: 'form-label mb-3' %><br>
+      <%= form.file_field :images, multiple: true, class: 'form-control' %>
+
+      <div class="mt-3 mb-3">
+        <% if defect.images? %>
+          <% defect.images.each do |image| %>
+            <%= image_tag(image.url, width: '100') %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <%= form.label "Change ipnone defect videos", class: 'form-label mb-3' %><br>
+    <%= form.file_field :videos, multiple: true, type: 'file', class: 'form-control' %>
+
+    <div class="mt-5">
+      <% if defect.videos.present? %>
+        <%= video_tag(defect.videos, width: '340', height: '180', controls: true, class: 'rounded card p-1 shadow mx-auto mb-5') %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="mt-5 mb-3">
+    <%= form.submit class: 'btn btn-sm btn-success' %>
+  </div>
+<% end %>
+
+
+<script type="text/javascript">
+
+  function readURL(input) {
+
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#image-preview').attr('src', e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $("#new-images-field").change(function(){
+    readURL(this);
+  });
+
+</script>

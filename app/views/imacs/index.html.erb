@@ -1,0 +1,64 @@
+<% provide :page_title, 'iMacs' %>
+<% currently_at 'iMacs' %>
+
+<div class="container pt-5 pb-5">
+  <div class="bg-white shadow p-4 col-12">
+
+    <h4 class="display-3 mb-5">iMacs</h4>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Title</th>
+          <th>Diagonal</th>
+          <th>Model</th>
+          <th>Version</th>
+          <th>Series</th>
+          <th>Production period</th>
+          <th>Full title</th>
+          <th>Overview</th>
+          <th>Images</th>
+          <th>Videos</th>
+          <th colspan="3">Controls</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @imacs.each do |imac| %>
+          <tr>
+            <td class="align-middle"><%= imac.id %></td>
+
+            <td class="align-middle"><%= imac.title %></td>
+            <td class="align-middle"><%= imac.diagonal %></td>
+            <td class="align-middle"><%= imac.model %></td>
+            <td class="align-middle"><%= imac.version %></td>
+            <td class="align-middle"><%= imac.series %></td>
+            <td class="align-middle"><%= imac.production_period %></td>
+            <td class="align-middle"><%= imac.full_title %></td>
+            <td class="align-middle"><%= imac.overview %></td>
+
+            <td class="align-middle">
+              <% imac.images.each do |image| %>
+                <%= image_tag(image.url, width: '30', class: 'rounded') %>
+              <% end %>
+            </td>
+
+            <td class="align-middle">
+              <% imac.videos.each do |video| %>
+                <%= video_tag(video.url, width: '40', height: '40', controls: true, class: 'rounded') %>
+              <% end %>
+            </td>
+
+            <td class="align-middle"><%= link_to 'Show', imac, class: 'text-decoration-none' %></td>
+            <td class="align-middle"><%= link_to 'Edit', edit_imac_path(imac), class: 'text-decoration-none' %></td>
+            <td class="align-middle"><%= link_to 'Destroy', imac, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-decoration-none' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+
+    <%= link_to 'New Imac', new_imac_path, class: 'text-decoration-none' %>
+  </div>
+</div>

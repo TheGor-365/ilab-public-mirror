@@ -1,0 +1,15 @@
+<div class="fixed-right nav-scroll shadow bg-white col-3 mx-3 mt-5">
+
+  <div class="show-nav-header shadow bg-white py-4">
+    <h4>
+      <div id='generation-title' class="text-center">
+        <%= @generation.nil? ? (render partial: 'generations/index_generations_partials/generations_default_title') : (render partial: 'generations/show_generation_partials/generation_title_show', generation: @generation) %>
+      </div>
+    </h4>
+  </div>
+  <br>
+
+  <div id="generations-info" class="text-center text-muted">
+    <%= render partial: 'generations/index_generations_partials/generation_default_content' if @generation.nil? %>
+  </div>
+</div>

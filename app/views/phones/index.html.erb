@@ -1,0 +1,16 @@
+<% provide :page_title, 'iPhones' %>
+<% currently_at 'iPhones' %>
+
+<div class="row">
+  <div class="col-2">
+    <%= render 'phones/index_phones_partials/phones_show_nav' %>
+  </div>
+
+  <div id="index-content" class="col-6 mt-5 ms-5">
+    <%= @phones.present? ? ( render partial: 'phones/index_phones_partials/phones_block' ) : ( render partial: 'phones/index_phones_partials/phones_table' )  %>
+  </div>
+
+  <div class="col-3">
+    <%= render 'phones/index_phones_partials/phones_info_card', phone: @phone %>
+  </div>
+</div>

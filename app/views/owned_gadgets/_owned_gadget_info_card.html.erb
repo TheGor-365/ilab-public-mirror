@@ -1,0 +1,8 @@
+<div class="fixed-right shadow bg-white p-4 pe-3 col-3 m-3 mt-5">
+  <h4 class="text-center">
+    <%=  @user.username %> gadget <span class="text-muted"><%= @owned_gadget.id %></span> info
+  </h4>
+  <br>
+
+  <%= image_tag(@owned_gadget.avatar.url, width: '420') if @owned_gadget.avatar.present? %>
+</div>

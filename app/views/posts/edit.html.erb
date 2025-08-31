@@ -1,0 +1,32 @@
+<% provide :page_title, 'Edit Post' %>
+<% currently_at 'Posts' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'post_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+    <div class="row p-5 shadow bg-white mb-5">
+      <h1 class="display-6">
+        Editing Post
+        <span class="text-muted">
+          <%= @post.title %>
+        </span>
+      </h1>
+    </div>
+
+    <%= render 'form', post: @post %>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Show', @post, class: 'text-decoration-none' %>
+      <%= link_to 'Back', posts_path, class: 'text-decoration-none' %>
+    </div>
+  </div>
+
+
+  <div class="col-3">
+    <%= render 'post_info_card' %>
+  </div>
+</div>

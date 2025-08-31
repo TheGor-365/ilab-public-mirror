@@ -1,0 +1,31 @@
+<% provide :page_title, "Edit #{@model.title}" %>
+<% currently_at 'iPhone Models' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'model_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+    <div class="row p-5 shadow bg-white mb-5">
+      <h1 class="display-6">
+        Editing Model
+        <span class="text-muted">
+          <%= @model.title %>
+        </span>
+      </h1>
+    </div>
+
+    <%= render 'form', model: @model %>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Show', @model, class: 'text-decoration-none me-3' %>
+      <%= link_to 'Back', models_path, class: 'text-decoration-none' %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <%= render 'model_info_card' %>
+  </div>
+</div>

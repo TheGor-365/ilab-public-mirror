@@ -1,0 +1,70 @@
+<% provide :page_title, @cource.name %>
+<% currently_at 'Cources' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'cource_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="author" class="anchorjs-link display-5">Author
+        <span class="text-muted display-5">
+          <strong><%= @cource.author %></strong>
+        </span>
+      </span>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+
+      University id <%= @cource.university_id %>
+      Category id   <%= @cource.category_id %>
+      Generation id <%= @cource.generation_id %>
+      Model id      <%= @cource.model_id %>
+
+      <span id="name" class="anchorjs-link display-5"><%= @cource.name %>
+        <span class="text-muted display-5">
+          <strong>cource</strong>
+        </span>
+      </span>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="description" class="anchorjs-link display-5"><%= @cource.name %>
+        <span class="text-muted display-5">
+          <strong>description</strong>
+        </span>
+      </span>
+      <%= @cource.description %>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="price" class="anchorjs-link display-5"><%= @cource.name %>
+        <span class="text-muted display-5">
+          <strong>price</strong>
+        </span>
+      </span>
+      <%= @cource.price %>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="chapters" class="anchorjs-link display-5"><%= @cource.name %>
+        <span class="text-muted display-5">
+          <strong>chapters</strong>
+        </span>
+      </span>
+      <%= @cource.chapters %>
+    </div>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Edit', edit_cource_path(@cource), class: 'text-decoration-none me-3' %>
+      <%= link_to 'Back', cources_path, class: 'text-decoration-none' %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <%= render 'cource_info_card' %>
+  </div>
+</div>
