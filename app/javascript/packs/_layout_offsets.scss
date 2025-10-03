@@ -1,0 +1,21 @@
+:root {
+  --main-navbar-height: 64px;
+  --mobile-navbar-height: 56px;
+}
+
+/* Только десктоп — отступ под fixed-top */
+@media (min-width: 992px) {
+  body.has-fixed-navbar {
+    padding-top: var(--main-navbar-height);
+  }
+}
+
+/* На мобиле отступ не нужен */
+@media (max-width: 991.98px) {
+  body.has-fixed-navbar { padding-top: 0; }
+}
+
+/* Немного воздуха в контейнере основной области (пусть останется) */
+main > .container {
+  padding-top: 0.5rem;
+}

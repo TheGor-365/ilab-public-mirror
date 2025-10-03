@@ -1,0 +1,37 @@
+- family: "Display"
+  generation_title: "Apple Studio Display 15″ LCD (1998)"
+  released_on: 1998-11-10
+  discontinued_on: 2004-01-01
+
+- family: "Display"
+  generation_title: "Apple Studio Display 17″ CRT (1998)"
+  released_on: 1998-11-10
+  discontinued_on: 2001-01-01
+
+- family: "Display"
+  generation_title: "Apple Cinema Display 22″ (2000, ADC)"
+  released_on: 2000-07-19
+  discontinued_on: 2003-01-28
+
+- family: "Display"
+  generation_title: "Apple Cinema Display 20/23 (2004 LCD)"
+  released_on: 2004-06-28
+  discontinued_on: 2009-12-31
+
+- family: "Display"
+  generation_title: "Apple Cinema Display 30″ (2004)"
+  released_on: 2004-06-28
+  discontinued_on: 2010-07-27
+
+- family: "Display"
+  generation_title: "Apple Thunderbolt Display 27″ (2011)"
+  released_on: 2011-07-20
+  discontinued_on: 2016-06-23
+
+- family: "Display"
+  generation_title: "Apple Studio Display 27″ (2022)"
+  released_on: 2022-03-18
+
+- family: "Display"
+  generation_title: "Pro Display XDR 32″ (2019)"
+  released_on: 2019-12-10

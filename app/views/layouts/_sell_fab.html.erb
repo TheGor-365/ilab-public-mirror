@@ -1,0 +1,20 @@
+<%# Плавающая кнопка — видна только на мобильных, КРОМЕ products#new|edit %>
+<% hide_fab = (controller_name == 'products' && %w[new edit].include?(action_name)) %>
+<% unless hide_fab %>
+  <%= link_to new_product_path, class: "sell-fab", data: { turbo: true } do %>
+    <span class="sell-fab__icon">＋</span>
+    <span class="sell-fab__label">Выставить на продажу</span>
+  <% end %>
+<% end %>
+
+<style>
+.sell-fab{
+  position:fixed; right:16px; bottom:16px; z-index:1040;
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.75rem 1rem; border-radius:9999px;
+  background:#0d6efd; color:#fff; text-decoration:none;
+  box-shadow:0 10px 15px rgba(0,0,0,.2); font-weight:600;
+}
+.sell-fab__icon{ font-size:18px; line-height:1 }
+@media (min-width: 768px){ .sell-fab{ display:none; } }
+</style>

@@ -1,0 +1,63 @@
+<div class="card shadow-sm mb-3">
+  <div class="card-body d-flex align-items-start gap-3">
+    <div class="flex-shrink-0">
+      <% if model&.respond_to?(:avatar) && model&.avatar.present? %>
+        <%= image_tag(model.avatar.url, class: "rounded", width: 64, height: 64) %>
+      <% else %>
+        <%= image_tag("default_product_avatar.jpg", class: "rounded", width: 64, height: 64) %>
+      <% end %>
+    </div>
+
+    <div class="flex-grow-1">
+      <h5 class="mb-1">
+        <% name = model&.try(:title) || model&.try(:name) || (phone&.try(:title) || phone&.try(:name)) || "Выбранная модель" %>
+        <%= name %>
+      </h5>
+
+      <div class="small text-muted mb-2 d-flex flex-wrap align-items-center gap-2">
+        <% if generation %>
+          <span class="badge bg-light text-dark">Gen: <%= generation.try(:title) || generation.id %></span>
+        <% elsif model&.respond_to?(:generation_id) && model.generation_id.present? %>
+          <span class="badge bg-light text-dark">Gen ID: <%= model.generation_id %></span>
+        <% end %>
+
+        <% if phone %>
+          <span class="badge bg-light text-dark">Phone: <%= phone.try(:title) || phone.try(:name) || phone.id %></span>
+        <% elsif model&.respond_to?(:phone_id) && model.phone_id.present? %>
+          <span class="badge bg-light text-dark">Phone ID: <%= model.phone_id %></span>
+        <% end %>
+
+        <span class="text-muted">|</span>
+        <span>Model ID: <%= model&.id || params[:model_id] || "—" %></span>
+      </div>
+
+      <div class="d-flex flex-wrap gap-2">
+        <% if model&.respond_to?(:storage) && model.storage.present? %>
+          <span class="badge bg-primary-subtle text-primary">Память: <%= model.storage %></span>
+        <% elsif model&.respond_to?(:capacity) && model.capacity.present? %>
+          <span class="badge bg-primary-subtle text-primary">Память: <%= model.capacity %></span>
+        <% end %>
+
+        <% if model&.respond_to?(:color) && model.color.present? %>
+          <span class="badge bg-info-subtle text-info">Цвет: <%= model.color %></span>
+        <% elsif model&.respond_to?(:colour) && model.colour.present? %>
+          <span class="badge bg-info-subtle text-info">Цвет: <%= model.colour %></span>
+        <% end %>
+
+        <% if model&.respond_to?(:ram) && model.ram.present? %>
+          <span class="badge bg-secondary-subtle text-secondary">RAM: <%= model.ram %></span>
+        <% end %>
+
+        <% if model&.respond_to?(:sku) && model.sku.present? %>
+          <span class="badge bg-light text-dark">SKU: <%= model.sku %></span>
+        <% end %>
+        <% if model&.respond_to?(:part_number) && model.part_number.present? %>
+          <span class="badge bg-light text-dark">PN: <%= model.part_number %></span>
+        <% end %>
+        <% if model&.respond_to?(:release_year) && model.release_year.present? %>
+          <span class="badge bg-light text-dark">Year: <%= model.release_year %></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

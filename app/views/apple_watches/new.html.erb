@@ -1,0 +1,16 @@
+<% provide :page_title, 'New Apple Watch' %>
+<% currently_at 'Apple Watches' %>
+
+<div class="container pt-5 pb-5">
+
+  <div class="bg-white shadow p-4 col-10">
+
+    <h4 class="display-3">
+      New Apple Watch
+    </h4>
+
+    <%= render 'form', apple_watch: @apple_watch %>
+
+    <%= link_to 'Back', apple_watches_path, class: 'text-decoration-none' %>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<%= turbo_stream.replace "product_details_frame" do %>
+  <%= render "products/details_panel",
+      product: @product,
+      model: @model,
+      phone: @phone,
+      generation: @generation,
+      category: @category,
+      repairs: @repairs,
+      defects: @defects,
+      spare_parts: @spare_parts,
+      mods: @mods,
+      mod: @mod %>
+<% end %>
+
+<%= turbo_stream.update "product-details-modal-body" do %>
+  <div
+    data-controller="modal-opener"
+    data-modal-opener-modal-id-value="productDetailsModal">
+    <%= render "products/details_panel",
+        product: @product,
+        model: @model,
+        phone: @phone,
+        generation: @generation,
+        category: @category,
+        repairs: @repairs,
+        defects: @defects,
+        spare_parts: @spare_parts,
+        mods: @mods,
+        mod: @mod %>
+  </div>
+<% end %>

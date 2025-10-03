@@ -1,0 +1,99 @@
+<div class="page-banner">
+  <div class="container page-banner__inner">
+    <div class="page-banner__title">
+      <i class="bi bi-box-seam"></i> Товары
+    </div>
+    <%= link_to "Выставить на продажу", new_product_path, class: "btn btn-sm btn-success d-none d-lg-inline-flex" %>
+  </div>
+</div>
+<div class="page-banner-spacer"></div>
+
+<div class="container">
+  <%# Поиск с автоподбором и скроллом к строке %>
+  <div class="card shadow-sm mb-3">
+    <div class="card-body d-flex gap-2 flex-wrap">
+      <input id="products-search" class="form-control form-control-sm" list="products-datalist"
+             placeholder="Найти товар по названию или ID…">
+      <datalist id="products-datalist">
+        <% @products.order(id: :desc).each do |p| %>
+          <option value="<%= "#{p.id} — #{p.display_name.presence || p.name.presence || "Товар ##{p.id}"}" %>"></option>
+        <% end %>
+      </datalist>
+      <button id="products-search-go" class="btn btn-sm btn-outline-secondary" type="button" title="Перейти">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </div>
+
+  <% if @products.any? %>
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Название</th>
+            <th>Статус</th>
+            <th>Цена</th>
+            <th>SKU</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @products.order(id: :desc).each do |p| %>
+            <tr id="product-row-<%= p.id %>">
+              <td><%= p.id %></td>
+              <td>
+                <%= link_to (p.respond_to?(:display_name) ? p.display_name : (p.name.presence || "Без названия")),
+                            p, class: "text-decoration-none" %>
+              </td>
+              <td><span class="badge bg-light text-dark"><%= p.state %></span></td>
+              <td>
+                <% if p.price.to_f > 0 %>
+                  <%= number_to_currency(p.price, unit: (p.currency.presence || "₽")) %>
+                <% else %>
+                  <span class="text-muted">не задана</span>
+                <% end %>
+              </td>
+              <td><%= p.sku_id || "—" %></td>
+              <td class="text-end">
+                <%= link_to "Открыть", p, class: "btn btn-sm btn-outline-primary" %>
+                <%= link_to "Править", edit_product_path(p), class: "btn btn-sm btn-outline-secondary" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="text-center text-muted py-5">
+      Пока нет товаров.
+      <div class="mt-3">
+        <%= link_to "Выставить на продажу", new_product_path, class: "btn btn-success" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="page-bottom-spacer"></div>
+
+<script>
+  (function(){
+    const input = document.getElementById('products-search');
+    const btn   = document.getElementById('products-search-go');
+    function go(){
+      if(!input) return;
+      const val = input.value.trim();
+      if(!val) return;
+      // Пытаемся вытащить ID слева от «—»
+      const id = (val.split('—')[0] || '').replace(/[^\d]/g,'').trim();
+      const row = document.getElementById('product-row-' + id);
+      if(row){
+        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        row.classList.add('table-warning');
+        setTimeout(()=>row.classList.remove('table-warning'), 1800);
+      }
+    }
+    if(btn) btn.addEventListener('click', go);
+    if(input) input.addEventListener('keydown', e => { if(e.key === 'Enter') go(); });
+  })();
+</script>

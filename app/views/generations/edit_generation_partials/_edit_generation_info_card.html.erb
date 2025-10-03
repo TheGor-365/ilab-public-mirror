@@ -1,0 +1,13 @@
+<div class="fixed-right nav-scroll shadow bg-white col-3 mx-3 mt-5">
+
+  <div id="edit-generation-title" class="show-nav-header shadow bg-white py-4">
+    <div>
+      <%= render partial: 'generations/show_generation_partials/generation_title_show', generation: @generation %>
+    </div>
+  </div>
+  <br>
+
+  <div id="edit-generation-info" class="mb-5 px-4 text-muted">
+    <%= render partial: 'generations/edit_generation_partials/edit_generation_default_content', generation: @generation %>
+  </div>
+</div>

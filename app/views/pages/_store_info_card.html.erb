@@ -1,0 +1,13 @@
+<div class="p-3 bg-white h-100 text-center text-muted">
+  <p class="border rounded p-2">
+    Product count: <span class="text-primary"><%= total.to_i %></span>
+  </p>
+
+  <% by_section.each do |title, items| %>
+    <p class="text-success fw-semibold"><%= title %></p>
+    <% items.each do |p| %>
+      <small><%= p.name %></small><br>
+    <% end %>
+    <hr class="text-primary">
+  <% end %>
+</div>

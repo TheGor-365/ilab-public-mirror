@@ -1,0 +1,11 @@
+<%= turbo_stream.replace "store_main" do %>
+  <%= render "store_main" %>
+<% end %>
+
+<%= turbo_stream.update "store_nav_offcanvas" do %>
+  <%= render "store_show_nav", offcanvas: true %>
+<% end %>
+
+<%= turbo_stream.update "store_nav_desktop" do %>
+  <%= render "store_show_nav" %>
+<% end %>

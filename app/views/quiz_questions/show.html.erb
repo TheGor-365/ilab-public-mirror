@@ -1,0 +1,37 @@
+<% provide :page_title, @quiz.question.content %>
+<% currently_at 'Quiz Questions' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'quiz_question_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="quiz" class="anchorjs-link display-5">
+        <span class="text-muted display-5">
+          <strong>Quiz</strong> <%= @quiz_question.quiz_id %>
+        </span>
+      </span>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="question" class="anchorjs-link display-5">
+        <span class="text-muted display-5">
+          <strong>Quiz Question</strong> <%= @quiz_question.content %>
+        </span>
+      </span>
+    </div>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Edit', edit_quiz_question_path(@quiz_question), class: 'text-decoration-none' %>
+      <%= link_to 'Back', quiz_questions_path, class: 'text-decoration-none' %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <%= render 'quiz_question_info_card' %>
+  </div>
+</div>

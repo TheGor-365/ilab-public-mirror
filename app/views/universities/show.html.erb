@@ -1,0 +1,29 @@
+<% provide :page_title, @university.title %>
+<% currently_at @university.title %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'university_show_nav', locals: { categories: Category.all } %>
+  </div>
+
+  <div class="col-6 m-5">
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="university" class="anchorjs-link display-5"><%= @university.title %>
+        <span class="text-muted display-5">
+          <strong>university</strong>
+        </span>
+      </span>
+    </div>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Edit', edit_university_path(@university), class: 'text-decoration-none me-3' %>
+      <%= link_to 'Back', universities_path, class: 'text-decoration-none' %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <%= render 'university_info_card' %>
+  </div>
+</div>

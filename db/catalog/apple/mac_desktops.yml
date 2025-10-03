@@ -1,0 +1,232 @@
+# ранние стационарные
+- family: "Mac"
+  generation_title: "Apple I"
+  released_on: 1976-04-01
+  discontinued_on: 1977-09-30
+
+- family: "Mac"
+  generation_title: "Apple II family"
+  model_variants:
+    - title: "Apple II (1977)"
+      discontinued_on: 1979-05-01
+    - title: "Apple II Plus / EuroPlus / J-Plus / Bell & Howell"
+      discontinued_on: 1982-12-01
+    - title: "Apple IIe (incl. Enhanced/Platinum)"
+      discontinued_on: 1993-01-01
+    - title: "Apple IIc / IIc Plus"
+      discontinued_on: 1988-08-01
+    - title: "Apple IIGS (incl. ROM3)"
+      discontinued_on: 1992-12-01
+
+- family: "Mac"
+  generation_title: "Apple III / III (Revised) / III Plus"
+  model_variants:
+    - title: "Apple III"
+      discontinued_on: 1981-12-01
+    - title: "Apple III (Revised)"
+      discontinued_on: 1983-12-01
+    - title: "Apple III Plus"
+      discontinued_on: 1984-04-24
+
+- family: "Mac"
+  generation_title: "Apple Lisa / Lisa 2 / Macintosh XL"
+  model_variants:
+    - title: "Lisa (1983)"
+      discontinued_on: 1984-01-01
+    - title: "Lisa 2"
+      discontinued_on: 1986-08-01
+
+- family: "Mac"
+  generation_title: "Compact Macintosh"
+  model_variants:
+    - title: "Macintosh 128K"
+      discontinued_on: 1984-09-10
+    - title: "Macintosh 512K / 512Ke"
+      discontinued_on: 1987-10-01
+    - title: "Macintosh Plus"
+      discontinued_on: 1990-10-15
+    - title: "Macintosh SE / SE/30"
+      discontinued_on: 1991-10-21
+    - title: "Macintosh Classic / Classic II"
+      discontinued_on: 1995-11-01
+    - title: "Macintosh Color Classic / II"
+      discontinued_on: 1994-05-16
+
+- family: "Mac"
+  generation_title: "Macintosh II series"
+  model_variants:
+    - title: "II / IIx / IIcx / IIci / IIfx / IIsi / IIvi / IIvx"
+      discontinued_on: 1993-10-10
+
+- family: "Mac"
+  generation_title: "Macintosh LC family"
+  model_variants:
+    - title: "LC / LC II / LC III / LC III+"
+      discontinued_on: 1994-02-14
+    - title: "LC 520 / 550 / 575 / 580 / 630"
+      discontinued_on: 1996-03-02
+
+- family: "Mac"
+  generation_title: "Quadra / Centris / Performa"
+  model_variants:
+    - title: "Quadra 700 / 900 / 950 / 610 / 650 / 800 / 605 / 660AV / 840AV"
+      discontinued_on: 1995-10-14
+    - title: "Performa 600 series (6100 etc.)"
+      discontinued_on: 1996-12-31
+
+- family: "Mac"
+  generation_title: "Power Macintosh"
+  model_variants:
+    - title: "6100 / 7100 / 8100"
+      discontinued_on: 1996-01-06
+    - title: "5200LC / 6200/6300 / 5400 / 6400"
+      discontinued_on: 1998-03-01
+    - title: "7220 / 7300 / 8500 / 8600 / 9500 / 9600"
+      discontinued_on: 1998-03-17
+
+- family: "Mac"
+  generation_title: "Power Macintosh G3"
+  model_variants:
+    - title: "DT/MT (1997)"
+      discontinued_on: 1999-01-05
+    - title: "All-In-One (Molar, 1998)"
+      discontinued_on: 1998-10-17
+    - title: "Blue & White (1999)"
+      discontinued_on: 1999-10-13
+
+- family: "Mac"
+  generation_title: "Power Mac G4"
+  model_variants:
+    - title: "Yikes! / AGP Sawtooth / DA / Quicksilver / MDD"
+      discontinued_on: 2004-06-09
+    - title: "Power Mac G4 Cube"
+      discontinued_on: 2001-07-03
+
+- family: "Mac"
+  generation_title: "Power Mac G5"
+  model_variants:
+    - title: "Aluminum (2003)"
+      discontinued_on: 2004-06-09
+    - title: "Late 2005 Dual-core"
+      discontinued_on: 2006-08-07
+
+# iMac
+- family: "Mac"
+  generation_title: "iMac (Bondi Blue, 1998)"
+  discontinued_on: 1999-05-10
+
+- family: "Mac"
+  generation_title: "iMac G4 (15/17/20)"
+  discontinued_on: 2004-08-31
+
+- family: "Mac"
+  generation_title: "iMac G5 (17/20, 2004)"
+  discontinued_on: 2006-01-10
+
+- family: "Mac"
+  generation_title: "iMac (Intel 2006–2014, см. ревизии)"
+  model_variants:
+    - title: "Early 2006"
+      discontinued_on: 2006-09-06
+    - title: "Mid 2007"
+      discontinued_on: 2008-04-28
+    - title: "Early 2008"
+      discontinued_on: 2009-03-03
+    - title: "Mid 2010"
+      discontinued_on: 2011-05-03
+    - title: "Mid 2011"
+      discontinued_on: 2012-11-30
+    - title: "Late 2012 (21.5/27)"
+      discontinued_on: 2013-09-24
+    - title: "Late 2013 (21.5/27)"
+      discontinued_on: 2014-06-18
+    - title: "Mid/Late 2014 / 2015 Retina"
+      discontinued_on: 2017-06-05
+
+- family: "Mac"
+  generation_title: "iMac (Retina 2017)"
+  model_variants:
+    - title: "Retina 4K 21.5″ (2017)"
+      discontinued_on: 2019-03-19
+    - title: "Retina 5K 27″ (2017)"
+      discontinued_on: 2019-03-19
+
+- family: "Mac"
+  generation_title: "iMac 24″ (M1, 2021)"
+  discontinued_on: 2023-10-30
+
+- family: "Mac"
+  generation_title: "iMac 24″ (M3, 2023)"
+
+# Mac mini
+- family: "Mac"
+  generation_title: "Mac mini (G4, 2005)"
+  discontinued_on: 2006-02-28
+- family: "Mac"
+  generation_title: "Mac mini (Intel 2006–2012)"
+  model_variants:
+    - title: "Core Solo/Duo (2006)"
+      discontinued_on: 2007-08-07
+    - title: "Early 2009"
+      discontinued_on: 2009-10-20
+    - title: "Mid 2010"
+      discontinued_on: 2010-06-15
+    - title: "Mid 2011"
+      discontinued_on: 2012-10-23
+    - title: "Late 2012"
+      discontinued_on: 2014-10-16
+- family: "Mac"
+  generation_title: "Mac mini (Intel, 2018)"
+  model_variants:
+    - title: "Core i3"
+      discontinued_on: 2020-11-17
+    - title: "Core i5/i7"
+      discontinued_on: 2023-01-17
+- family: "Mac"
+  generation_title: "Mac mini (M1, 2020)"
+  discontinued_on: 2023-01-17
+- family: "Mac"
+  generation_title: "Mac mini (M2/M2 Pro, 2023)"
+  discontinued_on: 2024-10-29
+- family: "Mac"
+  generation_title: "Mac mini (M4/M4 Pro, 2024)"
+
+# Mac Pro
+- family: "Mac"
+  generation_title: "Mac Pro (Original, 2006)"
+  discontinued_on: 2008-01-08
+- family: "Mac"
+  generation_title: "Mac Pro (Early 2008)"
+  discontinued_on: 2009-03-03
+- family: "Mac"
+  generation_title: "Mac Pro (Early 2009)"
+  discontinued_on: 2010-08-09
+- family: "Mac"
+  generation_title: "Mac Pro (Mid 2010/2012)"
+  discontinued_on: 2013-12-19
+- family: "Mac"
+  generation_title: "Mac Pro (Late 2013, Cylinder)"
+  discontinued_on: 2019-12-10
+- family: "Mac"
+  generation_title: "Mac Pro (2019, Tower)"
+  discontinued_on: 2023-06-05
+- family: "Mac"
+  generation_title: "Mac Pro (2023, M2 Ultra)"
+
+# Mac Studio
+- family: "Mac"
+  generation_title: "Mac Studio (M1 Max/Ultra, 2022)"
+  discontinued_on: 2023-06-05
+- family: "Mac"
+  generation_title: "Mac Studio (M2 Max/Ultra, 2023)"
+  discontinued_on: 2025-03-05
+- family: "Mac"
+  generation_title: "Mac Studio (M4 Max / M3 Ultra, 2025)"
+
+# Servers
+- family: "Mac"
+  generation_title: "Apple Network Server 500/700"
+  discontinued_on: 1997-04-01
+- family: "Mac"
+  generation_title: "Apple Workgroup Server (Quadra/PowerMac based)"
+  discontinued_on: 1998-03-02

@@ -1,0 +1,52 @@
+<% provide :page_title, 'Store' %>
+<% currently_at 'Store' %>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="storeOffcanvasNav" aria-labelledby="storeOffcanvasNavLabel">
+  <div class="offcanvas-header border-bottom">
+    <h5 class="offcanvas-title" id="storeOffcanvasNavLabel">Store Navigation</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body" id="store_nav_offcanvas">
+    <div class="mb-3">
+      <%= link_to "Выставить на продажу", new_product_path, class: "btn btn-success w-100" %>
+    </div>
+    <%= render 'store_show_nav', offcanvas: true %>
+  </div>
+</div>
+
+<!-- 🔽 Модалка для мобилы (не трогаю — у тебя уже работает) -->
+<div class="modal fade" id="productDetailsModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen-sm-down modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Детали товара</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      <div class="modal-body" id="product-details-modal-body">
+        <!-- Turbo вставит сюда products/_details_panel -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="store-grid-container">
+  <aside class="desktop-sidebar">
+    <div class="sidebar-sticky-content" id="store_nav_desktop">
+      <%= render 'store_show_nav' %>
+    </div>
+  </aside>
+
+  <main>
+    <div id="store_main">
+      <%= render 'store_main' %>
+    </div>
+  </main>
+
+  <aside class="desktop-sidebar">
+    <div class="sidebar-sticky-content">
+      <%= turbo_frame_tag "product_details_frame" do %>
+        <%= render partial: 'store_info_card', locals: { by_section: @by_section, total: @total_products } %>
+      <% end %>
+    </div>
+  </aside>
+</div>

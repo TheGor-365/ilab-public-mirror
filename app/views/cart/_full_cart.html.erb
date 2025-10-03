@@ -1,0 +1,157 @@
+<div class="row p-5 shadow bg-white mb-5">
+  <p class="align-middle">
+    <span id="cart" class="anchorjs-link display-1"><%= current_user.username %>'s
+      <span class="text-muted display-1">
+        <strong>cart</strong>
+      </span>
+    </span>
+  </p>
+</div>
+
+<div class="row p-5 shadow bg-white mb-5">
+
+  <p class="align-middle mb-5">
+    <span id="cart" class="anchorjs-link display-5"><%= current_user.username %>'s
+      <span class="text-muted display-5">
+        <strong>order items</strong>
+      </span>
+    </span>
+  </p>
+
+  <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th scope="col">№</th>
+        <th scope="col">Product</th>
+        <th scope="col">Photo</th>
+        <th scope="col">Qty</th>
+        <th scope="col">Price</th>
+        <th scope="col">Total</th>
+        <th scope="col">Controls</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% item_count = 0 %>
+
+      <% @order_items.each do |item| %>
+        <%= form_with model: item do |f| %>
+
+          <%= f.hidden_field :product_id, value: item.product.id %>
+
+          <tr>
+            <td class="align-middle"><%= item_count += 1 %></td>
+            <td class="align-middle"><%= item.product.name if item.product.present? %></td>
+
+            <td class="align-middle">
+              <% if item.product.avatar.present? %>
+                <%= image_tag(item.product.avatar.url, width: '30', class: 'rounded') %>
+              <% else %>
+                <%= image_tag('default_product_avatar.png', width: '30', class: 'rounded') %>
+              <% end %>
+            </td>
+
+            <td class="align-middle">
+              <div class="form-group mb-0">
+                <%= f.number_field :quantity, value: item.quantity.to_i, class: 'form-control cart-qty ps-5', id: 'product-count-field' %>
+              </div>
+            </td>
+
+            <td class="align-middle">$<%= item.product.price if item.present? %></td>
+            <td class="align-middle">$<%= item.total if item.present? %></td>
+
+            <td class="align-middle"><%= f.submit 'Update', class: 'btn btn-sm btn-primary me-0' %></td>
+            <td class="align-middle"><%= link_to 'Remove', item, method: :delete, remote: true, class: 'btn btn-sm btn-danger ms-0' %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="row p-5 shadow bg-white mb-5">
+
+  <p class="align-middle mb-5">
+    <span id="cart" class="anchorjs-link display-5"><%= current_user.username %>'s
+      <span class="text-muted display-5">
+        <strong>order price</strong>
+      </span>
+    </span>
+  </p>
+
+  <hr>
+
+  <table class="table table-borderless text-right">
+    <tbody>
+      <tr>
+        <td class="align-middle">Shipping</td>
+        <td class="align-middle">$0</td>
+      </tr>
+
+      <tr>
+        <td class="align-middle">Delivery price</td>
+        <td class="align-middle">$<%= @delivery_price.to_i %></td>
+      </tr>
+
+      <tr>
+        <td><hr></td>
+        <td><hr></td>
+      </tr>
+
+      <tr>
+        <td class="text-muted align-middle"><h5>Subtotal</h5></td>
+        <td class="align-middle"><h5>$<%= current_order.subtotal %></h5></td>
+      </tr>
+
+      <tr>
+        <td class="text-muted align-middle"><h4>Amount</h4></td>
+        <td class="align-middle"><h4>$<%= current_order.subtotal + @delivery_price %></h4></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+</div>
+
+<div class="row p-5 shadow bg-white mb-5">
+
+  <p class="align-middle mb-5">
+    <span id="cart" class="anchorjs-link display-5"><%= current_user.username %>'s
+      <span class="text-muted display-5">
+        <strong>order note</strong>
+      </span>
+    </span>
+  </p>
+
+  <form>
+    <div class="form-group">
+      <label for="specialNotes"><p class="text-muted">Special note for this order</p></label>
+      <textarea class="form-control" name="specialNotes" id="specialNotes" rows="3" placeholder="Type your message here">
+      </textarea>
+    </div>
+  </form>
+</div>
+
+<div class="row p-5 shadow bg-white mb-5">
+  <p class="align-middle mb-5">
+    <span id="delivery" class="anchorjs-link display-5"><%= current_user.username %>'s
+      <span class="text-muted display-5">
+        <strong>delivery info</strong>
+      </span>
+    </span>
+  </p>
+</div>
+
+<div class="list-inline-item mt-3">
+  <%= form_with model: @order_item do |f| %>
+
+    <% @products.each do |product| %>
+      <%= f.hidden_field :product_id, value: product.id %>
+    <% end %>
+
+    <%= f.submit 'Update Cart', class: 'btn btn-sm btn-primary' %>
+    <%= button_to 'Clear Cart', cart_path, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %>
+    <%= link_to 'Update Cart', cart_path, method: :post, class: 'btn btn-sm btn-success' %>
+  <% end %>
+</div>

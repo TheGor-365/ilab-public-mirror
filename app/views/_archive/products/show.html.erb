@@ -1,0 +1,95 @@
+<% title = @product.display_name.presence || @product.name.presence || "Товар ##{@product.id}" %>
+<% provide :page_title, title %>
+<% currently_at 'Products' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'product_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="title" class="anchorjs-link display-5">
+        <%= title %>
+        <span class="text-muted display-5">
+          <strong>info</strong>
+        </span>
+      </span>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="description" class="anchorjs-link display-6 mb-3">
+        <%= title %> description
+      </span>
+      <%= @product.description %>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="price" class="anchorjs-link display-5">
+        <%= title %> price
+        <span class="text-muted display-5">
+          <strong><%= @product.price %></strong>
+        </span>
+      </span>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="best-offer" class="anchorjs-link display-5">
+        <%= title %>
+        <span class="text-muted display-5">
+          <strong><%= @product.is_best_offer %></strong>
+        </span>
+      </span>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="photos" class="anchorjs-link display-6 mb-5">
+        Photos
+        <span class="text-muted display-6">
+          <%= title %>
+        </span>
+      </span>
+      <br>
+
+      <% @product.images.each do |image| %>
+        <div class="col text-center mb-5">
+          <%= image_tag(image.url, width: '300', class: 'rounded img-thumbnail shadow') %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="videos" class="anchorjs-link display-6 mb-3">videos</span>
+
+      <% @product.videos.each do |video| %>
+        <small class="text-muted mb-5">
+          <%= video.identifier %>
+        </small>
+      <% end %>
+
+      <div class="col">
+        <%= video_tag(@product.videos, width: '640', height: '380', controls: true, class: 'rounded card p-1 shadow mx-auto mb-5') if @product.videos.present? %>
+      </div>
+    </div>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Edit', edit_product_path(@product), class: 'text-decoration-none me-3' %>
+      <%= link_to 'Back', products_path, class: 'text-decoration-none' %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <!-- Автоподгружаемая правая панель с итогами/деталями товара -->
+    <turbo-frame id="product_details_frame"
+                 src="<%= product_description_product_path(@product, format: :turbo_stream, _ts: Time.now.to_i) %>">
+      <div class="card shadow-sm">
+        <div class="card-body text-muted text-center py-5">Загружаем детали…</div>
+      </div>
+    </turbo-frame>
+
+    <!-- Сохраняем ваш прежний инфо-бокс (если нужен параллельно) -->
+    <%= render 'product_info_card', product: @product %>
+  </div>
+</div>
