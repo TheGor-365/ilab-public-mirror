@@ -1,0 +1,58 @@
+<% provide :page_title, 'Products' %>
+<% currently_at 'Products' %>
+
+<div class="container pt-5 pb-5">
+
+  <div class="bg-white shadow p-4 col-12">
+
+    <h4 class="display-3 mb-5">
+      Products
+    </h4>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Is best offer</th>
+          <th>Images</th>
+          <th>Videos</th>
+          <th colspan="3">Controls</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @products.each do |product| %>
+        <tr>
+          <td class="align-middle"><%= product.id %></td>
+          <td class="align-middle"><%= product.name %></td>
+          <td class="align-middle"><%= product.description %></td>
+          <td class="align-middle"><%= product.price %></td>
+          <td class="align-middle"><%= product.is_best_offer %></td>
+
+          <td class="align-middle">
+            <% product.images.each do |image| %>
+              <%= image_tag(image.url, width: '30', class: 'rounded') %>
+            <% end %>
+          </td>
+
+          <td class="align-middle">
+            <% product.videos.each do |video| %>
+              <%= video_tag(video.url, width: '40', height: '40', controls: true, class: 'rounded') %>
+            <% end %>
+          </td>
+
+          <td class="align-middle"><%= link_to 'Show', product, class: 'text-decoration-none' %></td>
+          <td class="align-middle"><%= link_to 'Edit', edit_product_path(product), class: 'text-decoration-none' %></td>
+          <td class="align-middle"><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-decoration-none' %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+
+    <%= link_to 'New Product', new_product_path, class: 'text-decoration-none' %>
+  </div>
+</div>

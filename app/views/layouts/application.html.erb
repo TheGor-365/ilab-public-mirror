@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= full_title(yield(:page_title)) %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
+    <%= javascript_pack_tag "application", "data-turbo-track": "reload" %>
+  </head>
+
+  <body class="d-flex flex-column min-vh-100 <%= 'scope-products' if request.path.starts_with?('/products') %>">
+    <header>
+      <%= render('layouts/nav', current_page: @current_page_title || controller_path) %>
+      <%= toastr_flash %>
+    </header>
+
+    <main class="flex-shrink-0 pb-5 <%= content_for?(:has_banner) ? 'has-banner' : '' %>">
+      <div class="container">
+        <% if notice.present? %>
+          <div class="alert alert-success"><%= notice %></div>
+        <% end %>
+        <% if alert.present? %>
+          <div class="alert alert-danger"><%= alert %></div>
+        <% end %>
+        <%= yield %>
+      </div>
+    </main>
+
+    <%= render "layouts/sell_fab" %>
+  </body>
+</html>

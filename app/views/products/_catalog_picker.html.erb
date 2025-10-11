@@ -1,0 +1,166 @@
+<% families = Generation.distinct.order(:family).pluck(:family).compact %>
+<% current_family = @product.generation&.family %>
+<% current_phone_label =
+     @product.phone&.try(:title).presence ||
+     @product.phone&.try(:model_title).presence ||
+     @product.phone&.try(:name).presence %>
+
+<div
+  data-catalog-picker-source-url-value="/products/catalog_tree"
+  data-catalog-picker-phones-url-value="/products/catalog_phones">
+
+  <!-- Карточка 1: Модель и комплектация -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-header"><strong>Модель и комплектация</strong></div>
+    <div class="card-body">
+
+      <div class="row g-3 align-items-end">
+        <!-- Семейство -->
+        <div class="col-12 col-md-4">
+          <label class="form-label">Семейство</label>
+          <select class="form-select"
+                  data-catalog-picker-target="family"
+                  data-action="change->catalog-picker#onFamilyChange">
+            <option value="">— выберите —</option>
+            <% Generation.distinct.pluck(:family).sort.each do |fam| %>
+              <option value="<%= fam %>"><%= fam %></option>
+            <% end %>
+          </select>
+          <div class="form-text">Можно сразу открыть полный список моделей ниже.</div>
+        </div>
+
+        <!-- Поиск модели -->
+        <div class="col-12 col-md-8">
+          <label class="form-label">Модель (поиск по первым символам)</label>
+          <input class="form-control"
+                 type="text"
+                 placeholder="Например: iPhone 11 / 12 Pro Max…"
+                 list="phones-datalist"
+                 value=""
+                 data-catalog-picker-target="phoneInput"
+                 data-action="input->catalog-picker#onPhoneQuery change->catalog-picker#onPhoneChosen">
+          <datalist id="phones-datalist" data-catalog-picker-target="phoneList"></datalist>
+
+          <input type="hidden" name="product[phone_id]"      value="" data-catalog-picker-target="phoneId">
+          <input type="hidden" name="product[generation_id]" value="" data-catalog-picker-target="generationId">
+          <input type="hidden" name="product[sku_id]"        value="" data-catalog-picker-target="sku">
+        </div>
+
+        <!-- Полный список моделей выбранного семейства -->
+        <div class="col-12">
+          <div class="border rounded p-2" style="max-height: 220px; overflow:auto"
+               data-catalog-picker-target="phonePanel">
+            <div class="text-muted small">Выберите семейство — появится полный список моделей для клика.</div>
+          </div>
+        </div>
+
+        <!-- Комплектация -->
+        <div class="col-6 col-md-3">
+          <label class="form-label">Память</label>
+          <select class="form-select"
+                  name="product[storage]"
+                  data-catalog-picker-target="storage"
+                  data-action="change->catalog-picker#onSkuFieldChange">
+            <option value="">—</option>
+          </select>
+        </div>
+
+        <div class="col-6 col-md-3">
+          <label class="form-label">Цвет</label>
+          <select class="form-select"
+                  name="product[color]"
+                  data-catalog-picker-target="color"
+                  data-action="change->catalog-picker#onSkuFieldChange">
+            <option value="">—</option>
+          </select>
+        </div>
+
+        <div class="col-12">
+          <small class="text-muted">Название сгенерируется автоматически, можно поправить.</small>
+          <input class="form-control mt-1"
+                 name="product[name]"
+                 value=""
+                 placeholder="Например: iPhone 12 128GB Black"
+                 data-catalog-picker-target="nameInput"
+                 data-action="input->catalog-picker#onNameTyped">
+        </div>
+      </div>
+
+      <hr class="my-4">
+
+      <!-- Локальное резюме -->
+      <div class="row g-3">
+        <div class="col-12 col-md-4">
+          <strong>SKU:</strong>
+          <span class="badge bg-light text-dark" data-catalog-picker-target="skuBadge">—</span>
+        </div>
+        <div class="col-12 col-md-4">
+          <strong>Поколение:</strong>
+          <span class="text-muted" data-catalog-picker-target="genBadge">—</span>
+        </div>
+        <div class="col-12 col-md-4">
+          <strong>Модель:</strong>
+          <span class="text-muted" data-catalog-picker-target="phoneBadge">—</span>
+        </div>
+
+        <div class="col-12">
+          <strong>Комплектация:</strong>
+          <span class="text-muted" data-catalog-picker-target="skuText">—</span>
+        </div>
+
+        <div class="col-6 col-md-3">
+          <strong>Дефекты:</strong>
+          <span class="badge bg-dark" data-catalog-picker-target="defectsCount">0</span>
+        </div>
+        <div class="col-6 col-md-3">
+          <strong>Ремонты:</strong>
+          <span class="badge bg-dark" data-catalog-picker-target="repairsCount">0</span>
+        </div>
+        <div class="col-6 col-md-3">
+          <strong>Модули:</strong>
+          <span class="badge bg-dark" data-catalog-picker-target="modsCount">0</span>
+        </div>
+        <div class="col-6 col-md-3">
+          <strong>Запчасти:</strong>
+          <span class="badge bg-dark" data-catalog-picker-target="sparesCount">0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Карточка 2: Дефекты/ремонты/модули/запчасти -->
+  <div class="card shadow-sm">
+    <div class="card-header"><strong>Дефекты / ремонты / модули / запчасти</strong></div>
+    <div class="card-body">
+      <div class="row g-3">
+        <div class="col-12">
+          <label class="form-label">Дефекты (если есть)</label>
+          <div class="border rounded p-2" data-catalog-picker-target="defects">
+            <div class="text-muted small">Выберите семейство и модель — появятся варианты.</div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label">Были ремонты?</label>
+          <div class="border rounded p-2" data-catalog-picker-target="repairs">
+            <div class="text-muted small">Выберите семейство и модель — появятся варианты.</div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label">Заменённые модули</label>
+          <div class="border rounded p-2" data-catalog-picker-target="mods">
+            <div class="text-muted small">Выберите семейство и модель — появятся варианты.</div>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <label class="form-label">Замены запчастей</label>
+          <div class="border rounded p-2" data-catalog-picker-target="spares">
+            <div class="text-muted small">Выберите семейство и модель — появятся варианты.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

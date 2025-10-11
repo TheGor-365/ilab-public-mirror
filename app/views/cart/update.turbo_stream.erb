@@ -1,0 +1,25 @@
+<%= turbo_stream.replace dom_id(@order_item) do %>
+  <%= render 'cart/line_item', item: @order_item, index: @order_items.index(@order_item) + 1 %>
+<% end %>
+
+<%= turbo_stream.replace "cart_summary" do %>
+  <%= render 'cart/summary', subtotal: @subtotal, delivery: @delivery_price, amount: @amount %>
+<% end %>
+
+<%= turbo_stream.update "cart-count", @items_count %>
+<%= turbo_stream.update "side-cart-count", @items_count %>
+
+<%# Если после обновления позиция была удалена (qty=0), перестраиваем всю таблицу чтобы избежать дырок %>
+<% if @order_item.destroyed? %>
+  <%= turbo_stream.replace "cart_table" do %>
+    <% if @order_items.any? %>
+      <%= render 'cart/items_table', order_items: @order_items, grouped: {
+            device: @order_items.select{ |i| i.product.try(:category)&.try(:title).to_s.downcase !~ /(ремонт|repair|услуг|service|тюнинг|upgrade|обуч|part|запчаст|аксесс|accessor|module|модул)/ },
+            part:   @order_items.select{ |i| i.product.try(:category)&.try(:title).to_s.downcase =~ /(part|запчаст|аксесс|accessor|module|модул)/ },
+            service:@order_items.select{ |i| i.product.try(:category)&.try(:title).to_s.downcase =~ /(ремонт|repair|услуг|service|тюнинг|upgrade|обуч)/ }
+          } %>
+    <% else %>
+      <%= render 'cart/empty_cart' %>
+    <% end %>
+  <% end %>
+<% end %>

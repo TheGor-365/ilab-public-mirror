@@ -1,0 +1,12 @@
+<% @generation = Generation.find(params[:id]) %>
+
+<% @generation.videos.each_with_index do |video, index| %>
+
+  <small class="text-muted mb-5">
+    <%= video.identifier %>
+  </small>
+
+  <div class="mb-5 mt-5">
+    <%= video_tag(video.url, width: '420', height: '280', controls: true, class: 'rounded card p-1 shadow mx-auto mb-5') if video.present? %>
+  </div>
+<% end %>

@@ -1,0 +1,101 @@
+<% provide :page_title, @phone.model_title %>
+<% currently_at 'iPhones' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'phones/show_phone_partials/phone_show_nav' %>
+  </div>
+
+
+  <div class="col-6 m-5 contents-show">
+
+    <% if @phone.model_title.present? %>
+
+      <div class="row pt-4 pb-5 shadow bg-white mb-5 text-center header-nav">
+        <p class="align-middle">
+          <span id="gadget" class="anchorjs-link display-6 text-muted"><%= @phone.model_title %>
+            <span class="text-muted display-6">
+              <strong>show room</strong>
+            </span>
+          </span>
+        </p>
+
+        <i class="fas fa-2x fa-book-open text-muted pt-2"></i>
+      </div>
+    <% end %>
+
+
+    <% if @phone.images.present? %>
+
+      <div id="phone-image" class="row p-5 shadow bg-white">
+        <span class="display-6 mb-3"><%= @phone.model_title %>
+          <span id="photos" class="anchorjs-link text-muted display-6">
+            photos
+          </span>
+        </span>
+        <br>
+
+        <%= link_to phone_photo_path(@phone), remote: true, class: 'text-decoration-none text-muted' do %>
+
+          <% @phone.images.each do |image| %>
+
+            <small class="text-muted mb-5">
+              <%= image.identifier %>
+            </small>
+
+            <div class="col text-center mb-5">
+              <%= image_tag(image.url, width: '300', class: 'rounded img-thumbnail shadow') %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+
+
+    <% if @phone.model_overview.present? %>
+
+      <div class="row mt-5 mb-2 p-5 shadow bg-white">
+        <span class="display-6 mb-3"><%= @phone.model_title %>
+          <span id="overview" class="anchorjs-link text-muted display-6">
+            overview
+          </span>
+        </span>
+
+        <%= link_to phone_overview_path(@phone), remote: true, class: 'text-decoration-none text-muted' do %>
+          <small>
+            <%= @phone.model_overview %>
+          </small>
+        <% end %>
+      </div>
+    <% end %>
+
+
+    <% if @phone.videos.present? %>
+
+      <%= link_to phone_video_path(@phone), remote: true, class: 'text-decoration-none text-muted' do %>
+
+        <div class="row mt-5 p-5 mb-4 bg-white shadow">
+          <span class="display-6 mb-3"><%= @phone.model_title %>
+            <span id="videos" class="anchorjs-link text-muted display-6">
+              videos
+            </span>
+          </span>
+
+          <% @phone.videos.each do |video| %>
+            <small class="text-muted mb-5"><%= video.identifier %></small>
+          <% end %>
+
+          <div class="col">
+            <%= video_tag(@phone.videos, width: '640', height: '380', controls: true, class: 'rounded card p-1 shadow mx-auto mb-5') if @phone.videos.present? %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+
+  <div class="col-3">
+    <%= render 'phones/show_phone_partials/phone_info_card' %>
+  </div>
+</div>

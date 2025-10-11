@@ -1,0 +1,51 @@
+<% provide :page_title, 'Owned Gadgets' %>
+<% currently_at 'Owned Gadgets' %>
+
+<div class="container pt-5 pb-5">
+  <div class="bg-white shadow p-4 col-12">
+
+    <h4 class="display-3 mb-5">Owned Gadgets</h4>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>User</th>
+          <th>Phone</th>
+          <th>Images</th>
+          <th>Videos</th>
+          <th colspan="3">Controls</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @owned_gadgets.each do |owned_gadget| %>
+          <tr>
+            <td class="align-middle"><%= owned_gadget.id %></td>
+            <td class="align-middle"><%= owned_gadget.user_id %></td>
+            <td class="align-middle"><%= owned_gadget.phone_ids %></td>
+
+            <td class="align-middle">
+              <% owned_gadget.images.each do |image| %>
+                <%= image_tag(image.url, width: '30', class: 'rounded') %>
+              <% end %>
+            </td>
+
+            <td class="align-middle">
+              <% owned_gadget.videos.each do |video| %>
+                <%= video_tag(video.url, width: '40', height: '40', controls: true, class: 'rounded') %>
+              <% end %>
+            </td>
+
+            <td class="align-middle"><%= link_to 'Show', owned_gadget, class: 'text-decoration-none' %></td>
+            <td class="align-middle"><%= link_to 'Edit', edit_owned_gadget_path(owned_gadget), class: 'text-decoration-none' %></td>
+            <td class="align-middle"><%= link_to 'Destroy', owned_gadget, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-decoration-none' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+
+    <%= link_to 'New Owned Gadget', new_owned_gadget_path, class: 'text-decoration-none' %>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+/* Утилита: когда фон кнопки темнеет — текст/иконки должны светлеть */
+.btn-hover-invert:hover,
+.btn-hover-invert:focus,
+.btn-outline-dark:hover,
+.btn-outline-dark:focus,
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus {
+  color: #fff !important;
+}
+
+.btn-hover-invert .bi,
+.btn-outline-dark .bi,
+.btn-outline-secondary .bi {
+  transition: filter .15s ease;
+}
+
+.btn-hover-invert:hover .bi,
+.btn-outline-dark:hover .bi,
+.btn-outline-secondary:hover .bi {
+  /* «осветляем» иконку без смены svg */
+  filter: brightness(0) invert(1);
+}

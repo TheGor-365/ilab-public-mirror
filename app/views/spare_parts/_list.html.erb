@@ -1,0 +1,53 @@
+<% if spare_parts.blank? %>
+  <div class="card shadow-sm">
+    <div class="card-body text-center text-muted py-5">
+      Запчастей не найдено.
+    </div>
+  </div>
+<% else %>
+  <div class="row row-cols-1 row-cols-md-2 g-3">
+    <% spare_parts.each do |s| %>
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex align-items-start gap-3">
+              <div class="flex-shrink-0">
+                <% if s.avatar.present? %>
+                  <%= image_tag(s.avatar.url, class: "rounded", width: 64, height: 64) %>
+                <% else %>
+                  <%= image_tag("default_product_avatar.jpg", class: "rounded", width: 64, height: 64) %>
+                <% end %>
+              </div>
+              <div class="flex-grow-1">
+                <h6 class="mb-1"><%= s.try(:name) || s.try(:title) || "Spare Part ##{s.id}" %></h6>
+                <div class="small text-muted d-flex flex-wrap gap-2">
+                  <span class="badge bg-light text-dark">Gen: <%= s.generation_id || "—" %></span>
+                  <% if s.manufacturer.present? %>
+                    <span class="badge bg-light text-dark">Maker: <%= s.manufacturer %></span>
+                  <% end %>
+                  <span class="badge bg-light text-dark">Imgs: <%= Array(s.images).size %></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-3 d-flex gap-2">
+              <!-- Десктоп: правая панель (если есть turbo-frame id="spare_part_details") -->
+              <%= link_to "Подробнее",
+                          spare_part_path(s),
+                          data: { turbo_frame: "spare_part_details" },
+                          class: "btn btn-sm btn-outline-primary d-none d-lg-inline-flex" %>
+
+              <!-- Мобилка: пока обычная навигация; когда появится модалка+JS — будет открываться модалка -->
+              <%= link_to "Открыть",
+                          spare_part_path(s),
+                          data: { "spare-part-open": "1" },
+                          class: "btn btn-sm btn-primary d-inline-flex d-lg-none" %>
+
+              <%= link_to "Открыть страницу", s, class: "btn btn-sm btn-outline-dark ms-auto" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

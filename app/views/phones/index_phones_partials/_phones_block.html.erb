@@ -1,0 +1,140 @@
+<% @phones = Phone.order('id ASC').all %>
+
+<div class="contents-block">
+
+  <div class="row px-0 pt-2 pb-5 shadow bg-white mb-5 text-center header-nav">
+
+    <div class="col-5"></div>
+
+    <div class="col-2">
+      <p class="text-center text-muted display-6">
+        iPhones
+      </p>
+
+      <i class="fas fa-2x fa-book-open text-muted pt-2"></i>
+    </div>
+
+    <div class="col-3"></div>
+
+    <div class="col-2 mb-5 p-2 shadow toggler">
+
+      <%= link_to phones_table_path, remote: true, class: 'text-decoration-none text-muted' do %>
+
+        <i class="fas fa-table text-muted"></i><br>
+
+        <small class="text-muted">
+          table
+        </small>
+      <% end %>
+    </div>
+  </div>
+
+  <% @phones.each_with_index do |phone, index| %>
+
+    <div class="row phone-content">
+      <div class="col-10 block-controls"></div>
+
+      <div class="col-2 px-3 py-5 shadow bg-white text-center block-controls">
+        <small>
+          <div class="btn-group-vertical">
+            <%= link_to 'Show', phone, class: 'btn btn-sm btn-secondary' %>
+            <%= link_to 'Edit', edit_phone_path(phone), class: 'btn btn-sm btn-secondary' %>
+            <%= link_to 'Destroy', phone, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-secondary' %>
+          </div>
+        </small>
+      </div>
+
+      <% if phone.model_title.present? %>
+
+        <div class="spacecontainer"></div>
+
+        <div class="row p-5 mb-5 bg-white shadow begin">
+          <span class="title">
+            <small class="display-6 text-muted">
+              <%= link_to phone_title_path(phone), remote: true, class: 'text-decoration-none text-muted' do %>
+                <span id="<%= phone.model_title %>" class="anchorjs-link anchor">
+                  <%= phone.model_title %>
+                </span>
+              <% end %>
+            </small>
+          </span>
+        </div>
+      <% end %>
+
+      <% if phone.images.present? %>
+
+        <div class="row p-5 mb-5 bg-white shadow">
+
+          <span class="display-6 mb-5"><%= phone.model_title %>
+            <span id="photos" class="anchorjs-link text-muted display-6">
+              photos
+            </span>
+          </span>
+          <br>
+
+          <%= link_to phone_photo_path(phone), remote: true, class: 'text-decoration-none text-muted' do %>
+
+            <% phone.images.each do |image| %>
+
+              <small class="text-muted mb-5">
+                <%= image.identifier %>
+              </small>
+
+              <div class="col text-center mb-5 mt-5">
+                <%= image_tag(image.url, width: '500', class: 'rounded img-thumbnail p-1 shadow') %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if phone.videos.present? %>
+
+        <div class="row p-5 mb-5 bg-white shadow">
+
+          <span class="display-6 mb-5"><%= phone.model_title %>
+            <span id="videos" class="anchorjs-link text-muted display-6">
+              videos
+            </span>
+          </span>
+
+          <%= link_to phone_video_path(phone), remote: true, class: 'text-decoration-none text-muted' do %>
+
+            <% phone.videos.each do |video| %>
+
+              <small class="text-muted mb-5">
+                <%= video.identifier %>
+              </small>
+
+              <div class="col text-center mb-5 mt-5">
+                <%= video_tag(video.url, width: '640', height: '380', controls: false, class: 'rounded card p-1 shadow mx-auto mb-5') if phone.videos.present? %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if phone.model_overview.present? %>
+
+        <div class="row p-5 bg-white shadow">
+
+          <span class="display-6 mb-5"><%= phone.model_title %>
+            <span id="overview" class="anchorjs-link text-muted display-6">
+              overview
+            </span>
+          </span>
+
+          <%= link_to phone_overview_path(phone), remote: true, class: 'text-decoration-none text-muted' do %>
+            <small class="text-muted">
+              <%= phone.model_overview %>
+            </small>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="row p-5 m-5">
+      <div class="row p-5 m-5"></div>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,36 @@
+<% product = local_assigns[:product] || @product %>
+<% counts  = @attached_counts || {} %>
+
+<div class="pd-summary-pills d-grid gap-2">
+  <%= link_to repairs_path(product_id: product.id),
+              data: { turbo_frame: "_top" },
+              class: "badge rounded-pill bg-primary text-decoration-none d-inline-flex align-items-center justify-content-center p-2" do %>
+    <i class="bi bi-tools me-1"></i>
+    Ремонты (товар)
+    <span class="badge bg-light text-dark ms-2"><%= counts[:repairs].to_i %></span>
+  <% end %>
+
+  <%= link_to spare_parts_path(product_id: product.id),
+              data: { turbo_frame: "_top" },
+              class: "badge rounded-pill bg-info text-white text-decoration-none d-inline-flex align-items-center justify-content-center p-2" do %>
+    <i class="bi bi-cpu me-1"></i>
+    Запчасти (товар)
+    <span class="badge bg-light text-dark ms-2"><%= counts[:spare_parts].to_i %></span>
+  <% end %>
+
+  <%= link_to mods_path(product_id: product.id),
+              data: { turbo_frame: "_top" },
+              class: "badge rounded-pill bg-warning text-dark text-decoration-none d-inline-flex align-items-center justify-content-center p-2" do %>
+    <i class="bi bi-puzzle me-1"></i>
+    Модули (товар)
+    <span class="badge bg-dark text-white ms-2"><%= counts[:mods].to_i %></span>
+  <% end %>
+
+  <%= link_to defects_path(product_id: product.id),
+              data: { turbo_frame: "_top" },
+              class: "badge rounded-pill bg-danger text-decoration-none d-inline-flex align-items-center justify-content-center p-2" do %>
+    <i class="bi bi-bug me-1"></i>
+    Дефекты (товар)
+    <span class="badge bg-light text-dark ms-2"><%= counts[:defects].to_i %></span>
+  <% end %>
+</div>

@@ -1,0 +1,20 @@
+<% if images.is_a?(Array) && images.any? %>
+  <h6>Изображения</h6>
+  <div class="row">
+    <% images.each do |img| %>
+      <div class="col-4 mb-2">
+        <%= image_tag img.url, class: 'img-fluid rounded' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% if videos.present? %>
+  <h6 class="mt-3">Видео</h6>
+  <% videos.each do |video| %>
+    <video controls class="w-100 mb-3 rounded">
+      <source src="<%= video.url %>" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  <% end %>
+<% end %>

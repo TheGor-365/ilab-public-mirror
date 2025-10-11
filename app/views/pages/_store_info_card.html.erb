@@ -1,0 +1,44 @@
+<%# ДЕФОЛТНЫЙ контент правого сайдбара в /store: поиск + секции + товары %>
+<div class="p-3 sidebar-card sidebar--tone"
+     data-controller="store-info"
+     data-store-info-target="root">
+
+  <!-- Поиск -->
+  <div class="input-group input-group-sm mb-3">
+    <span class="input-group-text"><i class="bi bi-search"></i></span>
+    <input type="search"
+           class="form-control"
+           placeholder="Поиск по товарам…"
+           data-store-info-target="query"
+           data-action="input->store-info#filter">
+  </div>
+
+  <!-- Резюме -->
+  <p class="rounded p-2 d-flex justify-content-between align-items-center">
+    <span>Всего позиций</span>
+    <span class="text-dark" data-store-info-target="total"><%= total.to_i %></span>
+  </p>
+
+  <% by_section.each do |title, items| %>
+    <% next if items.blank? %>
+    <div class="mb-3" data-section>
+      <div class="section-title text-dark fw-semibold">
+        <%= title %>
+        <span class="badge bg-light text-dark ms-1 float-end" data-section-count><%= items.size %></span>
+      </div>
+
+      <ul class="list-unstyled small mt-2 mb-0" data-section-list>
+        <% items.each do |p| %>
+          <li class="list-item js-item" data-name="<%= p.name.to_s.downcase %>">
+            <a href="#product-<%= p.id %>"
+               class="store-nav__anchor"
+               data-store-anchor="#product-<%= p.id %>">
+              <%= p.name %>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <hr class="text-dark">
+  <% end %>
+</div>

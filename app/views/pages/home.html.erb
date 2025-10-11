@@ -1,0 +1,226 @@
+<% provide :page_title, 'Home' %>
+<% currently_at 'Home' %>
+
+<div class="home-page" data-controller="home">
+  <!-- HERO -->
+  <section class="home-hero position-relative overflow-hidden rounded">
+    <div class="container py-5 py-lg-6 position-relative">
+      <div class="row align-items-center g-4">
+        <div class="col-12 col-lg-7">
+          <h1 class="display-4 fw-semibold mb-3 text-dark">
+            iLab <span class="text-muted">Services</span>
+          </h1>
+          <p class="lead mb-4 hero-lead-contrast">
+            Сертифицированные устройства Apple, аккуратный ремонт и удобный обмен.<br class="d-none d-md-inline">
+            Всё прозрачно — от подбора до выдачи.
+          </p>
+          <div class="d-flex flex-wrap gap-2">
+            <%= link_to store_path, class: "btn btn-dark btn-success-custom shadow-lg" do %>
+              <i class="bi bi-shop me-2"></i> В магазин
+            <% end %>
+            <%= link_to repairs_path, class: "btn btn-success high-contrast" do %>
+              <i class="bi bi-tools me-2"></i> Ремонтировать устройство
+            <% end %>
+            <%= link_to new_product_path, class: "btn btn-outline-dark d-none d-md-inline-flex" do %>
+              <i class="bi bi-plus-circle me-2"></i> Продать устройство
+            <% end %>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-5">
+          <div class="home-hero-card glass-panel rounded-4 shadow-lg p-4">
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-lightning-charge fs-3 me-2"></i>
+              <h5 class="mb-0 fw-semibold">Быстро. Честно. Красиво.</h5>
+            </div>
+            <p class="text-muted mb-3 hero-card-text">
+              Мы берём на себя интеграцию, диагностику и аккуратный сервис. Вы — наслаждаетесь техникой.
+            </p>
+            <ul class="list-unstyled small mb-0">
+              <li class="mb-2"><i class="bi bi-check2-circle me-2 text-success"></i> Проверенные поставки и прозрачные цены</li>
+              <li class="mb-2"><i class="bi bi-check2-circle me-2 text-success"></i> Удобная витрина по семействам и моделям</li>
+              <li class="mb-2"><i class="bi bi-check2-circle me-2 text-success"></i> Поддержка модулей/запчастей/ремонтов</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- декоративные «блики» -->
+    <div class="hero-blob hero-blob-a"></div>
+    <div class="hero-blob hero-blob-b"></div>
+  </section>
+
+  <!-- LIVE-СТАТИСТИКА -->
+  <section class="home-stats mt-3 mt-md-4">
+    <div class="container">
+      <div class="row g-3 g-md-4 text-center">
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="stat glass-panel shadow-sm">
+            <div class="stat__num" data-home-target="counter" data-to="<%= @stats[:products] %>">0</div>
+            <div class="stat__label text-muted">Товаров</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="stat glass-panel shadow-sm">
+            <div class="stat__num" data-home-target="counter" data-to="<%= @stats[:families] %>">0</div>
+            <div class="stat__label text-muted">Семейств</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="stat glass-panel shadow-sm">
+            <div class="stat__num" data-home-target="counter" data-to="<%= @stats[:repairs] %>">0</div>
+            <div class="stat__label text-muted">Ремонтов</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="stat glass-panel shadow-sm">
+            <div class="stat__num" data-home-target="counter" data-to="<%= @stats[:spare_parts] %>">0</div>
+            <div class="stat__label text-muted">Запчастей</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="stat glass-panel shadow-sm">
+            <div class="stat__num" data-home-target="counter" data-to="<%= @stats[:mods] %>">0</div>
+            <div class="stat__label text-muted">Модулей</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="stat glass-panel shadow-sm">
+            <div class="stat__num" data-home-target="counter"
+                 data-to="<%= @stats[:avg_price].to_f %>" data-decimals="0">0</div>
+            <div class="stat__label text-muted">Средняя выгода</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- УСЛУГИ (3 карточки) -->
+  <section class="home-services py-4 py-md-5">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-md-3 g-3 g-lg-4 text-center">
+        <div class="col">
+          <div class="card h-100 d-flex flex-column rounded-3 shadow service-card">
+            <div class="card-header py-3 bg-light">
+              <h4 class="my-0 fw-normal"><i class="bi bi-arrow-repeat me-2"></i>ReStore</h4>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h4 class="card-title pricing-card-title">
+                <small class="text-muted fw-light">Repair from <strong>1500$</strong></small>
+              </h4>
+              <ul class="list-unstyled mt-3 mb-4 flex-grow-1 text-start mx-auto" style="max-width: 320px;">
+                <li><i class="bi bi-check2 me-2 text-success"></i> Базовая диагностика</li>
+                <li><i class="bi bi-check2 me-2 text-success"></i> Согласование работ</li>
+                <li><i class="bi bi-check2 me-2 text-success"></i> Проверка модулей</li>
+              </ul>
+              <%= link_to 'Select faults', store_path, class: "mt-auto w-100 btn btn-dark btn-success-custom shadow-lg btn-sm" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100 d-flex flex-column rounded-3 shadow service-card">
+            <div class="card-header py-3 bg-light">
+              <h4 class="my-0 fw-normal"><i class="bi bi-tools me-2"></i>RePair</h4>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h4 class="card-title pricing-card-title">
+                <small class="text-muted fw-light">Repair from <strong>2000$</strong></small>
+              </h4>
+              <ul class="list-unstyled mt-3 mb-4 flex-grow-1 text-start mx-auto" style="max-width: 320px;">
+                <li><i class="bi bi-check2 me-2 text-success"></i> Прицельный ремонт</li>
+                <li><i class="bi bi-check2 me-2 text-success"></i> Гарантия на работы</li>
+                <li><i class="bi bi-check2 me-2 text-success"></i> Прозрачный отчёт</li>
+              </ul>
+              <%= link_to 'Select faults', repairs_path, class: "mt-auto w-100 btn btn-dark btn-success-custom shadow-lg btn-sm" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100 d-flex flex-column rounded-3 shadow service-card">
+            <div class="card-header py-3 bg-light">
+              <h4 class="my-0 fw-normal"><i class="bi bi-mortarboard me-2"></i>University</h4>
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h4 class="card-title pricing-card-title">
+                <small class="text-muted fw-light">Repair from <strong>2500$</strong></small>
+              </h4>
+              <ul class="list-unstyled mt-3 mb-4 flex-grow-1 text-start mx-auto" style="max-width: 320px;">
+                <li><i class="bi bi-check2 me-2 text-success"></i> Обучающие материалы</li>
+                <li><i class="bi bi-check2 me-2 text-success"></i> Практические кейсы</li>
+                <li><i class="bi bi-check2 me-2 text-success"></i> Поддержка экспертов</li>
+              </ul>
+              <%= link_to 'Select faults', universities_path, class: "mt-auto w-100 btn btn-dark btn-success-custom shadow-lg btn-sm" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ТОП-СЕМЕЙСТВА -->
+  <section class="home-families py-4">
+    <div class="container">
+      <h5 class="text-center text-muted mb-3 mb-md-4">Быстрый переход по семействам</h5>
+      <div class="d-flex flex-wrap justify-content-center gap-2">
+        <% @top_families.keys.each do |fam| %>
+          <%= link_to fam.to_s, store_path(family: fam.to_s), class: "pill" %>
+        <% end %>
+        <% if @top_families.blank? %>
+          <span class="text-muted small">Семейства появятся после импорта каталога</span>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <!-- ВИТРИНА: УСТРОЙСТВА В ПРОДАЖЕ -->
+  <section class="home-featured py-4 py-md-5">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h5 class="mb-0 text-muted">Устройства в продаже</h5>
+        <%= link_to "Все товары →", store_path, class: "text-decoration-none small link-dark" %>
+      </div>
+
+      <% if @latest_products.any? %>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3 g-lg-4">
+          <% @latest_products.each do |product| %>
+            <div class="col">
+              <div class="card h-100 shadow-sm product-card rounded-3">
+                <% if product.respond_to?(:avatar) && product.avatar.present? %>
+                  <%= image_tag product.avatar.url, class: "card-img-top", alt: product.name %>
+                <% end %>
+                <div class="card-body d-flex flex-column">
+                  <h6 class="card-title word-break"><%= product.display_name.presence || product.name.presence || "Товар ##{product.id}" %></h6>
+                  <p class="card-text text-muted small flex-grow-1"><%= truncate(product.description.to_s, length: 90) %></p>
+                  <% if product.price.to_f > 0 %>
+                    <div class="fw-bold text-end">$<%= product.price %></div>
+                  <% end %>
+                </div>
+                <div class="card-footer bg-transparent border-0 d-flex gap-2">
+                  <%= link_to "Открыть", product_path(product), class: "btn btn-sm btn-outline-dark flex-fill" %>
+                  <%= link_to "В магазин", store_path, class: "btn btn-sm btn-outline-dark flex-fill" %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="text-center text-muted py-4">
+          Пока нет опубликованных устройств.
+          <div class="mt-2"><%= link_to "Выставить на продажу", new_product_path, class: "btn btn-success btn-sm" %></div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <!-- ПРИМЕЧАНИЕ -->
+  <section class="home-note text-center py-4">
+    <div class="container">
+      <p class="fs-6 fs-md-5 text-muted mb-0">
+        Departure and diagnostics of the master within the city 500$, outside the city 1000$.
+        The maximum distance from the city is 20 kilometers.
+      </p>
+    </div>
+  </section>
+</div>

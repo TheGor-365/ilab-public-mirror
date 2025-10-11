@@ -1,0 +1,31 @@
+<% provide :page_title, 'Edit Article' %>
+<% currently_at 'Articles' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'article_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+    <div class="row p-5 shadow bg-white mb-5">
+      <h4 class="display-6">
+        Editing Article
+        <span class="text-muted">
+          <%= @article.name %>
+        </span>
+      </h4>
+    </div>
+
+    <%= render 'form', article: @article %>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Show', @article, class: 'text-decoration-none' %>
+      <%= link_to 'Back', articles_path, class: 'text-decoration-none' %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <%= render 'article_info_card' %>
+  </div>
+</div>

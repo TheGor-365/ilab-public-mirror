@@ -1,0 +1,13 @@
+<div class="fixed-right nav-scroll shadow bg-white col-3 mx-3 mt-5">
+
+  <div id="phone-edit-title" class="show-nav-header shadow bg-white py-4">
+    <div>
+      <%= render partial: 'phones/show_phone_partials/phone_title_show', phone: @phone %>
+    </div>
+  </div>
+  <br>
+
+  <div id="edit-phone-info" class="mb-5 px-4 text-muted">
+    <%= render partial: 'phones/edit_phone_partials/edit_phone_default_content', phone: @phone %>
+  </div>
+</div>

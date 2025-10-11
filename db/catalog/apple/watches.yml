@@ -1,0 +1,71 @@
+- family: "Apple Watch"
+  generation_title: "Apple Watch (Series 0)"
+  released_on: 2015-04-24
+  discontinued_on: 2016-09-07
+
+- family: "Apple Watch"
+  generation_title: "Series 1"
+  released_on: 2016-09-16
+  discontinued_on: 2018-09-12
+
+- family: "Apple Watch"
+  generation_title: "Series 2"
+  released_on: 2016-09-16
+  discontinued_on: 2017-09-12
+
+- family: "Apple Watch"
+  generation_title: "Series 3"
+  released_on: 2017-09-22
+  discontinued_on: 2022-09-07
+
+- family: "Apple Watch"
+  generation_title: "Series 4"
+  released_on: 2018-09-21
+  discontinued_on: 2019-09-10
+
+- family: "Apple Watch"
+  generation_title: "Series 5"
+  released_on: 2019-09-20
+  discontinued_on: 2020-09-15
+
+- family: "Apple Watch"
+  generation_title: "SE (1st gen)"
+  released_on: 2020-09-18
+  discontinued_on: 2022-09-07
+
+- family: "Apple Watch"
+  generation_title: "Series 6"
+  released_on: 2020-09-18
+  discontinued_on: 2021-10-08
+
+- family: "Apple Watch"
+  generation_title: "Series 7"
+  released_on: 2021-10-15
+  discontinued_on: 2022-09-07
+
+- family: "Apple Watch"
+  generation_title: "Series 8"
+  released_on: 2022-09-16
+  discontinued_on: 2023-09-12
+
+- family: "Apple Watch"
+  generation_title: "SE (2nd gen)"
+  released_on: 2022-09-16
+
+- family: "Apple Watch"
+  generation_title: "Ultra (1st gen)"
+  released_on: 2022-09-23
+  discontinued_on: 2023-09-12
+
+- family: "Apple Watch"
+  generation_title: "Series 9"
+  released_on: 2023-09-22
+  discontinued_on: 2024-09-09
+
+- family: "Apple Watch"
+  generation_title: "Ultra 2"
+  released_on: 2023-09-22
+
+- family: "Apple Watch"
+  generation_title: "Series 10"
+  released_on: 2024-09-20

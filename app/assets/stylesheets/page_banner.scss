@@ -1,0 +1,29 @@
+.page-banner {
+  background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+  border-bottom: 1px solid rgba(0,0,0,.06);
+  padding: .75rem 0;
+}
+
+.page-banner__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-banner__title {
+  font-weight: 600;
+  font-size: 1.125rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.page-banner-spacer {
+  height: .75rem; /* воздух под баннером (реальную высоту задаёт page_banner_fix.scss) */
+}
+
+/* на всякий случай — если где-то сбиты bootstrap-отступы */
+h3.mb-3 { margin-bottom: 1.25rem !important; }
+
+/* Отступ снизу, чтобы последний блок не «лип» к краю экрана */
+.page-bottom-spacer { height: 80px; }

@@ -1,0 +1,7 @@
+<% if defined?(phone) && phone.present? %>
+  <h5 class="text-muted">Модель телефона</h5>
+  <p><%= product.category.products.find_by(id: product.id).name %></p>
+  <p><%= product.category.products.find_by(id: product.id).description %></p>
+<% else %>
+  <p class="text-muted fst-italic">Информация о модели телефона недоступна</p>
+<% end %>

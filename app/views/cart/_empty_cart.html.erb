@@ -1,0 +1,11 @@
+<div class="card shadow-sm mb-4" id="cart">
+  <div class="card-header">
+    <span class="h5 mb-0"><%= current_user.username %>'s <span class="text-muted">cart</span></span>
+  </div>
+  <div class="card-body">
+    <p class="lead mb-4">Корзина пуста</p>
+    <div class="d-grid gap-2 col-md-6 col-12">
+      <%= button_to 'Перейти в магазин', store_path, class: 'btn btn-success py-3' %>
+    </div>
+  </div>
+</div>

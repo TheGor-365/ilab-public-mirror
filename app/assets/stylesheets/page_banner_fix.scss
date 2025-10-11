@@ -1,0 +1,48 @@
+/* === Fixed page banner: desktop + mobile ===
+   Подключается после page_banner.scss.
+   Делает .page-banner фиксированной на всех брейкпоинтах
+   и даёт удобные utils для стикеров и якорей.
+*/
+
+:root {
+  /* базовые высоты баннера/навбара */
+  --banner-height: 52px;
+  /* navbar-offset берём из глобальных custom.scss, чтобы исключить JS-калькуляции */
+  --navbar-offset: var(--main-navbar-height);
+}
+
+@media (max-width: 991.98px) {
+  :root { --navbar-offset: var(--mobile-navbar-height); }
+}
+
+@media (max-width: 576px) {
+  :root { --banner-height: 56px; }
+}
+
+/* Фиксируем баннер на всех страницах, где он присутствует */
+.page-banner {
+  position: fixed !important;
+  top: var(--navbar-offset);
+  left: 0;
+  right: 0;
+  z-index: 1031; /* выше .navbar (Bootstrap ~1030) */
+}
+
+/* Spacer компенсирует высоту И навбара, И баннера */
+.page-banner-spacer {
+  display: block !important;
+  height: calc(var(--navbar-offset) + var(--banner-height) + 8px) !important;
+}
+
+/* Блоки под баннером, которые тоже должны "прилипать" ниже него */
+.sticky-below-banner {
+  position: sticky;
+  top: calc(var(--navbar-offset) + var(--banner-height) + 8px);
+  z-index: 1029;
+  background: #fff;
+}
+
+/* Чтобы якоря/заголовки не прятались за фиксированными панелями */
+.with-fixed-banner-anchor {
+  scroll-margin-top: calc(var(--navbar-offset) + var(--banner-height) + 16px);
+}

@@ -1,0 +1,28 @@
+<% provide :page_title, 'Edit University' %>
+<% currently_at 'Edit University' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'university_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+    <div class="row p-5 shadow bg-white mb-5">
+      <h1 class="display-6 mb-5">
+        Editing <span class="text-muted"><% @university.title %> university</span>
+      </h1>
+    </div>
+
+    <%= render 'form', university: @university %>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Show', @university, class: 'text-decoration-none me-3' %>
+      <%= link_to 'Back', universities_path, class: 'text-decoration-none' %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <%= render 'university_info_card' %>
+  </div>
+</div>

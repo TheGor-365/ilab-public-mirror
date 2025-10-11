@@ -1,0 +1,116 @@
+/* Минималистичный сайдбар Store — компактнее шрифт, без подчёркиваний и маркеров */
+
+/* Хелпер: печатаем фильтр как сырой CSS, чтобы Sass не считал saturate() своей функцией */
+@function css-filter($value) {
+  @return unquote($value);
+}
+
+/* Пилюли семейств */
+.store-nav__families {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin: 0 0 .6rem 0;
+}
+
+.pill {
+  display: inline-block;
+  padding: .18rem .5rem;
+  border-radius: 999px;
+  font-size: .8rem;
+  background: #f1f3f5;
+  color: #495057;
+  text-decoration: none;
+  transition: background .15s ease, color .15s ease;
+}
+.pill:hover { background: #e9ecef; text-decoration: none; }
+.pill.active { background: #343a40; color: #fff; }
+
+/* Секции */
+.store-nav__list { margin: 0; padding: 0; }
+.store-nav__section { margin: .6rem 0 .85rem; }
+
+.store-nav__section-title {
+  font-weight: 700;
+  font-size: .85rem;
+  margin: .45rem 0 .2rem;
+  color: #343a40;
+}
+
+/* Списки: без маркеров и отступов */
+.store-nav__ul { list-style: none !important; margin: 0 !important; padding: 0 !important; }
+.store-nav__li { list-style: none !important; padding: .15rem 0; }
+.store-nav__ul > li::marker { content: none; }
+
+/* Ссылки-элементы */
+.store-nav__anchor {
+  color: #495057;
+  text-decoration: none;
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: .8125rem;
+  line-height: 1.2;
+  cursor: pointer;
+}
+.store-nav__anchor:hover { text-decoration: none; color: #212529; }
+
+/* Offcanvas — чтобы клики не дёргали layout */
+#storeOffcanvasNav .store-nav__anchor { padding-right: .25rem; }
+
+.store-nav {
+  padding: 0 .5rem .75rem .5rem;
+}
+
+/* === Store: левый блок навигации как матовая карточка === */
+
+/* контейнер-стикер сам оставим прозрачным, тень уберём —
+   тень/радиус/фон дадим ВНУТРИ, на .store-nav */
+.desktop-sidebar .sidebar-sticky-content {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: .5rem; /* чуть меньше, карточка сама с паддингом */
+}
+
+/* собственно «карточка» для панели навигации */
+.desktop-sidebar .store-nav {
+  background: var(--glass-bg, rgba(255,255,255,.78)); /* фолбэк если переменные не подключены */
+  /* фолбэк для старых движков: хоть немного блюра */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  /* основное значение (экранировано от Sass) */
+  backdrop-filter: css-filter("saturate(var(--glass-sat, 1.12)) blur(var(--glass-blur, 14px))");
+  -webkit-backdrop-filter: css-filter("saturate(var(--glass-sat, 1.12)) blur(var(--glass-blur, 14px))");
+  border: 1px solid var(--glass-border, rgba(0,0,0,.08));
+  border-radius: .75rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,.08);
+  padding: .75rem .75rem 1rem;
+  position: relative;
+  z-index: 1;  /* дропдауны навбара выше (1100) */
+}
+
+/* небольшая полировка внутри карточки */
+.desktop-sidebar .store-nav__section-title {
+  color: #343a40;
+  font-weight: 700;
+}
+
+.desktop-sidebar .pill {
+  background: #f1f3f5;
+}
+.desktop-sidebar .pill:hover { background: #e9ecef; }
+.desktop-sidebar .pill.active { background: #343a40; color: #fff; }
+
+/* mobile offcanvas nav as a glass card */
+#storeOffcanvasNav .store-nav{
+  background: var(--glass-bg-mobile) !important;
+  border: 1px solid var(--glass-border) !important;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: .75rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,.12);
+  padding: .75rem !important;
+  margin: .25rem .5rem 1rem; /* чтобы было видно скругления */
+}

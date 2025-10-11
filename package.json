@@ -1,0 +1,31 @@
+{
+  "name": "devise-bootstrap",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3",
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/stimulus-webpack-helpers": "^1.0.1",
+    "@hotwired/turbo-rails": "^8.0.16",
+    "@popperjs/core": "^2.11.8",
+    "@rails/actioncable": "^6.0.0",
+    "@rails/actiontext": "^6.1.3-2",
+    "@rails/activestorage": "^6.0.0",
+    "@rails/ujs": "^6.0.0",
+    "@rails/webpacker": "5.3.0",
+    "bootstrap": "^5.3.7",
+    "bootstrap-icons": "^1.13.1",
+    "daterangepicker": "^3.1.0",
+    "jquery": "^3.6.0",
+    "moment": "^2.30.1",
+    "rails_admin": "3.0.0-rc3",
+    "toastr": "^2.1.4",
+    "trix": "^1.2.0",
+    "turbolinks": "^5.2.0",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "version": "0.1.0",
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.2"
+  }
+}

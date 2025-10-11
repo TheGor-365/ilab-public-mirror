@@ -1,0 +1,15 @@
+- family: "HomePod"
+  generation_title: "HomePod (1st generation)"
+  released_on: 2018-02-09
+  discontinued_on: 2021-03-12
+
+- family: "HomePod"
+  generation_title: "HomePod mini"
+  released_on: 2020-11-16
+  model_variants:
+    - title: "Space Gray (discontinued color)"
+      discontinued_on: 2024-07-15
+
+- family: "HomePod"
+  generation_title: "HomePod (2nd generation)"
+  released_on: 2023-02-03

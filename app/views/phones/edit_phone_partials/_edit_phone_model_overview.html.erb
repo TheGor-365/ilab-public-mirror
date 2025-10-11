@@ -1,0 +1,10 @@
+<% @phone = Phone.find(params[:id]) if @phone.present? %>
+
+<%= form_with(model: @phone, html: { multipart: true }) do |form| %>
+
+  <div class="row p-5 shadow bg-white mb-5">
+
+    <%= form.label :iPhone_model_overview, class: 'anchorjs-link display-6 mb-5', id: 'overview' %>
+    <%= form.rich_text_area :model_overview, class: 'anchorjs-link form-control' %>
+  </div>
+<% end %>

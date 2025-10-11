@@ -1,0 +1,43 @@
+<%# Одна карточка ремонта. На десктопе — в правую панель (repair_details),
+    на мобиле — модалка + загрузка в repair_modal. %>
+<div class="card h-100 shadow-sm">
+  <div class="card-body d-flex flex-column">
+    <div class="d-flex align-items-center gap-3">
+      <div class="flex-shrink-0">
+        <% if repair.avatar.present? %>
+          <%= image_tag(repair.avatar.url, class: "rounded", width: 56, height: 56) %>
+        <% else %>
+          <%= image_tag("default_product_avatar.jpg", class: "rounded", width: 56, height: 56) %>
+        <% end %>
+      </div>
+      <div class="flex-grow-1">
+        <h6 class="mb-1"><%= repair.title.presence || "Repair ##{repair.id}" %></h6>
+        <div class="text-muted small">
+          Gen: <span class="badge bg-light text-dark"><%= repair.generation_id || "—" %></span>
+          Phone: <span class="badge bg-light text-dark"><%= repair.phone_id || "—" %></span>
+        </div>
+      </div>
+    </div>
+
+    <% if repair.description.present? %>
+      <p class="mt-3 mb-2 text-truncate"><%= strip_tags(repair.description.to_s) %></p>
+    <% end %>
+
+    <div class="mt-auto d-flex flex-wrap gap-2">
+      <!-- Десктоп -->
+      <%= link_to "Детали",
+                  repair_path(repair),
+                  class: "btn btn-sm btn-outline-primary d-none d-md-inline-flex",
+                  data: { turbo_frame: "repair_details" } %>
+
+      <!-- Мобилка -->
+      <%= link_to "Детали",
+                  repair_path(repair),
+                  class: "btn btn-sm btn-outline-primary d-inline-flex d-md-none",
+                  data: { repair_open: "1" } %>
+
+      <%= link_to "Открыть", repair_path(repair), class: "btn btn-sm btn-light" %>
+      <%= link_to "Редактировать", edit_repair_path(repair), class: "btn btn-sm btn-dark" %>
+    </div>
+  </div>
+</div>

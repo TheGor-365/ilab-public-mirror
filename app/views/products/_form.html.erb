@@ -1,0 +1,160 @@
+<%= form_with model: @product, html: { multipart: true, class: "vstack gap-4 mb-5" } do |f| %>
+  <% if @product.errors.any? %>
+    <div class="alert alert-danger">
+      <div class="fw-bold mb-2">Нельзя сохранить товар:</div>
+      <ul class="mb-0">
+        <% @product.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- ОБЩИЙ КОНТЕЙНЕР С КОНТРОЛЛЕРОМ -->
+  <div data-controller="catalog-picker"
+       data-catalog-picker-source-url-value="/products/catalog_tree"
+       data-catalog-picker-phones-url-value="/products/catalog_phones">
+
+    <!-- теперь сам пикер отрисовывает две карточки внутри -->
+    <%= render "products/catalog_picker" %>
+
+    <div class="row g-4 mt-1">
+      <div class="col-12 col-lg-8 vstack gap-4">
+
+        <div class="card shadow-sm">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <strong>Состояние и описание</strong>
+            <small class="text-muted">клик по пресету добавляет текст</small>
+          </div>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-6 col-md-3">
+                <label class="form-label">Состояние</label>
+                <%= f.select :condition, Product.conditions.keys, {}, class: "form-select" %>
+              </div>
+
+              <div class="col-6 col-md-3">
+                <label class="form-label">Статус</label>
+                <%= f.select :state, Product.states.keys, {}, class: "form-select" %>
+              </div>
+
+              <div class="col-6 col-md-3">
+                <label class="form-label">Цена</label>
+                <%= f.number_field :price, step: "0.01", class: "form-control", placeholder: "например 199.99" %>
+              </div>
+
+              <div class="col-6 col-md-3">
+                <label class="form-label">Валюта</label>
+                <%= f.text_field :currency, class: "form-control", placeholder: "RUB/$/€", value: (@product.currency.presence || "RUB") %>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Нюансы / история (текстом)</label>
+                <%= f.text_area :description, class: "form-control", rows: 4, placeholder: "Царапина на дисплее, один владелец…", data: { "catalog-picker-target": "description" } %>
+
+                <!-- пресеты нюансов -->
+                <div class="mt-2" data-catalog-picker-target="presets">
+                  <% [
+                    "Незначительная царапина на корпусе",
+                    "Заметные царапины на корпусе",
+                    "Микроцарапины на экране",
+                    "Сколы на корпусе",
+                    "Слабая ёмкость аккумулятора",
+                    "Менялся дисплей",
+                    "Менялась батарея",
+                    "Следы эксплуатации, один владелец",
+                    "Нет оригинальной коробки",
+                    "Нет зарядного устройства",
+                    "Нет наушников",
+                    "Пятно на дисплее",
+                    "Есть пыль под камерой",
+                    "Менялся разъём зарядки"
+                  ].each do |preset| %>
+                    <button type="button"
+                            class="btn btn-sm btn-outline-dark me-2 mb-2"
+                            data-action="click->catalog-picker#applyTextPreset"
+                            data-preset="<%= preset %>"><%= preset %></button>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card shadow-sm" data-controller="images-preview">
+          <div class="card-header"><strong>Фото и видео</strong></div>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label">Аватар</label>
+                <%= f.file_field :avatar, class: "form-control", accept: "image/*", data: { action: "change->images-preview#avatar" } %>
+                <div class="mt-2">
+                  <% if @product.avatar&.url.present? %>
+                    <%= image_tag @product.avatar.url, class: "img-thumbnail", style: "max-width:200px" %>
+                  <% end %>
+                </div>
+                <img data-images-preview-target="avatar" class="img-thumbnail d-none" style="max-width:200px">
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Галерея</label>
+                <%= f.file_field :images, multiple: true, class: "form-control", accept: "image/*", data: { action: "change->images-preview#images" } %>
+                <div class="row g-2 mt-2" data-images-preview-target="imagesWrap"></div>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Видео</label>
+                <%= f.file_field :videos, multiple: true, class: "form-control", accept: "video/*" %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ПРАВАЯ КОЛОНКА — ИТОГИ -->
+      <div class="col-12 col-lg-4">
+        <div class="card shadow-sm">
+          <div class="card-header"><strong>Итоги</strong></div>
+          <div class="card-body small">
+            <% gen_label   = @product.generation&.title %>
+            <% phone_label = @product.phone&.try(:title).presence || @product.phone&.try(:model_title).presence || @product.phone&.try(:name).presence %>
+            <% sku_text    = [@product.storage, @product.color].compact.join(" ") %>
+
+            <div class="mb-2"><strong>SKU:</strong>
+              <span data-catalog-picker-target="skuBadge" class="badge bg-light text-dark"><%= @product.sku_id || "—" %></span>
+            </div>
+            <div class="mb-2"><strong>Поколение:</strong>
+              <span data-catalog-picker-target="genBadge" class="<%= gen_label.present? ? '' : 'text-muted' %>"><%= gen_label.presence || "—" %></span>
+            </div>
+            <div class="mb-2"><strong>Модель:</strong>
+              <span data-catalog-picker-target="phoneBadge" class="<%= phone_label.present? ? '' : 'text-muted' %>"><%= phone_label.presence || "—" %></span>
+            </div>
+            <div class="mb-2"><strong>Комплектация:</strong>
+              <span data-catalog-picker-target="skuText" class="<%= sku_text.present? ? '' : 'text-muted' %>"><%= sku_text.presence || "—" %></span>
+            </div>
+            <hr>
+            <div class="mb-2"><strong>Дефекты:</strong>
+              <span data-catalog-picker-target="defectsCount" class="badge bg-dark"><%= @product.defects.size %></span>
+            </div>
+            <div class="mb-2"><strong>Ремонты:</strong>
+              <span data-catalog-picker-target="repairsCount" class="badge bg-dark"><%= @product.repairs.size %></span>
+            </div>
+            <div class="mb-2"><strong>Модули:</strong>
+              <span data-catalog-picker-target="modsCount" class="badge bg-dark"><%= @product.mods.size rescue 0 %></span>
+            </div>
+            <div class="mb-2"><strong>Запчасти:</strong>
+              <span data-catalog-picker-target="sparesCount" class="badge bg-dark"><%= @product.spare_parts.size %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- row -->
+
+    <!-- больше воздуха снизу у кнопок -->
+    <div class="d-flex gap-2 mt-3 mb-5 pb-5">
+      <%= f.submit "Сохранить", class: "btn btn-success" %>
+      <%= link_to "Отмена", products_path, class: "btn btn-outline-dark" %>
+    </div>
+  </div><!-- /data-controller -->
+<% end %>

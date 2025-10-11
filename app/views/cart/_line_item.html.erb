@@ -1,0 +1,60 @@
+<% product = item.product %>
+<% type =
+     if product.try(:category)&.try(:title).to_s.downcase.match?(/ремонт|repair|услуг|service|тюнинг|upgrade|обуч/i)
+       "service"
+     elsif product.try(:category)&.try(:title).to_s.downcase.match?(/part|запчаст|аксесс|accessor|module|модул/i)
+       "part"
+     else
+       "device"
+     end %>
+
+<%= turbo_frame_tag dom_id(item) do %>
+  <tr class="cart-row" data-type="<%= type %>">
+    <td class="text-muted"><%= index %></td>
+
+    <td>
+      <div class="d-flex align-items-center gap-3">
+        <% if product.respond_to?(:avatar) && product.avatar.present? %>
+          <%= image_tag product.avatar.url, class: "rounded object-fit-cover", style: "width:54px;height:54px;" %>
+        <% else %>
+          <%= image_tag "default_product_avatar.png", class: "rounded", style: "width:54px;height:54px;" %>
+        <% end %>
+
+        <div>
+          <div class="fw-semibold"><%= product.try(:display_name).presence || product.name %></div>
+          <div class="small text-muted">
+            <% if product.try(:category) %>
+              <span class="badge rounded-pill bg-light text-dark border"><%= product.category.try(:title) || product.category.try(:name) %></span>
+            <% else %>
+              <span class="badge rounded-pill bg-light text-dark border">Без категории</span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </td>
+
+    <td class="text-center">
+      <%= form_with model: item, data: { controller: "cart", action: "change->cart#submitOnChange" } do |f| %>
+        <div class="input-group input-group-sm qty-group" data-controller="cart">
+          <button class="btn btn-outline-secondary" data-action="click->cart#dec" type="button" aria-label="Уменьшить">−</button>
+          <%= f.number_field :quantity,
+                value: item.quantity.to_i,
+                min: 0,
+                class: "form-control text-center",
+                data: { cart_target: "qty" } %>
+          <button class="btn btn-outline-secondary" data-action="click->cart#inc" type="button" aria-label="Увеличить">+</button>
+        </div>
+      <% end %>
+    </td>
+
+    <td class="text-end">$<%= '%.0f' % item.unit_price.to_f %></td>
+    <td class="text-end">$<%= '%.0f' % item.total.to_f %></td>
+
+    <td class="text-end">
+      <%= link_to 'Удалить',
+                  order_item_path(item),
+                  data: { turbo_method: :delete, turbo_confirm: 'Удалить позицию?' },
+                  class: 'btn btn-sm btn-outline-danger' %>
+    </td>
+  </tr>
+<% end %>

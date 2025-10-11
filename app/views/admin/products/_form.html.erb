@@ -1,0 +1,59 @@
+<%= form_with model: [:admin, @product], local: true, html: { data: { controller: "products-form" } } do |f| %>
+  <div class="row g-3">
+
+    <div class="col-md-4">
+      <%= label_tag :family, "Семейство" %>
+      <select class="form-select" data-products-form-target="family" data-action="change->products-form#onFamilyChange">
+        <option value="">— выберите —</option>
+        <option value="iPhone">iPhone</option>
+        <!-- позже добавим iPad/Watch/Mac/... -->
+      </select>
+    </div>
+
+    <div class="col-md-8">
+      <%= f.label :generation_id, "Поколение/модель" %>
+      <select class="form-select" data-products-form-target="generation" data-action="change->products-form#onGenerationChange change->products-form#updateDisplayName">
+        <option value="">— выберите —</option>
+      </select>
+      <%= f.hidden_field :generation_id, value: "", data: { products_form_target: "generationHidden" } %>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.label :storage, "Объём памяти" %>
+      <select class="form-select" data-products-form-target="storage" data-action="change->products-form#updateDisplayName">
+        <option value="">— выберите —</option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.label :color, "Цвет" %>
+      <select class="form-select" data-products-form-target="color" data-action="change->products-form#updateDisplayName">
+        <option value="">— выберите —</option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <%= f.label :price_cents, "Цена (в центах)" %>
+      <%= f.number_field :price_cents, class: "form-control" %>
+    </div>
+
+    <!-- техн. скрытые поля -->
+    <%= f.hidden_field :phone_id, value: "", data: { products_form_target: "phoneId" } %>
+    <%= f.hidden_field :model_id, value: "", data: { products_form_target: "modelId" } %>
+
+    <!-- красивое имя (если хочешь подсказать менеджеру) -->
+    <div class="col-12">
+      <%= label_tag :display_name, "Предпросмотр названия" %>
+      <input type="text" class="form-control" data-products-form-target="displayName" readonly>
+    </div>
+
+    <div class="col-12">
+      <%= f.label :description, "Описание" %>
+      <%= f.text_area :description, class: "form-control", rows: 4 %>
+    </div>
+
+    <div class="col-12 d-flex justify-content-end">
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

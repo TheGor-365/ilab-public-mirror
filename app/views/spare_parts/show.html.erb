@@ -1,0 +1,16 @@
+<% provide :page_title, (@spare_part.try(:name) || "Spare Part ##{@spare_part.id}") %>
+<% currently_at 'iPhone Spare Parts' %>
+
+<% if turbo_frame_request? %>
+  <%= turbo_frame_tag turbo_frame_request_id do %>
+    <%= render partial: "details", locals: { spare_part: @spare_part } %>
+  <% end %>
+<% else %>
+  <div class="container py-3">
+    <div class="d-flex align-items-center gap-3 mb-3">
+      <%= link_to "← К списку запчастей", spare_parts_path, class: "btn btn-link link-dark p-0" %>
+      <%= link_to "← В магазин", store_path, class: "btn btn-link link-dark p-0" %>
+    </div>
+    <%= render partial: "details", locals: { spare_part: @spare_part } %>
+  </div>
+<% end %>

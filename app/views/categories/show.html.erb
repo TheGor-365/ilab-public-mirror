@@ -1,0 +1,38 @@
+<% provide :page_title, @category.heading %>
+<% currently_at 'Chapters' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'category_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span class="text-muted display-6">
+        <strong>Category</strong>
+        <span id="title" class="anchorjs-link display-6">
+          <%= @category.heading %>
+        </span>
+      </span>
+
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="overview" class="anchorjs-link display-6 mb-3">
+        <%= @category.heading %> overview
+      </span>
+      <%= @category.overview %>
+    </div>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Edit', edit_category_path(@category), class: 'text-decoration-none me-3' %>
+      <%= link_to 'Back', categories_path, class: 'text-decoration-none me-3' %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <%= render 'category_info_card' %>
+  </div>
+</div>

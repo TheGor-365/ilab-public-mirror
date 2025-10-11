@@ -1,0 +1,73 @@
+<%# Детали продукта: иконки + значения, без текстовых лейблов %>
+<% p = local_assigns[:product] || @product %>
+
+<div class="pd-kv">
+  <%# Название (display_name или name) %>
+  <% name_val = (p.respond_to?(:display_name) && p.display_name.presence) || p.name.presence %>
+  <% if name_val.present? %>
+    <div class="pd-kv__row">
+      <span class="pd-kv__icon" title="Название" aria-label="Название"><i class="bi bi-tag"></i></span>
+      <span class="pd-kv__val"><%= name_val %></span>
+    </div>
+  <% end %>
+
+  <%# Семейство (iPhone/iPad/…) %>
+  <% fam_val = p.generation&.family %>
+  <% if fam_val.present? %>
+    <div class="pd-kv__row">
+      <span class="pd-kv__icon" title="Семейство" aria-label="Семейство"><i class="bi bi-collection"></i></span>
+      <span class="pd-kv__val"><%= fam_val %></span>
+    </div>
+  <% end %>
+
+  <%# Поколение/линейка %>
+  <% gen_val = p.generation&.title %>
+  <% if gen_val.present? %>
+    <div class="pd-kv__row">
+      <span class="pd-kv__icon" title="Поколение" aria-label="Поколение"><i class="bi bi-layers"></i></span>
+      <span class="pd-kv__val"><%= gen_val %></span>
+    </div>
+  <% end %>
+
+  <%# Модель (model.title или phone.model_title) %>
+  <% model_val = p.model&.title.presence || p.phone&.model_title.presence %>
+  <% if model_val.present? %>
+    <div class="pd-kv__row">
+      <span class="pd-kv__icon" title="Модель" aria-label="Модель"><i class="bi bi-cpu"></i></span>
+      <span class="pd-kv__val"><%= model_val %></span>
+    </div>
+  <% end %>
+
+  <%# Хранилище/объём %>
+  <% if p.storage.present? %>
+    <div class="pd-kv__row">
+      <span class="pd-kv__icon" title="Память" aria-label="Память"><i class="bi bi-hdd"></i></span>
+      <span class="pd-kv__val"><%= p.storage %></span>
+    </div>
+  <% end %>
+
+  <%# Цвет %>
+  <% if p.color.present? %>
+    <div class="pd-kv__row">
+      <span class="pd-kv__icon" title="Цвет" aria-label="Цвет"><i class="bi bi-palette"></i></span>
+      <span class="pd-kv__val"><%= p.color %></span>
+    </div>
+  <% end %>
+
+  <%# Состояние %>
+  <% cond_val = (p.respond_to?(:condition_human) && p.condition_human.presence) || p.condition.presence %>
+  <% if cond_val.present? %>
+    <div class="pd-kv__row">
+      <span class="pd-kv__icon" title="Состояние" aria-label="Состояние"><i class="bi bi-activity"></i></span>
+      <span class="pd-kv__val"><%= cond_val %></span>
+    </div>
+  <% end %>
+
+  <%# Цена %>
+  <% if p.price.present? %>
+    <div class="pd-kv__row">
+      <span class="pd-kv__icon" title="Цена" aria-label="Цена"><i class="bi bi-currency-dollar"></i></span>
+      <span class="pd-kv__val"><%= number_to_currency(p.price, unit: (p.currency.presence || "$")) %></span>
+    </div>
+  <% end %>
+</div>

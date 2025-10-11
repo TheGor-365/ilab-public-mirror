@@ -1,0 +1,2 @@
+module ImacsHelper
+end

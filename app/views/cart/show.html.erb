@@ -1,0 +1,142 @@
+<% provide :page_title, 'Cart' %>
+<% currently_at 'Cart' %>
+
+<div class="cart-page">
+
+  <!-- Отступ под главный navbar -->
+  <div class="cart-top-spacer"></div>
+
+  <!-- ====== Основная сетка: фиксированные боковые + центр с контентом ====== -->
+  <div class="container position-relative" id="cart-container">
+
+    <!-- ЛЕВЫЙ: стеклянная навигация (фиксированная на desktop) -->
+    <aside class="d-none d-lg-block cart-fixed-left">
+      <div class="glass-panel rounded-3 p-3 cart-fixed-scroll shape-decor shape--2 shape-size--md shape-pos--tl shape-soft">
+        <h6 class="mb-3">Навигация</h6>
+        <ul class="nav flex-column small">
+          <li class="nav-item"><a class="nav-link px-0" href="#cart"     data-cart-link>Корзина</a></li>
+          <li class="nav-item"><a class="nav-link px-0" href="#items"    data-cart-link>Позиции</a></li>
+          <li class="nav-item"><a class="nav-link px-0" href="#price"    data-cart-link>Итоги</a></li>
+          <li class="nav-item"><a class="nav-link px-0" href="#message"  data-cart-link>Сообщение</a></li>
+          <li class="nav-item"><a class="nav-link px-0" href="#delivery" data-cart-link>Доставка</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- ПРАВЫЙ: стеклянные подсказки (фиксированные на desktop) -->
+    <aside class="d-none d-lg-block cart-fixed-right">
+      <div class="glass-panel rounded-3 p-3 cart-fixed-scroll shape-decor shape--4 shape-size--md shape-pos--tr shape-soft">
+        <h6 class="mb-3">Подсказки</h6>
+        <div class="small text-muted">
+          <p class="mb-2">• Количество можно менять прямо в таблице — сумма пересчитается.</p>
+          <p class="mb-2">• Карточки товаров — кликабельные, можно открыть страницу товара.</p>
+          <p class="mb-2">• Доставка фиксированная: $<%= @delivery_price %>.</p>
+        </div>
+        <button class="btn btn-sm btn-outline-dark mt-2" data-bs-toggle="modal" data-bs-target="#cartTipsModal">
+          <i class="bi bi-lightbulb"></i> Больше
+        </button>
+      </div>
+    </aside>
+
+    <!-- ЦЕНТР: хедер + контент -->
+    <main class="cart-layout">
+      <%= render 'cart/cart_header' %>
+
+      <% if @order_items.size > 0 %>
+        <%= render 'cart/full_cart' %>
+      <% else %>
+        <%= render 'cart/empty_cart' %>
+      <% end %>
+    </main>
+  </div>
+
+  <!-- ====== Модалка «Подсказки» ====== -->
+  <div class="modal fade" id="cartTipsModal" tabindex="-1" aria-labelledby="cartTipsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content shape-decor shape--3 shape-size--lg shape-pos--tr shape-rot--b">
+        <div class="modal-header">
+          <h6 class="modal-title" id="cartTipsLabel">Подсказки по корзине</h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="small text-muted mb-0">
+            <li class="mb-2">Используйте кнопки «+ / −» для быстрой корректировки количества.</li>
+            <li class="mb-2">После удаления позиции восстановить её можно из страницы товара.</li>
+            <li class="mb-2">Для мобильного оглавления используйте иконку в шапке «Sara’s cart…».</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-dark" data-bs-dismiss="modal">Понятно</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Вычисление положения фикс-сайдбаров и высоты хедера (ранний пересчёт) -->
+<script>
+  (function(){
+    function setVar(name, value){ document.documentElement.style.setProperty(name, value); }
+
+    function recomputeVars(){
+      const c   = document.getElementById('cart-container');
+      const nav = document.querySelector('.navbar.fixed-top');
+
+      const r   = c ? c.getBoundingClientRect() : { left: 12 };
+      const x   = Math.max(r.left, 12);
+      setVar('--container-x', x + 'px');
+
+      const navH = nav ? Math.round(nav.getBoundingClientRect().height) : 67;
+      setVar('--main-navbar-height', navH + 'px');
+      setVar('--ui-offset',          navH + 'px');
+
+      // высота карточки-хедера для спейсера
+      const hdr = document.querySelector('.cart-header');
+      if (hdr){
+        const h = Math.round(hdr.getBoundingClientRect().height);
+        setVar('--cart-header-h', h + 'px');
+      }
+    }
+
+    const kick = () => {
+      recomputeVars();
+      // второй проход, когда шрифты / иконки дорисовались
+      requestAnimationFrame(recomputeVars);
+      setTimeout(recomputeVars, 180);
+    };
+
+    // максимально ранний старт
+    document.addEventListener('DOMContentLoaded', kick);
+    window.addEventListener('load', kick);
+    window.addEventListener('resize', kick);
+    document.addEventListener('turbo:load', kick);
+
+    // если что-то меняется в DOM (например, коллапс мобильного меню)
+    document.addEventListener('shown.bs.collapse', kick);
+    document.addEventListener('hidden.bs.collapse', kick);
+
+    // Плавный скролл по якорям из левого сайдбара и мобильного меню
+    document.addEventListener('click', function(e){
+      const a = e.target.closest('a[data-cart-link], a[data-cart-anchor]');
+      if(!a) return;
+      const href = a.getAttribute('href');
+      if(!href || !href.startsWith('#')) return;
+      e.preventDefault();
+
+      const target = document.querySelector(href);
+      if(!target) return;
+
+      // закрыть мобильный collapse, если открыт
+      const col = document.getElementById('cartNavCollapse');
+      if (col && col.classList.contains('show')) {
+        try { bootstrap.Collapse.getOrCreateInstance(col).hide(); } catch(e){}
+      }
+
+      // аккуратный скролл с учётом navbar + cart header
+      const offNavbar = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--ui-offset')) || 67;
+      const hdrH      = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--cart-header-h')) || 92;
+      const y = target.getBoundingClientRect().top + window.pageYOffset - (offNavbar + hdrH + 12);
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }, false);
+  })();
+</script>

@@ -1,0 +1,349 @@
+<% provide :page_title, "Товары" %>
+<% provide :has_banner, true %>
+
+<%
+  # Ключ семейства для карточек/пилюль
+  def family_key_for(p)
+    (
+      p.try(:family_name).presence ||
+      p.try(:family).presence ||
+      p.try(:series).presence ||
+      p.try(:generation)&.try(:title).presence ||
+      p.try(:model)&.try(:family_name).presence ||
+      "Прочее"
+    ).to_s
+  end
+
+  all_products = @products.to_a
+  groups = all_products.group_by { |p| family_key_for(p) }
+  family_names = groups.keys.sort_by { |k| k == "Прочее" ? "ЯЯЯЯ" : k }
+
+  def fam_slug(name) = name.to_s.parameterize.presence || "other"
+%>
+
+<div class="page-banner">
+  <div class="container page-banner__inner d-flex align-items-center gap-2">
+    <!-- слева заголовок -->
+    <div class="page-banner__title">
+      <i class="bi bi-box-seam"></i> Товары
+    </div>
+
+    <!-- центр: ДЕСКТОПНЫЙ поиск -->
+    <div class="flex-grow-1 d-none d-lg-flex justify-content-center">
+      <div class="mx-auto" style="max-width:520px; width:100%;">
+        <div class="input-group input-group-sm">
+          <input id="products-search"
+                 class="form-control"
+                 list="products-datalist"
+                 placeholder="Найти товар по названию или ID…">
+          <button id="products-search-go"
+                  class="btn btn-outline-dark"
+                  type="button"
+                  title="Перейти">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+        <datalist id="products-datalist">
+          <% all_products.sort_by(&:id).reverse.each do |p| %>
+            <option value="<%= "#{p.id} — #{p.respond_to?(:display_name) ? (p.display_name.presence || p.name) : (p.name.presence || "Товар ##{p.id}")}" %>"></option>
+          <% end %>
+        </datalist>
+      </div>
+    </div>
+
+    <!-- справа: Магазин + жалюзи + Выставить (desktop) -->
+    <div class="d-flex align-items-center gap-2 ms-auto">
+      <%= link_to store_path, class: "btn btn-sm btn-outline-dark", title: "Магазин" do %>
+        <i class="bi bi-shop"></i><span class="ms-1">Магазин</span>
+      <% end %>
+
+      <%= link_to new_product_path, class: "btn btn-sm btn-success d-none d-lg-inline-flex" do %>
+        <i class="bi bi-plus-circle"></i><span class="ms-1">Выставить</span>
+      <% end %>
+
+      <button class="btn btn-sm btn-outline-dark"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#productsOffcanvasNav"
+              aria-controls="productsOffcanvasNav"
+              title="Навигация по семействам">
+        <i class="bi bi-grid-3x3-gap" style="font-size:1.05rem;"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="page-banner-spacer"></div>
+
+<!-- Offcanvas «жалюзи» -->
+<div class="offcanvas offcanvas-top" tabindex="-1" id="productsOffcanvasNav" style="height:66vh">
+  <div class="offcanvas-header py-2">
+    <h6 class="offcanvas-title mb-0">Навигация по семействам</h6>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
+  </div>
+  <div class="offcanvas-body pt-0 d-flex flex-column">
+    <!-- Поиск -->
+    <div class="mb-2">
+      <div class="input-group input-group-sm">
+        <input id="products-search-oc"
+               class="form-control"
+               list="products-datalist"
+               placeholder="Найти товар по названию или ID…">
+        <button id="products-search-go-oc" class="btn btn-outline-dark" type="button" title="Перейти">
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Пилюли -->
+    <div class="store-nav flex-grow-1" style="overflow:auto;">
+      <div class="store-nav__families" style="flex-direction:row; flex-wrap:wrap; gap:.4rem;">
+        <% family_names.each do |fam| %>
+          <a href="#fam-<%= fam_slug(fam) %>" class="pill" data-role="family-anchor"><%= fam %></a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row gx-4">
+    <!-- Сайдбар (десктоп) -->
+    <aside class="col-lg-3 d-none d-lg-block">
+      <div id="products-desktop-nav" class="store-nav sticky-col">
+        <div class="store-nav__families">
+          <% family_names.each do |fam| %>
+            <a href="#fam-<%= fam_slug(fam) %>" class="pill d-block" data-role="family-anchor"><%= fam %></a>
+          <% end %>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Контент -->
+    <section class="col-12 col-lg-9 vstack gap-3">
+      <% if all_products.any? %>
+        <% family_names.each do |fam| %>
+          <% items = (groups[fam] || []).sort_by(&:id).reverse %>
+
+          <div class="card shadow-sm" id="fam-<%= fam_slug(fam) %>">
+            <div class="card-header d-flex align-items-center justify-content-between">
+              <strong><%= fam %></strong>
+              <a class="small text-decoration-none" href="#top" data-role="scroll-top">к началу ↑</a>
+            </div>
+
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table align-middle mobile-table">
+                  <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Название</th>
+                    <th class="d-none d-sm-table-cell">Статус</th>
+                    <th>Цена</th>
+                    <th class="d-none d-sm-table-cell">SKU</th>
+                    <th class="d-none d-lg-table-cell"></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <% items.each do |p| %>
+                    <tr id="product-row-<%= p.id %>">
+                      <td><%= p.id %></td>
+                      <td style="white-space: normal; word-break: break-word;">
+                        <%= link_to (p.respond_to?(:display_name) ? (p.display_name.presence || p.name.presence || "Без названия")
+                                                                  : (p.name.presence || "Без названия")),
+                                    p, class: "text-decoration-none" %>
+                      </td>
+                      <td class="d-none d-sm-table-cell"><span class="badge bg-light text-dark"><%= p.state %></span></td>
+                      <td>
+                        <% if p.price.to_f > 0 %>
+                          <%= number_to_currency(p.price, unit: (p.currency.presence || "₽")) %>
+                        <% else %>
+                          <span class="text-muted">не задана</span>
+                        <% end %>
+                      </td>
+                      <td class="d-none d-sm-table-cell"><%= p.sku_id || "—" %></td>
+                      <td class="text-end d-none d-lg-table-cell">
+                        <%= link_to "Открыть", p, class: "btn btn-sm btn-outline-primary" %>
+                        <%= link_to "Править", edit_product_path(p), class: "btn btn-sm btn-outline-dark" %>
+                      </td>
+                    </tr>
+
+                    <!-- Мобила: кнопки внизу, две, на всю ширину -->
+                    <tr class="d-lg-none">
+                      <td colspan="6">
+                        <div class="action-bar-mobile d-flex align-items-center gap-2">
+                          <%= link_to "Открыть", p, class: "btn btn-sm btn-outline-primary flex-fill" %>
+                          <%= link_to "Править", edit_product_path(p), class: "btn btn-sm btn-outline-dark flex-fill" %>
+                        </div>
+                      </td>
+                    </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <%# Футер карточки: метрики %>
+            <%
+              total = items.size
+              by_state = items.group_by(&:state).transform_values(&:size)
+              prices = items.map { |i| i.price.to_f }.select { |v| v > 0 }
+              min_p = prices.min; max_p = prices.max
+              avg_p = prices.any? ? (prices.sum / prices.size) : nil
+            %>
+            <div class="card-footer small text-muted d-flex flex-wrap gap-3">
+              <span><strong><%= total %></strong> поз.</span>
+              <% if by_state.present? %>
+                <span>
+                  <% by_state.each_with_index do |(st, cnt), idx| %>
+                    <%= idx.zero? ? "" : " • " %><%= st %>: <strong><%= cnt %></strong>
+                  <% end %>
+                </span>
+              <% end %>
+              <% if prices.any? %>
+                <span>мин: <strong><%= number_to_currency(min_p, unit: "₽") %></strong></span>
+                <span>ср: <strong><%= number_to_currency(avg_p, unit: "₽") %></strong></span>
+                <span>макс: <strong><%= number_to_currency(max_p, unit: "₽") %></strong></span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="text-center text-muted py-5">
+          Пока нет товаров.
+          <div class="mt-3">
+            <%= link_to "Выставить на продажу", new_product_path, class: "btn btn-success" %>
+          </div>
+        </div>
+      <% end %>
+    </section>
+  </div>
+</div>
+
+<div class="page-bottom-spacer"></div>
+
+<style>
+  .page-banner-spacer { height: var(--ui-offset, 120px); }
+
+  /* сайдбар: фикс/прокрутка и доступ ко всем семействам */
+  .sticky-col {
+    position: sticky;
+    top: var(--ui-offset, 112px);
+    max-height: calc(100vh - var(--ui-offset, 112px));
+    overflow: auto;
+    padding-bottom: .5rem;
+  }
+
+  /* «Пилюли» */
+  .store-nav { padding: 0 .5rem .75rem .5rem; }
+  .store-nav__families { display:flex; flex-direction:column; gap:.35rem; }
+  .pill {
+    display:inline-block; padding:.25rem .6rem; border-radius:999px;
+    font-size:.85rem; background:#f1f3f5; color:#495057; text-decoration:none;
+    transition:background .15s ease, color .15s ease;
+  }
+  .pill:hover { background:#e9ecef; color:#212529; text-decoration:none; }
+
+  /* якоря не прячутся под фикс-шапку */
+  [id^="fam-"], tr[id^="product-row-"] { scroll-margin-top: var(--ui-offset, 120px); }
+
+  /* мобильная таблица компактнее и без горизонтального расползания */
+  @media (max-width: 575.98px){
+    .mobile-table td, .mobile-table th { font-size: .9rem; vertical-align: middle; }
+    .mobile-table td a { word-break: break-word; }
+    .action-bar-mobile .btn { min-width: 0; white-space: nowrap; }
+  }
+</style>
+
+<script>
+  (function(){
+    function recomputeOffset() {
+      const nav    = document.querySelector('.navbar.fixed-top');
+      const banner = document.querySelector('.page-banner');
+      const navH   = nav ? Math.round(nav.getBoundingClientRect().height) : 0;
+      const banH   = banner ? Math.round(banner.getBoundingClientRect().height) : 0;
+      const off    = navH + banH;
+      document.documentElement.style.setProperty('--ui-offset', off + 'px');
+      return off;
+    }
+    function isDesktop(){ return window.matchMedia('(min-width: 992px)').matches; }
+    function smoothScrollTo(el){
+      const off = recomputeOffset();
+      const y = el.getBoundingClientRect().top + window.pageYOffset - off + 2;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+
+    const kick = () => { recomputeOffset(); setTimeout(recomputeOffset, 60); setTimeout(recomputeOffset, 250); };
+    kick();
+    window.addEventListener('resize', kick);
+    document.addEventListener('turbo:load', kick);
+    window.addEventListener('load', kick);
+    document.addEventListener('shown.bs.offcanvas', kick);
+    document.addEventListener('hidden.bs.offcanvas', kick);
+    document.addEventListener('shown.bs.collapse', kick);
+    document.addEventListener('hidden.bs.collapse', kick);
+
+    // Пилюли: плавный скролл + автозакрытие жалюзи
+    document.addEventListener('click', function(e){
+      const a = e.target.closest('a[data-role="family-anchor"]');
+      if(!a) return;
+      const href = a.getAttribute('href');
+      if(!href || !href.startsWith('#')) return;
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if(!target) return;
+
+      const ocEl = document.getElementById('productsOffcanvasNav');
+      if(ocEl && !isDesktop() && window.bootstrap){
+        const oc = window.bootstrap.Offcanvas.getInstance(ocEl);
+        if(oc) oc.hide();
+      }
+      setTimeout(()=> smoothScrollTo(target), 90);
+    }, false);
+
+    // «К началу»
+    document.addEventListener('click', function(e){
+      const topLink = e.target.closest('a[data-role="scroll-top"]');
+      if(!topLink) return;
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, false);
+
+    // Поиск (баннер + оффканвас)
+    function wireSearch(inputId, btnId){
+      const input = document.getElementById(inputId);
+      const btn   = document.getElementById(btnId);
+
+      function hideOcIfAny(){
+        const ocEl = document.getElementById('productsOffcanvasNav');
+        if(ocEl && window.bootstrap){
+          const oc = window.bootstrap.Offcanvas.getInstance(ocEl);
+          if(oc) oc.hide();
+        }
+      }
+
+      function go(){
+        if(!input) return;
+        const val = (input.value || '').trim();
+        if(!val) return;
+        const id  = (val.split('—')[0] || '').replace(/[^\d]/g,'').trim();
+        const row = document.getElementById('product-row-' + id);
+        if(row){
+          hideOcIfAny();
+          setTimeout(()=> {
+            smoothScrollTo(row);
+            row.classList.add('table-warning');
+            setTimeout(()=>row.classList.remove('table-warning'), 1800);
+          }, 90);
+        }
+      }
+      if(btn)   btn.addEventListener('click', go);
+      if(input){
+        input.addEventListener('keydown', e => { if(e.key === 'Enter') go(); });
+        input.addEventListener('change', go); // выбор из datalist
+      }
+    }
+    wireSearch('products-search','products-search-go');
+    wireSearch('products-search-oc','products-search-go-oc');
+  })();
+</script>

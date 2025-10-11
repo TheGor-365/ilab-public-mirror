@@ -1,0 +1,102 @@
+<div class="p-3">
+  <div class="d-flex align-items-start gap-3 mb-3">
+    <div class="flex-shrink-0">
+      <% if repair.avatar.present? %>
+        <%= image_tag(repair.avatar.url, class: "rounded", width: 88, height: 88) %>
+      <% else %>
+        <%= image_tag("default_product_avatar.jpg", class: "rounded", width: 88, height: 88) %>
+      <% end %>
+    </div>
+    <div class="flex-grow-1">
+      <h5 class="mb-1"><%= repair.try(:title) || "Repair ##{repair.id}" %></h5>
+      <div class="small text-muted d-flex flex-wrap gap-2">
+        <span class="badge bg-light text-dark">Gen: <%= repair.generation_id || "—" %></span>
+        <% if repair.phone_id.present? %>
+          <span class="badge bg-light text-dark">Phone ID: <%= repair.phone_id %></span>
+        <% end %>
+        <% if repair.price.present? %>
+          <span class="badge bg-success-subtle text-success">Цена: <%= repair.price %></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% if repair.spare_parts.present? %>
+    <div class="mb-3">
+      <div class="fw-semibold mb-2">Запчасти:</div>
+      <ul class="list-unstyled mb-2" data-controller="details" data-details-target="list" data-initial="6">
+        <% Array(repair.spare_parts).each do |sp| %>
+          <li class="mb-1">
+            <span class="badge bg-dark-subtle text-dark"><%= sp %></span>
+          </li>
+        <% end %>
+      </ul>
+      <% if Array(repair.spare_parts).size > 6 %>
+        <button class="btn btn-sm btn-outline-dark" data-action="click->details#toggleMore">Показать ещё</button>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if repair.description.present? %>
+    <div class="mb-3">
+      <div class="fw-semibold mb-2">Описание</div>
+      <div class="card card-body">
+        <%= repair.description %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if repair.overview.present? %>
+    <div class="mb-3">
+      <div class="fw-semibold mb-2">Обзор</div>
+      <div class="card card-body">
+        <%= repair.overview %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if repair.images.present? %>
+    <div class="mb-3">
+      <div class="fw-semibold mb-2">Фото</div>
+      <div class="row g-2">
+        <% repair.images.each do |image| %>
+          <div class="col-6 col-md-4 col-lg-3">
+            <%= image_tag(image.url, class: "img-fluid rounded border") %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if repair.videos.present? %>
+    <div class="mb-3">
+      <div class="fw-semibold mb-2">Видео</div>
+      <div class="ratio ratio-16x9">
+        <%= video_tag(repair.videos, controls: true, class: "rounded border") %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="d-flex flex-wrap gap-2">
+    <%= link_to "Открыть полную страницу", repair_path(repair), class: "btn btn-sm btn-outline-dark" %>
+    <%= link_to "Редактировать", edit_repair_path(repair), class: "btn btn-sm btn-outline-dark" %>
+
+    <%# Внутри Turbo-Frame показываем "Назад" (мгновенный откат к placeholder) %>
+    <% if turbo_frame_request? %>
+      <a href="#"
+         class="btn btn-sm btn-dark ms-auto"
+         data-controller="frame-reset"
+         data-frame-reset-frame-id-value="repair_details"
+         data-action="click->frame-reset#toPlaceholder">
+        Назад
+      </a>
+      <%# Для модалки можно добавить "Закрыть" (альтернатива крестику) %>
+      <a href="#"
+         class="btn btn-sm btn-outline-light text-dark"
+         data-controller="frame-reset"
+         data-action="click->frame-reset#closeModal">
+        Закрыть
+      </a>
+    <% end %>
+  </div>
+</div>

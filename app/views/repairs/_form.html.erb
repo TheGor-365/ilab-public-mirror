@@ -1,0 +1,179 @@
+<%= form_with(model: repair, html: { multipart: true, class: "row g-3" }) do |form| %>
+  <% if repair.errors.any? %>
+    <div class="col-12">
+      <div class="alert alert-danger">
+        <strong><%= pluralize(repair.errors.count, "error") %></strong>
+        <span class="text-muted">prohibited this repair from being saved</span>
+        <ul class="mb-0 mt-2">
+          <% repair.errors.each do |error| %>
+            <li class="small text-muted"><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="col-12 col-md-6">
+    <label class="form-label">Generation</label>
+    <div class="d-flex gap-3 flex-wrap">
+      <div class="form-check">
+        <%= form.radio_button(:generation_id, '1', class: 'form-check-input', id: 'gen_1') %>
+        <label class="form-check-label" for="gen_1">generation_5</label>
+      </div>
+      <div class="form-check">
+        <%= form.radio_button(:generation_id, '2', class: 'form-check-input', id: 'gen_2') %>
+        <label class="form-check-label" for="gen_2">generation_6</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <label class="form-label">Phone</label>
+    <div class="form-check">
+      <%= form.radio_button(:phone_id, '1', class: 'form-check-input', id: 'phone_1') %>
+      <label class="form-check-label" for="phone_1">phone_1</label>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <label class="form-label">Defect</label>
+    <div class="form-check">
+      <%= form.radio_button(:defect_id, '1', class: 'form-check-input', id: 'defect_1') %>
+      <label class="form-check-label" for="defect_1">defect_1</label>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <label class="form-label">Repair title</label>
+    <%= form.text_field :title, class: 'form-control', placeholder: 'Например: Замена дисплея' %>
+  </div>
+
+  <div class="col-12">
+    <label class="form-label">Product avatar</label>
+    <%= form.file_field :avatar, type: 'file', class: 'form-control', accept: "image/*", data: { action: "change->preview#one" } %>
+    <%= form.hidden_field :avatar_cache %>
+
+    <div class="row g-3 mt-1">
+      <div class="col-6 col-md-4">
+        <label class="form-label small text-muted">Current</label><br>
+        <% if repair.avatar.present? %>
+          <%= image_tag(repair.avatar.url, class: 'img-thumbnail', style: 'max-width: 200px;' ) %>
+        <% else %>
+          <%= image_tag('default_product_avatar.jpg', class: 'img-thumbnail', style: 'max-width: 200px;') %>
+        <% end %>
+      </div>
+      <div class="col-6 col-md-4">
+        <label class="form-label small text-muted">Preview</label><br>
+        <img id="avatar-preview" src="#" class="img-thumbnail d-none" style="max-width: 200px;" />
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <label class="form-label">Spare parts (пример)</label>
+    <div class="btn-group flex-wrap" role="group" aria-label="spare_parts">
+      <% if repair.spare_parts.present? %>
+        <%# Сохраняем существующее поведение: выводим возможные чекбоксы из repair.spare_parts %>
+        <% Array(repair.spare_parts).first(10).each_with_index do |sp, i| %>
+          <input type="checkbox" class="btn-check" id="sp_<%= i %>" autocomplete="off">
+          <label class="btn btn-outline-primary mb-2" for="sp_<%= i %>"><%= sp %></label>
+        <% end %>
+      <% else %>
+        <%# Если массив пуст — просто показываем примеры %>
+        <% ["display", "corpus", "mainboard", "speaker", "rear camera", "front-facing camera", "battery"].each_with_index do |sp, i| %>
+          <input type="checkbox" class="btn-check" id="sp_<%= i %>" autocomplete="off">
+          <label class="btn btn-outline-primary mb-2" for="sp_<%= i %>"><%= sp %></label>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <label class="form-label">Description</label>
+    <%= form.rich_text_area :description, class: 'form-control' %>
+  </div>
+
+  <div class="col-12">
+    <label class="form-label">Overview</label>
+    <%= form.rich_text_area :overview, class: 'form-control' %>
+  </div>
+
+  <div class="col-12">
+    <label class="form-label">Images</label>
+    <%= form.file_field :images, type: 'file', multiple: true, class: 'form-control', accept: "image/*", data: { action: "change->preview#many" } %>
+    <%= form.hidden_field :images_cache %>
+
+    <% if repair.images? %>
+      <div class="row g-2 mt-2">
+        <% repair.images.each do |image| %>
+          <div class="col-4 col-md-2">
+            <%= image_tag(image.url, class: 'img-fluid rounded shadow-sm') %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div id="images-preview" class="row g-2 mt-2"></div>
+  </div>
+
+  <div class="col-12">
+    <label class="form-label">Videos</label>
+    <%= form.file_field :videos, multiple: true, type: 'file', class: 'form-control', accept: "video/*" %>
+    <% if repair.videos.present? %>
+      <div class="mt-2">
+        <%= video_tag(repair.videos, width: '340', height: '180', controls: true, class: 'rounded shadow-sm') %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-12 col-md-6">
+    <label class="form-label">Price</label>
+    <%= form.text_field :price, class: 'form-control', placeholder: 'Например: 1990' %>
+  </div>
+
+  <div class="col-12">
+    <%= form.submit class: 'btn btn-success' %>
+  </div>
+<% end %>
+
+<script>
+  // Лёгкий превью без jQuery
+  (function() {
+    const avatarInput  = document.querySelector('input[type=file][name="repair[avatar]"]');
+    const avatarImg    = document.getElementById('avatar-preview');
+    const imagesInput  = document.querySelector('input[type=file][name="repair[images][]"]');
+    const imagesWrap   = document.getElementById('images-preview');
+
+    if (avatarInput && avatarImg) {
+      avatarInput.addEventListener('change', (e) => {
+        const f = e.target.files?.[0];
+        if (!f) { avatarImg.classList.add('d-none'); return; }
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          avatarImg.src = ev.target.result;
+          avatarImg.classList.remove('d-none');
+        };
+        reader.readAsDataURL(f);
+      });
+    }
+
+    if (imagesInput && imagesWrap) {
+      imagesInput.addEventListener('change', (e) => {
+        imagesWrap.innerHTML = '';
+        Array.from(e.target.files || []).forEach((f) => {
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            const col = document.createElement('div');
+            col.className = 'col-4 col-md-2';
+            const img = document.createElement('img');
+            img.src = ev.target.result;
+            img.className = 'img-fluid rounded shadow-sm';
+            col.appendChild(img);
+            imagesWrap.appendChild(col);
+          };
+          reader.readAsDataURL(f);
+        });
+      });
+    }
+  })();
+</script>

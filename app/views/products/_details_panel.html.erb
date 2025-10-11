@@ -1,0 +1,101 @@
+<%# Панель деталей товара (правый сайдбар + модалка на мобиле) %>
+<% product = local_assigns[:product] || @product %>
+
+<div id="product-details-panel" class="product-details">
+  <div class="accordion" id="pd-accordion">
+    <div class="accordion-item">
+      <h2 class="accordion-header glass-panel" id="pd-acc-1-h">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#pd-acc-1" aria-expanded="true" aria-controls="pd-acc-1">
+          <i class="bi bi-info-circle me-3"></i>
+          <span>Ключевые параметры</span>
+        </button>
+      </h2>
+      <div id="pd-acc-1" class="accordion-collapse collapse show" aria-labelledby="pd-acc-1-h" data-bs-parent="#pd-accordion">
+        <div class="accordion-body">
+          <%= render "products/details_kv", product: product %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- === Блок 1: по модели/поколению -->
+  <div class="card mt-3">
+    <div class="card-header d-flex align-items-center">
+      <i class="bi bi-layers me-2"></i>
+      По модели/поколению
+    </div>
+    <div class="card-body">
+      <%= render "products/generation_summaries", product: product %>
+    </div>
+  </div>
+
+  <!-- === Блок 2: для конкретного товара -->
+  <div class="card mt-3">
+    <div class="card-header d-flex align-items-center">
+      <i class="bi bi-box-seam me-2"></i>
+      Для этого товара
+    </div>
+    <div class="card-body">
+      <%= render "products/product_summaries", product: product %>
+    </div>
+  </div>
+
+  <% if @attached_repairs.any? || @attached_defects.any? || @attached_mods.any? || @attached_spare_parts.any? %>
+    <div class="card mt-3">
+      <div class="card-header">
+        <i class="bi bi-diagram-3 me-1"></i> Привязанные сущности
+      </div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <h6 class="text-muted mb-2"><i class="bi bi-tools me-1"></i> Ремонты</h6>
+            <ul class="list-unstyled small mb-0">
+              <% @attached_repairs.first(5).each do |r| %>
+                <li>• <%= link_to (r.try(:title) || "Repair ##{r.id}"), repair_path(r), data: { turbo_frame: "_top" } %></li>
+              <% end %>
+              <% if @attached_repairs.size > 5 %>
+                <li class="mt-1"><%= link_to "Показать все (#{@attached_counts[:repairs]})", repairs_path(product_id: @product.id), data: { turbo_frame: "_top" } %></li>
+              <% end %>
+            </ul>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <h6 class="text-muted mb-2"><i class="bi bi-bug me-1"></i> Дефекты</h6>
+            <ul class="list-unstyled small mb-0">
+              <% @attached_defects.first(5).each do |d| %>
+                <li>• <%= link_to (d.try(:title) || "Defect ##{d.id}"), defect_path(d), data: { turbo_frame: "_top" } %></li>
+              <% end %>
+              <% if @attached_defects.size > 5 %>
+                <li class="mt-1"><%= link_to "Показать все (#{@attached_counts[:defects]})", defects_path(product_id: @product.id), data: { turbo_frame: "_top" } %></li>
+              <% end %>
+            </ul>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <h6 class="text-muted mb-2"><i class="bi bi-puzzle me-1"></i> Модули</h6>
+            <ul class="list-unstyled small mb-0">
+              <% @attached_mods.first(5).each do |m| %>
+                <li>• <%= link_to (m.try(:title) || m.try(:name) || "Mod ##{m.id}"), mod_path(m), data: { turbo_frame: "_top" } %></li>
+              <% end %>
+              <% if @attached_mods.size > 5 %>
+                <li class="mt-1"><%= link_to "Показать все (#{@attached_counts[:mods]})", mods_path(product_id: @product.id), data: { turbo_frame: "_top" } %></li>
+              <% end %>
+            </ul>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <h6 class="text-muted mb-2"><i class="bi bi-cpu me-1"></i> Запчасти</h6>
+            <ul class="list-unstyled small mb-0">
+              <% @attached_spare_parts.first(5).each do |s| %>
+                <li>• <%= link_to (s.try(:name) || "Spare Part ##{s.id}"), spare_part_path(s), data: { turbo_frame: "_top" } %></li>
+              <% end %>
+              <% if @attached_spare_parts.size > 5 %>
+                <li class="mt-1"><%= link_to "Показать все (#{@attached_counts[:spare_parts]})", spare_parts_path(product_id: @product.id), data: { turbo_frame: "_top" } %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

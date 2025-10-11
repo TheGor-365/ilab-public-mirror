@@ -1,0 +1,25 @@
+<% phone = Phone.new %>
+
+<%= form_with(model: phone, html: { multipart: true }) do |form| %>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <div class="mb-3">
+      <%= form.label "Add iPhone images", class: 'anchorjs-link display-6 mb-5 text-decoration-none text-muted', id: 'photos' %>
+      <%= form.file_field :images, id: 'new-images-field', type: 'file', multiple: true, class: 'form-control' %>
+      <%= form.hidden_field :images_cache %>
+    </div>
+
+    <div class="mt-3 mb-3">
+      <% if phone.images? %>
+        <% phone.images.each do |image| %>
+          <%= image_tag(image.url, width: '100', class: 'rounded p-1 shadow') %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="mt-3 mb-3 col">
+      <%= form.label "Choosed images", class: 'form-label mb-3' %><br>
+      <img id="image-prevew" src="#" width="300" height="200" class="img-thumbnail rounded p-1 shadow" />
+    </div>
+  </div>
+<% end %>

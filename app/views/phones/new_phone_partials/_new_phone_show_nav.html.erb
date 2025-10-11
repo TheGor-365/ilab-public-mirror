@@ -1,0 +1,41 @@
+<div class="fixed-left nav-scroll shadow bg-white col-2 mx-3 mt-5">
+
+  <div class="show-nav-header shadow bg-white py-4 text-center">
+    <h4>
+      <span class="text-muted display-6">
+        Navigation
+      </span><br>
+      <i class="fas fa-2x fa-route text-muted pt-4"></i>
+    </h4>
+  </div>
+  <br>
+
+  <div class="ps-4">
+    <ul class="nav flex-column">
+
+      <li class="nav-item">
+        <%= link_to 'Generation', new_phone_path(anchor: 'phone-generation'), class: 'text-decoration-none text-muted' %>
+      </li>
+
+      <li class="nav-item">
+        <%= link_to 'Model Title', new_phone_path(anchor: 'phone-model-title'), class: 'text-decoration-none text-muted' %>
+      </li>
+
+      <li class="nav-item">
+        <%= link_to 'Avatar', new_phone_path(anchor: 'phone-avatar'), class: 'text-decoration-none text-muted' %>
+      </li>
+
+      <li class="nav-item">
+        <%= link_to 'Images', new_phone_path(anchor: 'phone-images'), class: 'text-decoration-none text-muted' %>
+      </li>
+
+      <li class="nav-item">
+        <%= link_to 'Model Overview', new_phone_path(anchor: 'phone-model-overview'), class: 'text-decoration-none text-muted' %>
+      </li>
+
+      <li class="nav-item">
+        <%= link_to 'Videos', new_phone_path(anchor: 'phone-videos'), class: 'text-decoration-none text-muted' %>
+      </li>
+    </ul>
+  </div>
+</div>

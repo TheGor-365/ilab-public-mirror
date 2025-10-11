@@ -1,0 +1,63 @@
+/* Активный пункт в dropdown */
+.dropdown-menu .dropdown-item.active,
+.dropdown-menu .dropdown-item.bg-dark,
+.dropdown-menu .dropdown-item.active.bg-dark,
+.dropdown-menu .dropdown-item.active.text-white {
+  padding-left: .75rem;
+  padding-right: .75rem;
+  border-radius: .375rem;
+}
+
+/* Контраст навигации на «стеклянном» фоне */
+.navbar .nav-link,
+.navbar .dropdown-item,
+.navbar .navbar-brand,
+.navbar .navbar-toggler,
+.navbar .navbar-toggler i {
+  color: #111 !important;
+}
+
+/* Плавное раскрытие мобильного меню: одна фаза (height) */
+.navbar .nav-collapse.collapse,
+.navbar .nav-collapse.collapse.show { transition: none !important; }
+.navbar .nav-collapse.collapsing {
+  overflow: hidden;
+  transition: height .28s cubic-bezier(.4, 0, .2, 1) !important;
+  will-change: height;
+}
+
+/* Тогглер без бликов */
+.navbar .navbar-toggler { outline: none; box-shadow: none !important; }
+
+/* Prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .navbar .nav-collapse.collapsing { transition: none !important; }
+}
+
+/* Иконка корзины + БЕЙДЖ (идеальный круг на мобиле) */
+.nav-cart-link { color: #111 !important; line-height: 1; position: relative; }
+.nav-cart-link .bi { vertical-align: middle; }
+
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: #111;
+  color: #fff;
+  font-size: .7rem;
+
+  /* круг */
+  width: 1.15rem;
+  height: 1.15rem;
+  padding: 0;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+
+  line-height: 1;
+  border: 0;
+}
+
+/* Текст рядом с корзиной (desktop) — тёмный */
+.nav-cart-text { color: #111 !important; }
+.nav-cart-text:hover { color: #000 !important; text-decoration: none !important; }

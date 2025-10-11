@@ -1,0 +1,197 @@
+<!-- Секция позиций заказа (один и тот же card для якоря; внутри — разные представления) -->
+<div class="card shadow-sm mb-4 shape-decor shape--1 shape-size--xl shape-pos--tr shape-soft" id="items">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <div>
+      <span class="h5 mb-0">Sara's cart</span>
+      <span class="text-muted ms-2">всего позиций <strong><%= @order_items.sum(&:quantity) %></strong></span>
+    </div>
+    <div class="d-flex align-items-center gap-2">
+      <% if defined?(destroy_all_order_items_path) %>
+        <%= button_to 'Очистить корзину', destroy_all_order_items_path, method: :delete, class: 'btn btn-sm btn-outline-danger' %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <!-- ===== Desktop (таблица) ===== -->
+    <div class="d-none d-lg-block">
+      <div class="table-responsive">
+        <table class="table align-middle table-cart">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Товар</th>
+              <th class="text-center">Кол-во</th>
+              <th class="text-end">Цена</th>
+              <th class="text-end">Итого</th>
+              <th class="text-end">Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @order_items.each_with_index do |item, idx| %>
+              <%= form_with model: item, html: { class: "contents" } do |f| %>
+                <tr>
+                  <td class="align-middle"><%= idx + 1 %></td>
+                  <td class="align-middle" style="min-width: 220px;">
+                    <div class="d-flex align-items-center gap-2">
+                      <% if item.product.avatar.present? %>
+                        <%= image_tag(item.product.avatar.url, width: '40', class: 'rounded') %>
+                      <% else %>
+                        <%= image_tag('default_product_avatar.png', width: '40', class: 'rounded') %>
+                      <% end %>
+                      <div class="d-flex flex-column">
+                        <%= link_to (item.product.try(:display_name).presence || item.product.name || "Товар ##{item.product_id}"),
+                                    product_path(item.product),
+                                    class: "text-decoration-none" %>
+                        <span class="small text-muted">ID: <%= item.product_id %></span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <div class="input-group input-group-sm qty-group">
+                      <button class="btn btn-outline-secondary" type="button"
+                              onclick="this.nextElementSibling.stepDown(); this.nextElementSibling.dispatchEvent(new Event('change'));">−</button>
+                      <%= f.number_field :quantity, value: item.quantity.to_i, class: 'form-control text-center',
+                                         min: 1, step: 1,
+                                         onchange: "this.form.requestSubmit()" %>
+                      <button class="btn btn-outline-secondary" type="button"
+                              onclick="this.previousElementSibling.stepUp(); this.previousElementSibling.dispatchEvent(new Event('change'));">+</button>
+                    </div>
+                  </td>
+                  <td class="align-middle text-end">$<%= item.unit_price %></td>
+                  <td class="align-middle text-end">$<%= item.total %></td>
+                  <td class="align-middle text-end">
+                    <%= link_to 'Удалить', item, method: :delete, data: { turbo_confirm: 'Удалить позицию?' },
+                                class: 'btn btn-sm btn-outline-danger' %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== Mobile (карточки, без таблицы, больше воздуха) ===== -->
+    <div class="d-lg-none cart-mobile-items">
+      <% @order_items.each_with_index do |item, idx| %>
+        <% product = item.product %>
+        <div class="item-card">
+          <div class="d-flex align-items-start gap-3">
+            <% if product.respond_to?(:avatar) && product.avatar.present? %>
+              <%= image_tag product.avatar.url, class: "thumb" %>
+            <% else %>
+              <%= image_tag "default_product_avatar.png", class: "thumb" %>
+            <% end %>
+
+            <div class="flex-grow-1">
+              <div class="title"><%= product.try(:display_name).presence || product.name || "Товар ##{product.id}" %></div>
+              <div class="meta mt-1">ID: <%= product.id %></div>
+
+              <!-- Кол-во + цена/сумма -->
+              <div class="row align-items-center mt-3 g-2">
+                <div class="col-7">
+                  <%= form_with model: item do |f| %>
+                    <div class="input-group input-group-sm qty-group">
+                      <button class="btn btn-outline-secondary" type="button"
+                              onclick="this.nextElementSibling.stepDown(); this.nextElementSibling.dispatchEvent(new Event('change'));">−</button>
+                      <%= f.number_field :quantity,
+                            value: item.quantity.to_i,
+                            min: 1, step: 1,
+                            class: "form-control text-center",
+                            onchange: "this.form.requestSubmit()" %>
+                      <button class="btn btn-outline-secondary" type="button"
+                              onclick="this.previousElementSibling.stepUp(); this.previousElementSibling.dispatchEvent(new Event('change'));">+</button>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="col-5">
+                  <div class="price">$<%= '%.0f' % item.unit_price.to_f %></div>
+                  <div class="total text-muted small">сумма: $<%= '%.0f' % item.total.to_f %></div>
+                </div>
+              </div>
+
+              <!-- Кнопки действия -->
+              <div class="actions d-grid gap-2 mt-3">
+                <div class="d-flex gap-2">
+                  <%= link_to 'Открыть', product_path(product), class: 'btn btn-outline-primary flex-fill' %>
+                  <%= link_to 'Удалить',
+                              item,
+                              data: { turbo_method: :delete, turbo_confirm: 'Удалить позицию?' },
+                              class: 'btn btn-outline-danger flex-fill' %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <!-- Кнопка «В магазин» внизу, на всю ширину -->
+      <div class="d-grid mt-3">
+        <%= link_to store_path, class: "btn btn-dark btn-lg" do %>
+          <i class="bi bi-shop"></i> <span class="ms-2">В магазин</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Итоги -->
+<div class="card shadow-sm mb-4 shape-decor shape--5 shape-size--lg shape-pos--br shape-soft" id="price">
+  <div class="card-header">
+    <span class="h5 mb-0">Итоги</span>
+  </div>
+  <div class="card-body">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-6">
+        <table class="table table-borderless mb-0">
+          <tbody>
+            <tr>
+              <td class="align-middle">Доставка</td>
+              <td class="align-middle text-end">$<%= @delivery_price.to_i %></td>
+            </tr>
+            <tr><td colspan="2"><hr class="my-2"></td></tr>
+            <tr>
+              <td class="text-muted align-middle"><h6 class="mb-0">Subtotal</h6></td>
+              <td class="align-middle text-end"><h6 class="mb-0">$<%= current_order.subtotal %></h6></td>
+            </tr>
+            <tr>
+              <td class="text-muted align-middle"><h5 class="mb-0">Итого к оплате</h5></td>
+              <td class="align-middle text-end">
+                <h5 class="mb-0">$<%= current_order.subtotal + @delivery_price %></h5>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="d-flex gap-2 justify-content-end mt-3">
+          <%= link_to 'Оформить', '#', class: 'btn btn-success' %>
+          <%= link_to 'Продолжить покупки', store_path, class: 'btn btn-outline-dark' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Сообщение -->
+<div class="card shadow-sm mb-4 shape-decor shape--7 shape-size--lg shape-pos--bl shape-soft" id="message">
+  <div class="card-header"><span class="h5 mb-0">Сообщение к заказу</span></div>
+  <div class="card-body">
+    <form>
+      <div class="mb-3">
+        <label for="specialNotes" class="form-label small text-muted">Специальные примечания</label>
+        <textarea class="form-control" id="specialNotes" rows="3" placeholder="Напишите пожелания, удобное время, уточнения…"></textarea>
+      </div>
+      <button class="btn btn-outline-dark" type="button">Сохранить заметку</button>
+    </form>
+  </div>
+</div>
+
+<!-- Доставка -->
+<div class="card shadow-sm mb-4 shape-decor shape--6 shape-size--lg shape-pos--tr shape-soft" id="delivery">
+  <div class="card-header"><span class="h5 mb-0">Доставка</span></div>
+  <div class="card-body">
+    <div class="small text-muted">
+      Доставка по городу — фиксированно $<%= @delivery_price %>. За пределами — по договорённости.
+    </div>
+  </div>
+</div>

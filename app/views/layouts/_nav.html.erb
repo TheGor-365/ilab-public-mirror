@@ -1,0 +1,142 @@
+<nav class="navbar navbar-expand-lg fixed-top transparent-nav" role="navigation" aria-label="Main navigation">
+  <div class="container-fluid">
+
+    <h3 class="navbar-brand mb-0">
+      <%= link_to 'iLab', root_path, class: 'text-decoration-none' %>
+    </h3>
+
+    <% cart_qty = (current_order.order_items.sum(:quantity) rescue 0).to_i %>
+
+    <!-- Правый «остров»: иконки (мобайл) + гамбургер -->
+    <div class="d-flex align-items-center ms-auto gap-2 order-lg-2">
+
+      <%# Мобильная иконка корзины — всегда видна при наличии позиций %>
+      <% if cart_qty > 0 %>
+        <%= link_to cart_path,
+                    id: 'nav-cart-mobile',
+                    class: 'btn btn-link nav-cart-link d-inline-flex d-lg-none position-relative p-0',
+                    data: { turbo: true } do %>
+          <i class="bi bi-cart3 fs-4"></i>
+          <span id="nav-cart-count-mobile" class="cart-badge badge rounded-pill"><%= cart_qty %></span>
+        <% end %>
+      <% end %>
+
+      <%# Мобильная иконка «жалюзи»-навигации по семействам — только на странице товаров %>
+      <% if controller_name == 'products' %>
+        <button class="btn btn-link d-inline-flex d-lg-none p-0 nav-cart-link"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#productsOffcanvasNav"
+                aria-controls="productsOffcanvasNav"
+                title="Навигация по товарам">
+          <i class="bi bi-grid-3x3-gap fs-4"></i>
+        </button>
+      <% end %>
+
+      <!-- Кнопка гамбургер -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="bi bi-list dark" style="font-size: 1.5rem;"></i>
+      </button>
+    </div>
+
+    <!-- Контент меню -->
+    <div class="collapse navbar-collapse nav-collapse order-lg-1" id="navbarSupportedContent">
+      <!-- Левый блок -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= nav_tab 'Store', store_path, class: "nav-link", current_page: local_assigns[:current_page] %>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="catalogDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Каталог
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="catalogDropdown">
+            <li><%= nav_tab 'iPhones', phones_path, class: "dropdown-item", current_page: local_assigns[:current_page] %></li>
+            <li><%= nav_tab 'iPhone Generations', generations_path, class: "dropdown-item", current_page: local_assigns[:current_page] %></li>
+            <li><%= nav_tab 'iPhone Models', models_path, class: "dropdown-item", current_page: local_assigns[:current_page] %></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><%= nav_tab 'iPhone Modules', mods_path, class: "dropdown-item", current_page: local_assigns[:current_page] %></li>
+            <li><%= nav_tab 'iPhone Spare Parts', spare_parts_path, class: "dropdown-item", current_page: local_assigns[:current_page] %></li>
+            <li><%= nav_tab 'iPhone Defects', defects_path, class: "dropdown-item", current_page: local_assigns[:current_page] %></li>
+            <li><%= nav_tab 'iPhone Repairs', repairs_path, class: "dropdown-item", current_page: local_assigns[:current_page] %></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="contentDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Контент
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="contentDropdown">
+            <li><%= nav_tab 'Posts', posts_path, class: 'dropdown-item', current_page: local_assigns[:current_page] %></li>
+            <li><%= nav_tab 'Articles', articles_path, class: 'dropdown-item', current_page: local_assigns[:current_page] %></li>
+            <li><%= nav_tab 'New Post', new_post_path, class: 'dropdown-item', current_page: local_assigns[:current_page] %></li>
+            <li><%= nav_tab 'New Article', new_article_path, class: 'dropdown-item', current_page: local_assigns[:current_page] %></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="moreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Ещё
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="moreDropdown">
+            <li><%= nav_tab 'Home', root_path, class: "dropdown-item", current_page: local_assigns[:current_page] %></li>
+            <li><%= nav_tab 'Terms', terms_path, class: "dropdown-item", current_page: local_assigns[:current_page] %></li>
+            <li><%= nav_tab 'Contacts', contacts_path, class: "dropdown-item", current_page: local_assigns[:current_page] %></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Правый блок: корзина (десктоп) + подпись + профиль -->
+      <% if user_signed_in? %>
+        <div class="me-3 d-none d-lg-inline-flex align-items-center">
+          <%= link_to cart_path, id: 'nav-cart', class: 'text-decoration-none nav-cart-link position-relative p-0', data: { turbo: true } do %>
+            <i class="bi bi-cart3 fs-4"></i>
+            <% if cart_qty > 0 %>
+              <span id="nav-cart-count" class="cart-badge badge rounded-pill"><%= cart_qty %></span>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class="dropdown user-dropdown">
+          <a href="#" class="d-block text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= user_avatar(current_user, 40) %>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end text-small shadow px-5" aria-labelledby="dropdownUser1">
+            <li><%= nav_tab 'Profile', account_path(current_user.username), class: "dropdown-item", current_page: local_assigns[:current_page] %></li>
+            <li><%= nav_tab 'Store', store_path, class: "dropdown-item", current_page: local_assigns[:current_page] %></li>
+            <li><%= nav_tab 'Owned Gadgets', owned_gadgets_path, class: "dropdown-item", current_page: local_assigns[:current_page] %></li>
+            <li><%= nav_tab 'MacBooks', makbooks_path, class: "dropdown-item", current_page: local_assigns[:current_page] %></li>
+            <li><%= nav_tab 'iMacs', imacs_path, class: "dropdown-item", current_page: local_assigns[:current_page] %></li>
+            <li><%= nav_tab 'iPads', ipads_path, class: "dropdown-item", current_page: local_assigns[:current_page] %></li>
+            <li><%= nav_tab 'AirPods', airpods_path, class: "dropdown-item", current_page: local_assigns[:current_page] %></li>
+            <% @universities.each do |university| %>
+              <li><%= nav_tab university.title, university_path(university), class: 'dropdown-item', current_page: local_assigns[:current_page] %></li>
+            <% end %>
+            <li><%= nav_tab 'Settings', edit_user_registration_path, class: "dropdown-item", current_page: local_assigns[:current_page] %></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><%= nav_tab 'Sign out', destroy_user_session_path, method: :delete, class: "dropdown-item text-danger", current_page: local_assigns[:current_page] %></li>
+          </ul>
+        </div>
+      <% else %>
+        <div class="me-3 d-none d-lg-inline-flex align-items-center">
+          <%= link_to cart_path, class: 'text-decoration-none nav-cart-link position-relative p-0' do %>
+            <i class="bi bi-cart3 fs-4"></i>
+            <% if cart_qty > 0 %>
+              <span class="cart-badge badge rounded-pill"><%= cart_qty %></span>
+            <% end %>
+          <% end %>
+        </div>
+
+        <ul class="navbar-nav">
+          <li class="nav-item d-none d-lg-inline-flex me-2">
+            <%= link_to "Выставить на продажу", new_product_path, class: "btn btn-success" %>
+          </li>
+          <li class="nav-item"><%= link_to 'Sign In', new_user_session_path, class: "nav-link" %></li>
+          <li class="nav-item"><%= link_to 'Sign Up', new_user_registration_path, class: "nav-link" %></li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</nav>

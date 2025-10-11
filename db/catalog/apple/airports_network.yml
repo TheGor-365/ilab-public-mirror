@@ -1,0 +1,38 @@
+- family: "Networking"
+  generation_title: "AirPort Base Station (Graphite, 1999)"
+  released_on: 1999-07-21
+  discontinued_on: 2001-11-13
+
+- family: "Networking"
+  generation_title: "AirPort Base Station (Snow, 2001)"
+  released_on: 2001-11-13
+  discontinued_on: 2003-12-31
+
+- family: "Networking"
+  generation_title: "AirPort Extreme 802.11g (2003)"
+  released_on: 2003-01-07
+
+- family: "Networking"
+  generation_title: "AirPort Extreme 802.11n (2007–2011, gens 1–5)"
+  released_on: 2007-01-09
+  discontinued_on: 2013-06-10
+
+- family: "Networking"
+  generation_title: "AirPort Express 802.11g (2004)"
+  released_on: 2004-06-07
+  discontinued_on: 2008-03-17
+
+- family: "Networking"
+  generation_title: "AirPort Express 802.11n (2nd gen, 2012)"
+  released_on: 2012-06-11
+  discontinued_on: 2018-04-26
+
+- family: "Networking"
+  generation_title: "AirPort Extreme 802.11ac (2013)"
+  released_on: 2013-06-10
+  discontinued_on: 2018-04-26
+
+- family: "Networking"
+  generation_title: "AirPort Time Capsule (2008/2009/2011/2013)"
+  released_on: 2008-02-29
+  discontinued_on: 2018-04-26

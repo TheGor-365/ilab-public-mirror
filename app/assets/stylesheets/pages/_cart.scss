@@ -1,0 +1,143 @@
+/* ===================== Cart page ===================== */
+
+/* Прозрачные панели (хедер + боковые), в стиле products */
+.cart-page .glass-panel{
+  background: var(--glass-bg, rgba(255,255,255,.28)) !important;
+  border: 1px solid var(--glass-border, rgba(0,0,0,.08)) !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06) !important;
+  backdrop-filter: blur(var(--glass-blur, 12px));
+  -webkit-backdrop-filter: blur(var(--glass-blur, 12px));
+  border-radius: .75rem;
+}
+
+/* Отступ под главный navbar (чтобы ничего не заезжало вверх) */
+.cart-top-spacer{
+  height: calc(var(--ui-offset, 72px) + 12px);
+}
+
+/* ===== Хедер корзины ===== */
+/* Мобайл — sticky + небольшой нижний зазор, чтобы первая белая карточка не прилипала */
+.cart-header.sticky-top{
+  top: calc(var(--ui-offset, 72px) + 12px) !important;
+  z-index: 103;
+  margin-bottom: .85rem;
+}
+
+/* Спейсер под фикс-хедер (включается только на десктопе) */
+.cart-header-spacer{ height: var(--cart-header-h, 92px); }
+
+/* ===== Фиксированные боковые и фиксированный центральный хедер (desktop) ===== */
+@media (min-width: 992px){
+  .cart-layout {
+    --cart-left-w:  260px;
+    --cart-right-w: 300px;
+    padding-left:  calc(var(--cart-left-w) + 1rem);
+    padding-right: calc(var(--cart-right-w) + 1rem);
+  }
+
+  .cart-fixed-left, .cart-fixed-right{
+    position: fixed;
+    top: calc(var(--ui-offset, 72px) + 12px);
+    z-index: 102;
+  }
+  .cart-fixed-left{
+    left:  calc(var(--container-x, 12px));
+    width: var(--cart-left-w, 260px);
+  }
+  .cart-fixed-right{
+    right: calc(var(--container-x, 12px));
+    width: var(--cart-right-w, 300px);
+  }
+  .cart-fixed-scroll{
+    max-height: calc(100vh - var(--ui-offset, 72px) - 24px);
+    overflow: auto;
+  }
+
+  /* ВАЖНО: переопределяем sticky у .sticky-top -> делаем фиксированным и точно выравниваем */
+  .cart-header.sticky-top{
+    position: fixed !important;
+    top: calc(var(--ui-offset, 72px) + 12px) !important;
+    left:  calc(var(--container-x, 12px) + var(--cart-left-w, 260px) + 16px);
+    right: calc(var(--container-x, 12px) + var(--cart-right-w, 300px) + 16px);
+    margin-bottom: 0; /* на десктопе отступ не нужен — работает спейсер */
+  }
+}
+
+/* ====== Таблица корзины (desktop) ====== */
+.table-cart thead th{
+  font-weight: 600;
+  border-bottom-color: rgba(0,0,0,.06);
+}
+.table-cart tbody td{ border-top-color: rgba(0,0,0,.06); }
+
+.qty-group .btn{ min-width: 2rem; }
+.qty-group input[type="number"]{
+  max-width: 64px;
+  -moz-appearance: textfield;
+}
+.qty-group input::-webkit-outer-spin-button,
+.qty-group input::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ====== Мобильная версия списка позиций (без таблицы) ====== */
+@media (max-width: 991.98px){
+  .cart-mobile-items .item-card{
+    border: 1px solid rgba(0,0,0,.06);
+    border-radius: .75rem;
+    padding: .9rem;
+    box-shadow: 0 6px 14px rgba(0,0,0,.05);
+    background: #fff;
+  }
+  .cart-mobile-items .item-card + .item-card{ margin-top: .75rem; }
+  .cart-mobile-items .thumb{
+    width: 60px; height: 60px; border-radius: .5rem; object-fit: cover;
+  }
+  .cart-mobile-items .title{
+    font-weight: 600; line-height: 1.25; word-break: break-word;
+  }
+  .cart-mobile-items .meta{
+    font-size: .85rem; color: #6c757d;
+  }
+  .cart-mobile-items .qty-group .btn{ min-width: 2.25rem; }
+  .cart-mobile-items .qty-group input{ max-width: 70px; }
+  .cart-mobile-items .price{
+    font-weight: 600; text-align: right;
+  }
+  .cart-mobile-items .total{
+    font-weight: 700; text-align: right;
+  }
+  .cart-mobile-items .actions .btn{
+    min-height: 38px;
+  }
+}
+
+/* ====== Ссылки меню (левый сайдбар и мобильный collapse) ====== */
+.cart-fixed-left .nav-link,
+#cartNavCollapse a{
+  color: #111 !important;
+  text-decoration: none;
+  border-radius: .375rem;
+  padding: .375rem .75rem;
+  display: block;
+}
+.cart-fixed-left .nav-link:hover,
+#cartNavCollapse a:hover{
+  color: #fff !important;
+  background: rgba(33,37,41,.92);
+}
+
+/* ====== Модалка «Подсказки» — белая карточка с фигурами ====== */
+#cartTipsModal .modal-content{
+  background: #fff;
+  border-radius: .75rem;
+}
+#cartTipsModal .modal-content.shape-decor::before{
+  content: "";
+}
+
+/* ====== Якоря — не прячутся под фикс-шапку ====== */
+#cart, #items, #price, #message, #delivery{
+  scroll-margin-top: calc(var(--ui-offset, 72px) + 64px);
+}

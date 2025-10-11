@@ -1,0 +1,7 @@
+<% if local_assigns[:generation].present? %>
+  <h5 class="text-muted">Поколение</h5>
+  <p><%= generation.title %> (<%= generation.production_period %>)</p>
+  <p><%= generation.features %></p>
+<% else %>
+  <p class="text-muted fst-italic">Информация о поколении недоступна</p>
+<% end %>

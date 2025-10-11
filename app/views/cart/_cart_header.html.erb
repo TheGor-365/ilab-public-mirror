@@ -1,0 +1,56 @@
+<% total_qty = @order_items.sum(:quantity) %>
+
+<div class="card shadow-sm glass-panel cart-header sticky-top" data-cart-target="header">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center gap-2">
+      <span id="cart" class="h5 mb-0">
+        <%= (current_user&.username || "User") %>'s
+        <span class="text-muted">cart</span>
+      </span>
+      <span class="badge bg-dark"><%= total_qty %></span>
+    </div>
+
+    <!-- Мобила: бургер (Bootstrap collapse) + подсказки -->
+    <div class="d-flex align-items-center gap-2 d-lg-none">
+      <button class="btn btn-sm btn-outline-dark"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#cartNavCollapse"
+              aria-controls="cartNavCollapse"
+              aria-expanded="false"
+              aria-label="Оглавление">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <button class="btn btn-sm btn-outline-dark" type="button"
+              data-bs-toggle="modal" data-bs-target="#cartTipsModal"
+              title="Подсказки">
+        <i class="bi bi-info-circle"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Мобильное меню-навигация (Bootstrap collapse) -->
+  <div id="cartNavCollapse" class="collapse d-lg-none border-top">
+    <ul class="list-unstyled my-2 px-2">
+      <li><a href="#cart"     class="d-block py-2" data-cart-anchor>Корзина</a></li>
+      <li><a href="#items"    class="d-block py-2" data-cart-anchor>Позиции</a></li>
+      <li><a href="#price"    class="d-block py-2" data-cart-anchor>Итоги</a></li>
+      <li><a href="#message"  class="d-block py-2" data-cart-anchor>Сообщение</a></li>
+      <li><a href="#delivery" class="d-block py-2" data-cart-anchor>Доставка</a></li>
+    </ul>
+  </div>
+
+  <div class="card-body py-2">
+    <div class="d-flex flex-wrap gap-3 small">
+      <span class="text-muted">Всего позиций: <strong><%= total_qty %></strong></span>
+      <% if @delivery_price.present? %>
+        <span class="text-muted">Доставка: <strong>$<%= @delivery_price.to_i %></strong></span>
+      <% end %>
+      <span class="text-muted">Сумма: <strong>$<%= current_order.subtotal %></strong></span>
+    </div>
+  </div>
+</div>
+
+<!-- Спейсер под фикс-хедер (работает только на десктопе) -->
+<div class="cart-header-spacer d-none d-lg-block"></div>

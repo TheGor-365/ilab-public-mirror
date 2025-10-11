@@ -1,0 +1,175 @@
+# iPad family
+
+- family: "iPad"
+  generation_title: "iPad (1st generation)"
+  released_on: 2010-04-03
+  model_variants:
+    - title: "Wi-Fi"
+      discontinued_on: 2011-03-02
+    - title: "Wi-Fi + 3G"
+      discontinued_on: 2011-03-02
+
+- family: "iPad"
+  generation_title: "iPad 2"
+  released_on: 2011-03-11
+  storage_options: ["16GB","32GB","64GB"]
+  model_variants:
+    - title: "16 GB (budget keep-sell)"
+      discontinued_on: 2014-03-18
+    - title: "32/64 GB"
+      discontinued_on: 2012-03-07
+
+- family: "iPad"
+  generation_title: "iPad (3rd generation)"
+  released_on: 2012-03-16
+  discontinued_on: 2012-10-23
+
+- family: "iPad"
+  generation_title: "iPad (4th generation)"
+  released_on: 2012-11-02
+  model_variants:
+    - title: "Wi-Fi 16 GB"
+      discontinued_on: 2014-10-16
+    - title: "Wi-Fi 32/64 GB"
+      discontinued_on: 2013-10-22
+    - title: "Wi-Fi + Cellular 16 GB"
+      discontinued_on: 2014-10-16
+    - title: "Wi-Fi + Cellular 32/64 GB"
+      discontinued_on: 2013-10-22
+
+- family: "iPad"
+  generation_title: "iPad mini (1st generation)"
+  released_on: 2012-11-02
+  model_variants:
+    - title: "Wi-Fi 16 GB"
+      discontinued_on: 2015-06-19
+    - title: "Wi-Fi 32/64 GB"
+      discontinued_on: 2013-10-22
+    - title: "Wi-Fi + Cellular 16 GB"
+      discontinued_on: 2015-06-19
+    - title: "Wi-Fi + Cellular 32/64 GB"
+      discontinued_on: 2013-10-22
+
+- family: "iPad"
+  generation_title: "iPad Air (1st generation)"
+  released_on: 2013-11-01
+  model_variants:
+    - title: "16/32 GB"
+      discontinued_on: 2016-03-21
+    - title: "64/128 GB"
+      discontinued_on: 2014-10-16
+
+- family: "iPad"
+  generation_title: "iPad mini 2 (Retina)"
+  released_on: 2013-11-12
+  model_variants:
+    - title: "16 GB"
+      discontinued_on: 2016-09-07
+    - title: "32 GB"
+      discontinued_on: 2017-03-21
+    - title: "64/128 GB"
+      discontinued_on: 2014-10-16
+
+- family: "iPad"
+  generation_title: "iPad Air 2"
+  released_on: 2014-10-22
+  model_variants:
+    - title: "16/64 GB"
+      discontinued_on: 2016-09-07
+    - title: "128 GB"
+      discontinued_on: 2017-03-21
+
+- family: "iPad"
+  generation_title: "iPad mini 3"
+  released_on: 2014-10-22
+  discontinued_on: 2015-09-09
+
+- family: "iPad"
+  generation_title: "iPad Pro (1st generation)"
+  released_on: 2015-11-11
+  model_variants:
+    - title: "12.9″ 32/128/256 GB"
+      discontinued_on: 2017-06-05
+    - title: "9.7″ 32/128 GB"
+      discontinued_on: 2017-06-05
+
+- family: "iPad"
+  generation_title: "iPad (5th generation)"
+  released_on: 2017-03-24
+  discontinued_on: 2018-03-27
+
+- family: "iPad"
+  generation_title: "iPad Pro (2nd generation)"
+  released_on: 2017-06-13
+  model_variants:
+    - title: "12.9″"
+      discontinued_on: 2018-11-07
+    - title: "10.5″"
+      discontinued_on: 2019-03-18
+
+- family: "iPad"
+  generation_title: "iPad (6th generation)"
+  released_on: 2018-03-27
+  discontinued_on: 2019-09-10
+
+- family: "iPad"
+  generation_title: "iPad Pro (3rd generation)"
+  released_on: 2018-11-07
+  model_variants:
+    - title: "11″"
+      discontinued_on: 2020-03-18
+    - title: "12.9″"
+      discontinued_on: 2020-03-18
+
+- family: "iPad"
+  generation_title: "iPad (7th generation)"
+  released_on: 2019-09-30
+  discontinued_on: 2020-09-15
+
+- family: "iPad"
+  generation_title: "iPad Pro (4th generation)"
+  released_on: 2020-03-25
+  discontinued_on: 2021-04-20
+
+- family: "iPad"
+  generation_title: "iPad Air (4th generation)"
+  released_on: 2020-10-23
+  discontinued_on: 2022-03-08
+
+- family: "iPad"
+  generation_title: "iPad (8th generation)"
+  released_on: 2020-09-18
+  discontinued_on: 2021-09-14
+
+- family: "iPad"
+  generation_title: "iPad mini (6th generation)"
+  released_on: 2021-09-24
+
+- family: "iPad"
+  generation_title: "iPad (9th generation)"
+  released_on: 2021-09-24
+
+- family: "iPad"
+  generation_title: "iPad Pro (5th generation)"
+  released_on: 2021-05-21
+  discontinued_on: 2022-10-18
+
+- family: "iPad"
+  generation_title: "iPad Air (5th generation)"
+  released_on: 2022-03-18
+
+- family: "iPad"
+  generation_title: "iPad (10th generation)"
+  released_on: 2022-10-26
+
+- family: "iPad"
+  generation_title: "iPad Pro (6th generation)"
+  released_on: 2022-10-26
+
+- family: "iPad"
+  generation_title: "iPad Air (M2, 2024)"
+  released_on: 2024-05-15
+
+- family: "iPad"
+  generation_title: "iPad Pro (M4, 2024)"
+  released_on: 2024-05-15

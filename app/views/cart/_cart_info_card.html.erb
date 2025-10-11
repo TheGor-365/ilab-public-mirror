@@ -1,0 +1,8 @@
+<div class="glass-panel p-3 rounded-3 shape-decor shape--4 shape-size--md shape-pos--tr shape-soft">
+  <h6 class="text-center mb-3">
+    Product <span class="text-muted"><%= @product.name if @product.present? %></span> info
+  </h6>
+  <% if @category.present? && @product&.avatar&.url.present? %>
+    <%= image_tag(@product.avatar.url, width: '420', class: "img-fluid rounded") %>
+  <% end %>
+</div>

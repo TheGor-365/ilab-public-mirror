@@ -1,0 +1,63 @@
+.product-details {
+  .info-section {
+    border-left: 4px solid #28a745;
+    padding-left: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 768px) {
+    .row {
+      flex-direction: column;
+    }
+
+    .col-lg-6 {
+      width: 100%;
+    }
+  }
+}
+
+#product-details-panel .accordion-button {
+  gap: .5rem;
+}
+
+#product-details-panel dl dt { color: #6c757d; }
+#product-details-panel .accordion-button { gap: .5rem; }
+#product-details-panel dl dt { color: #6c757d; }
+
+@media (max-width: 991.98px){
+  #product-details-panel .details-header,
+  #product-details-panel .card-header{
+    background: var(--glass-bg-mobile) !important;
+  }
+}
+
+#productDetailsModal .modal-content{
+  background: transparent;            /* общий фон за модалкой виден */
+}
+
+
+#productDetailsModal .modal-content{
+  background: transparent; /* фон позади — общий фон приложения */
+}
+
+#productDetailsModal .modal-header{
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06) !important;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: .75rem;
+  /* если нужен совсем без рамки — раскомментируй следующую строку */
+  /* border: 0 !important; */
+}
+
+@media (max-width: 991.98px){
+  #productDetailsModal .modal-header{
+    background: var(--glass-bg-mobile) !important;
+  }
+}

@@ -1,0 +1,55 @@
+<% provide :page_title, 'Articles' %>
+<% currently_at 'Articles' %>
+
+<div class="container pt-5 pb-5">
+
+  <div class="bg-white shadow p-4 col-12">
+
+    <h4 class="display-3 mb-5">
+      Articles
+    </h4>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Name</th>
+          <th>Content</th>
+          <th>Images</th>
+          <th>Videos</th>
+          <th colspan="3">Controls</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @articles.each do |article| %>
+        <tr>
+          <td class="align-middle"><%= article.id %></td>
+          <td class="align-middle"><%= article.name %></td>
+          <td class="align-middle"><%= article.content %></td>
+
+          <td class="align-middle">
+            <% article.images.each do |image| %>
+              <%= image_tag(image.url, width: '30', class: 'rounded') %>
+            <% end %>
+          </td>
+
+          <td class="align-middle">
+            <% article.videos.each do |video| %>
+              <%= video_tag(video.url, width: '40', height: '40', controls: true, class: 'rounded') %>
+            <% end %>
+          </td>
+
+          <td class="align-middle"><%= link_to 'Show', article, class: 'text-decoration-none' %></td>
+          <td class="align-middle"><%= link_to 'Edit', edit_article_path(article), class: 'text-decoration-none' %></td>
+          <td class="align-middle"><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-decoration-none' %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%= link_to 'New Article', new_article_path, class: 'text-decoration-none' %>
+  </div>
+</div>

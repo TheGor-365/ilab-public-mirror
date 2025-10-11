@@ -1,0 +1,110 @@
+/* ----- Home page styles ----- */
+
+.home-page {
+  /* ссылки по умолчанию на небелом фоне — тёмные */
+  a:not(.btn) {
+    color: #111;
+    text-decoration: none;
+    &:hover { text-decoration: underline; }
+  }
+}
+
+/* HERO фон + отступ от фикс-навбара */
+.home-hero {
+  background: radial-gradient(1200px 500px at 10% -10%, #e7f5ff 0%, transparent 60%),
+              radial-gradient(900px 480px at 100% 0%, #fff3bf 0%, transparent 60%);
+  position: relative;
+  padding-top: calc(var(--ui-offset, 112px) + 14px); /* чуть ниже навбара */
+  padding-bottom: clamp(2rem, calc(1.25rem + 2vw), 4rem);
+
+  /* мягкий градиент сверху/снизу, чтобы баннер начинался/заканчивался плавно */
+  &::before,
+  &::after {
+    content: "";
+    position: absolute; left: 0; right: 0; pointer-events: none;
+  }
+  &::before {
+    top: 0; height: 64px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0));
+  }
+  &::after {
+    bottom: 0; height: 72px;
+    background: linear-gradient(0deg, rgba(255,255,255,0.85), rgba(255,255,255,0));
+  }
+}
+
+/* Карточка справа */
+.home-hero .home-hero-card {
+  backdrop-filter: blur(8px);
+}
+
+/* «блики» и их позиционирование, чтобы не бить по кнопкам/тексту */
+.hero-blob {
+  position: absolute; filter: blur(44px); opacity: .48; pointer-events: none;
+  border-radius: 999px; animation: blobMove 18s ease-in-out infinite;
+}
+.hero-blob-a { width: 280px; height: 280px; background: #a5d8ff; top: -40px; right: 2%; animation-delay: .2s; }
+.hero-blob-b { width: 320px; height: 320px; background: #ffd8a8; bottom: -80px; left: 8%; animation-delay: 1.2s; }
+
+@keyframes blobMove {
+  0%, 100% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(12px, -8px, 0) scale(1.05); }
+}
+
+/* Контрастная подложка под лид-текстом (десктоп и мобайл) */
+.hero-lead-contrast {
+  color: #1f2937;
+  background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.60));
+  border-radius: 12px;
+  padding: .5rem .65rem;
+  display: inline-block;
+  text-shadow: 0 1px 0 rgba(255,255,255,.75);
+}
+.high-contrast { border-width: 2px; }
+
+/* Отступ сверху у блока метрик, чтобы не «лип» к баннеру */
+.home-stats { margin-top: clamp(1rem, 1.5vw, 1.75rem); }
+.home-stats .stat {
+  border-radius: 1rem; padding: .9rem .75rem;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 2px 10px rgba(0,0,0,.04);
+}
+.home-stats .stat__num {
+  font-size: clamp(1.25rem, calc(1.1rem + 1.2vw), 2rem);
+  font-weight: 700; line-height: 1; letter-spacing: .5px;
+}
+.home-stats .stat__label { font-size: .85rem; color: #6b7280; }
+
+/* Сервисные карточки и ховеры */
+.service-card { transition: transform .15s ease, box-shadow .15s ease; }
+.service-card:hover { transform: translateY(-3px); box-shadow: 0 0.5rem 1.25rem rgba(0,0,0,.08); }
+
+/* Карточки товаров */
+.product-card { transition: transform .12s ease; }
+.product-card:hover { transform: translateY(-2px); }
+
+/* Пилюли семейств */
+.pill {
+  display:inline-block; padding:.35rem .8rem; border-radius:999px;
+  font-size:.9rem; background:#f1f3f5; color:#495057; text-decoration:none;
+  transition:background .15s ease, color .15s ease, transform .12s ease;
+}
+.pill:hover { background:#e9ecef; color:#212529; transform: translateY(-1px); }
+
+/* Тёмная кнопка «Открыть» на карточке */
+.card .btn.btn-outline-dark { border-width: 1.5px; }
+
+/* Мобайл: баннер чуть ниже + усиливаем читаемость подписи */
+@media (max-width: 575.98px){
+  .home-hero { padding-top: calc(var(--ui-offset, 96px) + 12px); }
+  .hero-lead-contrast { padding: .45rem .6rem; border-radius: 10px; }
+  .home-stats { margin-top: 1.25rem; }
+}
+
+/* Небольшой утилити-отступ */
+.py-lg-6 { padding-top: 4.5rem !important; padding-bottom: 4.5rem !important; }
+
+@media (max-width: 991.98px){
+  .home-hero { background-position: 50% 0; }
+}

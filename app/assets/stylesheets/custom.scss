@@ -1,0 +1,243 @@
+:root {
+  --main-navbar-height: 67px;
+  --mobile-navbar-height: 56px;
+
+  /* фикс-ширина сайдбаров (Store desktop) */
+  --store-sidebar-w: clamp(260px, 19vw, 320px);
+}
+
+a {
+  text-decoration: none !important;
+}
+
+/* Глобальный отступ под fixed-top navbar — только десктоп */
+@media (min-width: 992px) {
+  body { padding-top: var(--main-navbar-height); }
+}
+
+/* Плавный скролл для якорей */
+html { scroll-behavior: smooth; }
+
+/* ===== Store (desktop) ===== */
+.store-grid-container {
+  display: grid;
+  grid-template-columns: var(--store-sidebar-w) minmax(0, 1fr) var(--store-sidebar-w);
+  gap: 1.5rem;
+}
+.store-grid-container > main { min-width: 0; }
+
+/* Sticky шапка центрального блока — без тени */
+.sticky-main-header {
+  position: sticky;
+  top: var(--main-navbar-height);
+  z-index: 20;
+  background-color: #fff;
+}
+
+/* Боковые sticky-колонки */
+.sidebar-sticky-content {
+  position: sticky;
+  top: var(--main-navbar-height);
+  height: calc(100vh - var(--main-navbar-height) - 1rem);
+  overflow-y: auto;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0.2, 0.2, 0.2, 0.2);
+}
+
+/* Единый helper */
+.sticky-below-navbar {
+  top: calc(var(--main-navbar-height) + 1rem) !important;
+}
+
+@media (max-width: 991.98px) {
+  .sticky-below-navbar { top: .75rem !important; }
+}
+
+/* Заголовки секций (якоря) */
+.category-heading { transition: all 0.2s ease; scroll-margin-top: 88px; }
+
+/* Ссылки навигации */
+.store-nav-link.active { background-color: #0d6efd; color: #fff; border-radius: .375rem; }
+.word-break { overflow-wrap: break-word; }
+
+/* Пилюли */
+.store-nav__families { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 .6rem 0; }
+.pill {
+  display: inline-block; padding: .18rem .5rem; border-radius: 999px; font-size: .8rem;
+  background: #f1f3f5; color: #495057; text-decoration: none; transition: background .15s ease, color .15s ease;
+}
+.pill:hover { background: #e9ecef; text-decoration: none; }
+.pill.active { background: #343a40; color: #fff; }
+
+/* Списки в навигации */
+.store-nav__list { margin: 0; padding: 0; }
+.store-nav__section { margin: .6rem 0 .85rem; }
+.store-nav__section-title { font-weight: 700; font-size: .85rem; margin: .45rem 0 .2rem; color: #343a40; }
+.store-nav__ul { list-style: none !important; margin: 0 !important; padding: 0 !important; }
+.store-nav__li { list-style: none !important; padding: .15rem 0; }
+.store-nav__anchor {
+  color: #495057; text-decoration: none; display: inline-block; max-width: 100%;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: .8125rem; line-height: 1.2; cursor: pointer;
+}
+.store-nav__anchor:hover { text-decoration: none; color: #212529; }
+
+/* Детали товара (иконки/списки) */
+.pd-kv { display: grid; grid-auto-rows: minmax(24px, auto); row-gap: .5rem; }
+.pd-kv .pd-kv__row { display: grid; grid-template-columns: 22px 1fr; column-gap: .5rem; align-items: start; }
+.pd-kv .pd-kv__icon { width: 22px; height: 22px; line-height: 1; opacity: .7; display: inline-flex; align-items: center; justify-content: center; }
+.pd-kv .pd-kv__val { word-break: break-word; }
+
+.pd-chipline { margin-top: .75rem; display: flex; align-items: baseline; flex-wrap: wrap; gap: .5rem; font-size: .875rem; color: #6c757d; }
+.pd-chipline__label { font-weight: 600; color: #495057; }
+.pd-chipline__badge { background: #eef2f6; border-radius: 999px; padding: 0 .5rem; font-size: .75rem; }
+.pd-chipline__items { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.pd-summary { margin-top: 1rem; padding: .75rem .75rem .9rem; border: 1px solid #e9ecef; border-radius: .5rem; display: flex; flex-direction: column; align-items: center; gap: .6rem; text-align: center; }
+.pd-summary__icon .bi { font-size: 1.35rem; opacity: .8; }
+.pd-summary__badges { width: 100%; display: grid; gap: .5rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 576px) { .pd-summary__badges { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.pd-summary__badge { display: inline-flex; align-items: center; justify-content: center; gap: .35rem; padding: .4rem .6rem; border-radius: 999px; background: #eef2f6; font-size: .85rem; line-height: 1.1; white-space: nowrap; }
+.pd-summary__badge-label { color: #495057; }
+.pd-summary__badge-num { font-weight: 700; }
+
+/* ===== MOBILE ===== */
+@media (max-width: 991.98px) {
+  .category-heading { scroll-margin-top: 72px; }
+  .store-grid-container { display: block; }
+  .desktop-sidebar { display: none; }
+
+  .mobile-header {
+    position: sticky;
+    top: calc(var(--mobile-navbar-height) + 6px); /* чуть отступим от глобального navbar */
+    z-index: 103;
+
+    /* стекло + скругление, в унисон карточкам */
+    background: var(--glass-bg-mobile) !important;
+    border: 1px solid var(--glass-border) !important;
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border-radius: .75rem;
+
+    /* лёгкая тень и дыхание вокруг */
+    box-shadow: 0 6px 18px rgba(0,0,0,.06);
+    margin: .5rem 0 .75rem;
+    padding: 0.25rem 1rem; /* как было */
+  }
+}
+
+/* Offcanvas (мобилка) — читаемые паддинги и гарантированный скролл */
+#storeOffcanvasNav .offcanvas-body {
+  padding: 1rem .75rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: 100vh;
+}
+
+/* На мобилке глобальный верхний зазор не нужен (Store и др.) */
+@media (max-width: 991.98px) {
+  body { padding-top: 0 !important; }
+}
+
+/* === ПОПРАВКА ТОЛЬКО ДЛЯ СТРАНИЦЫ REPAIRS (мобилка): отступ под навбар === */
+@media (max-width: 991.98px) {
+  .repairs-page { margin-top: var(--mobile-navbar-height); }
+}
+
+
+/* === /products: offcanvas (мобила) — матовое стекло как у dropdown === */
+@media (max-width: 991.98px) {
+  #productsOffcanvasNav.offcanvas-top {
+    /* из-под мобильной шапки, как было */
+    top: var(--nav-h, var(--mobile-navbar-height, 56px)) !important;
+    height: calc(100vh - var(--nav-h, var(--mobile-navbar-height, 56px))) !important;
+
+    /* Матовое стекло: те же токены, что и у dropdown */
+    background: var(--glass-bg-mobile) !important;         /* rgba(255,255,255,.36) из :root */
+    border-bottom: 1px solid var(--glass-border) !important;
+    box-shadow: 0 12px 28px rgba(0,0,0,.12) !important;
+    backdrop-filter: blur(var(--glass-blur)) !important;   /* 12px по умолчанию */
+    -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
+
+    z-index: 1100 !important; /* над бэкдропом, над навбаром */
+  }
+
+  /* затемнение позади панели (не трогаем сам контент панели) */
+  #productsOffcanvasNav {
+    --bs-backdrop-bg: #000;
+    --bs-backdrop-opacity: .35;
+  }
+
+  /* чтобы хедер панели выглядел единым «стеклом» */
+  #productsOffcanvasNav .offcanvas-header {
+    background: inherit !important;
+    backdrop-filter: inherit !important;
+    -webkit-backdrop-filter: inherit !important;
+    border-bottom: 1px solid var(--glass-border) !important;
+  }
+
+  /* контент панели — контрастный, без высветляющих теней */
+  #productsOffcanvasNav,
+  #productsOffcanvasNav .offcanvas-body,
+  #productsOffcanvasNav .store-nav,
+  #productsOffcanvasNav .store-nav__anchor,
+  #productsOffcanvasNav .pill {
+    color: #212529 !important;
+    text-shadow: none !important;
+  }
+}
+
+
+/* === Глобальные скроллбары: без белого трека на hover === */
+:root{
+  --sb-size: 10px;
+  --sb-thumb: rgba(60,60,67,.55);       /* тёмно-серый */
+  --sb-thumb-hover: rgba(60,60,67,.75); /* чуть контрастнее при наведении */
+}
+
+/* Firefox */
+*{
+  scrollbar-width: thin;
+  scrollbar-color: var(--sb-thumb) transparent; /* трек полностью прозрачный */
+}
+
+/* WebKit/Chromium */
+*::-webkit-scrollbar{
+  width: var(--sb-size);
+  height: var(--sb-size);
+  background: transparent; /* убираем общий фон */
+}
+
+*::-webkit-scrollbar-track{
+  background: transparent !important;   /* убираем белый трек */
+}
+*::-webkit-scrollbar-track:hover{
+  background: transparent !important;   /* и при hover тоже прозрачный */
+}
+
+*::-webkit-scrollbar-thumb{
+  background-color: var(--sb-thumb);
+  border-radius: 999px;
+  border: 2px solid transparent;        /* «прослойка», чтобы не просвечивал трек */
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover{
+  background-color: var(--sb-thumb-hover);
+}
+
+/* угловой квадрат и кнопки скролла — прозрачные/скрыты */
+*::-webkit-scrollbar-corner{ background: transparent; }
+*::-webkit-scrollbar-button{ width:0; height:0; display:none; }
+
+
+.sticky-main-header {
+  position: sticky;
+  top: var(--main-navbar-height);
+  z-index: 20;
+
+  /* стекло вместо сплошного #fff */
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: .75rem;
+}

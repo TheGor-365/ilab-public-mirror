@@ -1,0 +1,14 @@
+<% provide :page_title, 'New iPhone Spare Part' %>
+<% currently_at 'iPhone Spare Parts' %>
+
+<div class="container pt-5 pb-5">
+
+  <div class="bg-white shadow p-4 col-10">
+
+    <h4 class="display-3">New Spare Part</h4>
+
+    <%= render 'form', spare_part: @spare_part %>
+
+    <%= link_to 'Back', spare_parts_path, class: 'text-decoration-none text-dark' %>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<%= turbo_stream.replace "cart_table" do %>
+  <%= render 'cart/empty_cart' %>
+<% end %>
+
+<%= turbo_stream.replace "cart_summary" do %>
+  <%= render 'cart/summary', subtotal: 0, delivery: @delivery_price, amount: @delivery_price %>
+<% end %>
+
+<%= turbo_stream.update "cart-count", 0 %>
+<%= turbo_stream.update "side-cart-count", 0 %>

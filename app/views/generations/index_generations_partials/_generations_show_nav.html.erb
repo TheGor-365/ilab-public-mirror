@@ -1,0 +1,26 @@
+<div class="fixed-left nav-scroll shadow bg-white col-2 mx-3 mt-5">
+
+  <div class="show-nav-header shadow bg-white py-4 text-center">
+    <h4>
+      <span class="text-muted display-6">
+        iPhone Models
+      </span>
+      <br>
+
+      <i class="fas fa-2x fa-route text-muted pt-4"></i>
+    </h4>
+  </div>
+  <br>
+
+  <div class="px-4">
+    <ul class="nav flex-column">
+      <% @generations.each do |generation| %>
+        <%= link_to generations_path(generation, anchor: generation.title.to_s), class: "nav-link py-1 text-muted rounded active-anchor" do %>
+          <li class="nav-item">
+            <%= generation.title %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<% provide :page_title, 'Categories' %>
+<% currently_at 'Categories' %>
+
+<div class="container pt-5 pb-5">
+
+  <div class="bg-white shadow p-4 col-12">
+
+    <h1 class="display-3 mb-5">Categories</h1>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Heading</th>
+          <th>Overview</th>
+          <th>Display</th>
+          <th>Avatar</th>
+          <th colspan="3">Controls</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @categories.each do |category| %>
+        <tr>
+          <td class="align-middle"><%= category.id %></td>
+          <td class="align-middle"><%= category.heading %></td>
+          <td class="align-middle"><%= category.overview %></td>
+          <td class="align-middle"><%= category.display %></td>
+
+          <td class="align-middle"><%= image_tag(category.avatar.url, width: '30', class: 'rounded') if category.avatar.present? %></td>
+
+          <td class="align-middle"><%= link_to 'Show', category, class: 'text-decoration-none' %></td>
+          <td class="align-middle"><%= link_to 'Edit', edit_category_path(category), class: 'text-decoration-none' %></td>
+          <td class="align-middle"><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-decoration-none' %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+
+    <%= link_to 'New Category', new_category_path, class: 'text-decoration-none' %>
+  </div>
+</div>

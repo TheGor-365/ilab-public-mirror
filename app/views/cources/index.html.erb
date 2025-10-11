@@ -1,0 +1,68 @@
+<% provide :page_title, 'Cources' %>
+<% currently_at 'Cources' %>
+
+<div class="container pt-5 pb-5">
+
+  <div class="bg-white shadow p-4 col-12">
+
+    <h4 class="display-3 mb-5">Cources</h4>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>university_id</th>
+          <th>category_id</th>
+          <th>generation_id</th>
+          <th>model_id</th>
+          <th>Author</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Chapters</th>
+          <th>Images</th>
+          <th>Videos</th>
+          <th colspan="3">Controls</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @cources.each do |cource| %>
+          <tr>
+            <td class="align-middle"><%= cource.id %></td>
+            <td class="align-middle"><%= cource.university_id %></td>
+            <td class="align-middle"><%= cource.category_id %></td>
+            <td class="align-middle"><%= cource.generation_id %></td>
+            <td class="align-middle"><%= cource.model_id %></td>
+
+            <td class="align-middle"><%= cource.author %></td>
+            <td class="align-middle"><%= cource.name %></td>
+            <td class="align-middle"><%= cource.description %></td>
+            <td class="align-middle"><%= cource.price %></td>
+            <td class="align-middle"><%= cource.chapters %></td>
+
+            <td class="align-middle">
+              <% cource.images.each do |image| %>
+                <%= image_tag(image.url, width: '30', class: 'rounded') %>
+              <% end %>
+            </td>
+
+            <td class="align-middle">
+              <% cource.videos.each do |video| %>
+                <%= video_tag(video.url, width: '40', height: '40', controls: true, class: 'rounded') %>
+              <% end %>
+            </td>
+
+            <td class="align-middle"><%= link_to 'Show', cource, class: 'text-decoration-none' %></td>
+            <td class="align-middle"><%= link_to 'Edit', edit_cource_path(cource), class: 'text-decoration-none' %></td>
+            <td class="align-middle"><%= link_to 'Destroy', cource, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-decoration-none' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%= link_to 'New Cource', new_cource_path, class: 'text-decoration-none' %>
+  </div>
+</div>

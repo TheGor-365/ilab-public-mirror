@@ -1,0 +1,16 @@
+<% provide :page_title, 'New Quiz Question' %>
+<% currently_at 'Quiz Questions' %>
+
+<div class="container pt-5 pb-5">
+
+  <div class="bg-white shadow p-4 col-10">
+
+    <h4 class="display-3">
+      New Quiz Question
+    </h4>
+
+    <%= render 'form', quiz_question: @quiz_question %>
+
+    <%= link_to 'Back', quiz_questions_path, class: 'text-decoration-none' %>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<% provide :page_title, 'Edit iPhone Defects' %>
+<% currently_at 'iPhone Defects' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'defect_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+    <div class="row p-5 shadow bg-white mb-5">
+      <h1 class="display-6">
+        Editing defect
+        <span class="text-muted">
+          <%= @defect.title %>
+        </span>
+      </h1>
+    </div>
+
+    <%= render 'form', defect: @defect %>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Show', @defect, class: 'text-decoration-none' %>
+      <%= link_to 'Back', defects_path, class: 'text-decoration-none text-dark' %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <%= render 'defect_info_card' %>
+  </div>
+</div>

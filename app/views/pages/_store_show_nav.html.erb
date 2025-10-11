@@ -1,0 +1,88 @@
+<% current_family = (@family.presence || params[:family]).to_s %>
+
+<% families =
+     if defined?(@families) && @families.present?
+       @families
+     elsif defined?(@all_families) && @all_families.present?
+       @all_families
+     else
+       []
+     end
+%>
+
+<div class="store-nav <%= 'glass-panel p-3' if local_assigns[:offcanvas] %>">
+
+  <!-- Пилюли семейств (включая «Все») -->
+  <div class="store-nav__families mb-3">
+    <%= link_to 'Все',
+                store_path,
+                class: "pill #{'active' if current_family.blank?}",
+                data: { role: "family", turbo: "false" } %>
+
+    <% families.each do |fam| %>
+      <% label = fam.respond_to?(:title) ? fam.title.to_s : fam.to_s %>
+      <% value = (fam.respond_to?(:slug) ? fam.slug : label).to_s %>
+      <%= link_to label,
+                  store_path(family: value),
+                  class: "pill #{'active' if current_family == value}",
+                  data: { role: "family", turbo: "false" } %>
+    <% end %>
+  </div>
+
+  <% if defined?(@products_by_category) && @products_by_category.present? %>
+    <% limit_per_section = (local_assigns[:offcanvas] ? nil : 20) %>
+
+    <div class="store-nav__list">
+      <% @products_by_category.each do |category, products| %>
+        <% next if category.nil? || products.blank? %>
+        <% title =
+             if category.respond_to?(:heading) && category.heading.present?
+               category.heading
+             elsif category.respond_to?(:title)
+               category.title
+             else
+               'Без категории'
+             end
+        %>
+
+        <div class="store-nav__section">
+          <div class="store-nav__section-title"><%= title %></div>
+
+          <!-- Якорь на раздел -->
+          <ul class="store-nav__ul">
+            <li class="store-nav__li">
+              <a href="#<%= dom_id(category) %>"
+                 class="store-nav__anchor"
+                 data-store-anchor="#<%= dom_id(category) %>"
+                 data-bs-target="#storeOffcanvasNav">
+                Перейти к разделу
+              </a>
+            </li>
+          </ul>
+
+          <!-- Товары -->
+          <% visible_products = limit_per_section ? products.first(limit_per_section) : products %>
+          <ul class="store-nav__ul">
+            <% visible_products.each do |product| %>
+              <li class="store-nav__li">
+                <a href="#product-<%= product.id %>"
+                   class="store-nav__anchor"
+                   data-role="product"
+                   data-store-anchor="#product-<%= product.id %>"
+                   data-bs-target="#storeOffcanvasNav">
+                  <%= product.name %>
+                </a>
+              </li>
+            <% end %>
+
+            <% if limit_per_section && products.size > limit_per_section %>
+              <li class="store-nav__li">
+                <small class="text-muted">…и ещё <%= products.size - limit_per_section %></small>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

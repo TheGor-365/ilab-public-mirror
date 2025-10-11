@@ -1,0 +1,90 @@
+/* === Decorative shape overlays ===========================================
+   JS навешивает классы: shape-decor + shape--N + позиция/размер/поворот.
+   Опт-аут: .no-shape или [data-shape="off"].
+=========================================================================== */
+
+.shape-decor{
+  position: relative;
+  isolation: isolate;       /* свой stacking-context, чтобы mix-blend работал локально */
+  overflow: hidden;         /* чтобы края не вылезали за карточку */
+}
+
+/* Контент карточки всегда поверх псевдо-элемента */
+.shape-decor > *{ position: relative; z-index: 1; }
+
+/* Базовый псевдо-элемент — темнее и крупнее (x2) */
+.shape-decor::before{
+  content: "";
+  position: absolute;
+  width: var(--shape-w, 66%);     /* базовый размер, если класс размера не задан */
+  aspect-ratio: 1 / 1;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  /* темнее по умолчанию */
+  opacity: var(--shape-o, .58);
+
+  /* читаемость на белом, без серого ореола вокруг PNG */
+  mix-blend-mode: multiply;
+  filter: drop-shadow(0 12px 28px rgba(0,0,0,.12))
+          contrast(1.2) brightness(.82);
+
+  pointer-events: none;
+  z-index: 0;
+
+  /* трансформации */
+  transform: var(--shape-t, none) rotate(var(--shape-r, 0deg)) scale(var(--shape-s, 1));
+}
+
+/* Карты изображений (через asset pipeline) */
+.shape--1::before{ background-image: image-url('shapes/shape1_faded.png'); }
+.shape--2::before{ background-image: image-url('shapes/shape2_faded.png'); }
+.shape--3::before{ background-image: image-url('shapes/shape3_faded.png'); }
+.shape--4::before{ background-image: image-url('shapes/shape4_faded.png'); }
+.shape--5::before{ background-image: image-url('shapes/shape5_faded.png'); }
+.shape--6::before{ background-image: image-url('shapes/shape6_faded.png'); }
+.shape--7::before{ background-image: image-url('shapes/shape7_faded.png'); }
+.shape--8::before{ background-image: image-url('shapes/shape8_faded.png'); }
+
+/* --- размеры: x2 от исходных --- */
+.shape-size--sm::before{ --shape-w: 68%; }
+.shape-size--md::before{ --shape-w: 88%; }
+.shape-size--lg::before{ --shape-w: 120%; }
+.shape-size--xl::before{ --shape-w: 144%; }
+
+/* --- ещё темнее пресеты --- */
+.shape-soft::before   { --shape-o: .50; }
+.shape-normal::before { --shape-o: .68; }
+.shape-strong::before { --shape-o: .82; }
+
+/* Позиции (якоря) */
+.shape-pos--tl::before{ top: -12%; left: -8%; }
+.shape-pos--tr::before{ top: -12%; right: -8%; }
+.shape-pos--bl::before{ bottom: -12%; left: -8%; }
+.shape-pos--br::before{ bottom: -12%; right: -8%; }
+.shape-pos--tc::before{ top: -12%; left: 50%;  --shape-t: translate(-50%, 0); }
+.shape-pos--bc::before{ bottom: -12%; left: 50%;--shape-t: translate(-50%, 0); }
+.shape-pos--cl::before{ top: 50%; left: -8%;  --shape-t: translate(0, -50%); }
+.shape-pos--cr::before{ top: 50%; right: -8%; --shape-t: translate(0, -50%); }
+
+/* Повороты */
+.shape-rot--a::before{ --shape-r: -22deg; }
+.shape-rot--b::before{ --shape-r: -14deg; }
+.shape-rot--c::before{ --shape-r: -6deg; }
+.shape-rot--d::before{ --shape-r: 6deg; }
+.shape-rot--e::before{ --shape-r: 14deg; }
+.shape-rot--f::before{ --shape-r: 24deg; }
+
+/* Доп. масштаб (вариативность из JS) */
+.shape-scale--95::before{ --shape-s: .95; }
+.shape-scale--100::before{ --shape-s: 1; }
+.shape-scale--110::before{ --shape-s: 1.1; }
+.shape-scale--120::before{ --shape-s: 1.2; }
+
+/* Опт-аут: вообще без фигур */
+.no-shape::before,
+[data-shape="off"]::before{ content: none !important; }
+
+/* Безопасный relative для карточек */
+.card{ position: relative; }

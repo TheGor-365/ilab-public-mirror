@@ -1,0 +1,53 @@
+<% provide :page_title, @quiz.name %>
+<% currently_at 'Quizzes' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'quiz_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="course" class="anchorjs-link display-5">
+        <span class="text-muted display-5">
+          <strong>Course</strong> <%= @@quiz.cource_id %>
+        </span>
+      </span>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="chapter" class="anchorjs-link display-5">
+        <span class="text-muted display-5">
+          <strong>Chapter</strong> <%= @@quiz.chapter %>
+        </span>
+      </span>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="name" class="anchorjs-link display-5">
+        <span class="text-muted display-5">
+          <strong>Name</strong> <%= @@quiz.name %>
+        </span>
+      </span>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="description" class="anchorjs-link display-5">
+        <span class="text-muted display-5">
+          <strong>Description</strong> <%= @@quiz.description %>
+        </span>
+      </span>
+    </div>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Edit', edit_quiz_path(@quiz), class: 'text-decoration-none' %>
+      <%= link_to 'Back', quizzes_path, class: 'text-decoration-none' %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <%= render 'quiz_info_card' %>
+  </div>
+</div>

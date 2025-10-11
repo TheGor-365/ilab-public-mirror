@@ -1,0 +1,63 @@
+<div class="fixed-left nav-scroll shadow bg-white p-4 col-2 m-3 mt-5">
+
+  <h5>
+    Navigation <span class="text-muted"> <%= @cource.name %> cource</span>
+  </h5>
+  <br>
+
+  <% @universities.each do |university| %>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link text-dark ps-0" href="#university">University</a>
+
+        <% if @universities.length > 0 %>
+          <a class="nav-link text-muted" href="#university">
+            <%= university.title %>
+          </a>
+        <% end %>
+      </li>
+    </ul>
+  <% end %>
+
+
+  <h5 class="nav-link text-dark ps-0 mb-3 mt-4" href="#category">Categories</h5>
+
+  <% @categories.each do |category| %>
+
+    <%= category.heading %>
+
+    <% @cources.each do |cource| %>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link text-dark ps-0" href="#cource">University</a>
+
+          <% if @cources.length > 0 %>
+          <a class="nav-link text-muted" href="#cource">
+            <%= cource.name %>
+          </a>
+          <% end %>
+        </li>
+      </ul>
+    <% end %>
+
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link text-muted" href="#chapter">Chapters</a>
+      </li>
+    </ul>
+
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link text-muted" href="#product">
+          <% if category.products.length > 0 %>
+            <% category.products.each do |product| %>
+              <%= product.name %> <br>
+            <% end %>
+          <% end %>
+        </a>
+      </li>
+    </ul>
+
+  <% end %>
+
+</div>

@@ -1,0 +1,265 @@
+/* === Глобальный фон без швов (cover + fixed слой) === */
+html, body { min-height: 100%; }
+
+html::before {
+  content: "";
+  position: fixed;        /* всегда за контентом, не скроллится */
+  inset: 0;               /* во весь вьюпорт */
+  z-index: -1;            /* слой под всем содержимым */
+  background-image: image-url('backgounds/home-bg.png');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover; /* растягивает без повторов, шва нет */
+  transform: translateZ(0);
+}
+
+/* запасной цвет, если картинка не загрузится */
+body { background-color: #f7f8fa; }
+
+/* === CSS custom props для «стекла» ===
+   Сделал прозрачность меньше, чтобы вернулся оттенок фоновой картинки. */
+:root {
+  /* лёгкая «дымка», сквозь которую хорошо читается фон */
+  --glass-bg: rgba(255,255,255,.28);
+  --glass-bg-mobile: rgba(255,255,255,.36);
+  --glass-border: rgba(0,0,0,.08);
+  --glass-blur: 12px;
+  --nav-h: 56px; /* высота шапки на мобиле (bootstrap) */
+}
+
+/* Универсальная «стеклянная» панель — как у dropdown */
+.glass-panel {
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06) !important;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: .75rem;
+}
+@media (max-width: 991.98px){
+  .glass-panel { background: var(--glass-bg-mobile) !important; }
+}
+
+
+/* === NAVBAR базово — вписываемся в фон, не белим === */
+header,
+header.bg-white,
+header.bg-white.shadow-sm {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* навбар делаем «дымкой», но с оттенком фона за ним */
+.navbar.fixed-top,
+.navbar.fixed-top.bg-light,
+.navbar.fixed-top.bg-white,
+.transparent-nav {
+  background: var(--glass-bg) !important;
+  border-bottom: 1px solid var(--glass-border) !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06) !important;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  z-index: 1055; /* выше контента и любых карточек */
+}
+
+/* текст/линки читаемы на любом фоне */
+.navbar .navbar-brand,
+.navbar .navbar-brand a,
+.navbar .nav-link,
+.navbar .dropdown-toggle,
+.navbar .dropdown-item {
+  color: #1f2937; /* slate-800 */
+  text-shadow: 0 1px 1px rgba(255,255,255,.20);
+}
+
+/* hover */
+.navbar .nav-link:hover,
+.navbar .dropdown-item:hover {
+  color: white !important;
+  background: rgba(13,110,253,.08);
+}
+
+/* активный пункт — тёмная пилюля */
+.navbar .nav-link.active,
+.navbar .nav-link.active-nav,
+.navbar .dropdown-item.active,
+.navbar .dropdown-item.active-nav {
+  background: rgba(33,37,41,.92) !important;
+  color: #fff !important;
+  border-radius: .375rem;
+}
+
+/* чтобы меню не срезалось предками */
+.navbar { overflow: visible; }
+
+/* PAGE-BANNER в том же стиле (тонкая дымка) */
+.page-banner {
+  position: relative;
+  z-index: 1;
+  background: var(--glass-bg) !important;
+  border-bottom: 1px solid var(--glass-border) !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06) !important;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
+/* DROPDOWNS — поверх всего и без «белого мигания» */
+.dropdown-menu {
+  position: absolute;
+  z-index: 1100; /* выше navbar и любых сайдбаров */
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,.12) !important;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
+/* === МОБИЛЬНОЕ МЕНЮ: стабильная полноэкранная матовая панель === */
+.navbar .navbar-collapse { background: transparent; }
+
+@media (max-width: 991.98px) {
+  // .navbar { --nav-h: 56px; }
+
+  /* и в состоянии анимации (.collapsing), и в открытом (.show) */
+  .navbar .navbar-collapse.show,
+  .navbar .navbar-collapse.collapsing {
+    position: fixed !important;
+    top: var(--nav-h);
+    left: 0; right: 0; bottom: 0;
+    min-height: calc(100vh - var(--nav-h));
+    padding: .75rem 1rem 1.25rem;
+    overflow-y: auto;
+
+    background: var(--glass-bg-mobile) !important;
+    border-bottom: 1px solid var(--glass-border) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,.12);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+
+    z-index: 1060; /* над навбаром */
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  /* дропдауны внутри мобильного меню — статично, чтобы не «съезжали» */
+  .navbar .dropdown-menu {
+    position: static;
+    float: none;
+    margin: .25rem 0;
+    z-index: 1065; /* поверх содержимого панели */
+    background: var(--glass-bg-mobile) !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,.10) !important;
+  }
+
+  /* чтобы иконка-гамбургер была кликабельна поверх панели */
+  .navbar .navbar-toggler[aria-expanded="true"] {
+    position: relative;
+    z-index: 1070;
+  }
+}
+
+/* На всякий случай — любые «жёсткие белые» фоны у header/навара убираем */
+header.bg-white, .navbar.bg-white, .navbar.bg-light { background-color: transparent !important; }
+
+/* Хелпер */
+.transparent-nav { background: transparent; border-bottom: 0; box-shadow: none; }
+
+/* На тёмном фоне делаем “primary” светлым */
+.page-banner,
+.sticky-main-header,
+.on-dark {
+  a.link-primary,
+  .text-primary {
+    color: black !important;
+  }
+  a.link-primary:hover {
+    color: black !important;
+  }
+}
+/* Баннер под навбаром — светлые иконки/ссылки */
+.page-banner .page-banner__title i,
+.page-banner a.btn-link,
+.page-banner a.nav-link {
+  color: black !important;
+}
+.page-banner a.btn-link:hover,
+.page-banner a.nav-link:hover {
+  color: black !important;
+}
+
+/* Если в разметке остались outline-secondary — ведём себя как outline-light */
+.page-banner .btn-outline-secondary,
+.page-banner .btn-outline-primary {
+  --bs-btn-color: black;
+  --bs-btn-border-color: black;
+  --bs-btn-hover-bg: black;
+  --bs-btn-hover-color: #212529;
+  --bs-btn-hover-border-color: black;
+}
+/* Баннер под навбаром — тёмные иконки/ссылки, чтобы не терялись на белом контенте позади */
+.page-banner .page-banner__title i,
+.page-banner a.btn-link,
+.page-banner a.nav-link {
+  color: #212529 !important; /* text-dark */
+}
+.page-banner a.btn-link:hover,
+.page-banner a.nav-link:hover {
+  color: #000 !important;
+}
+
+/* В баннере используем outline-dark (контрастно на белом) */
+.page-banner .btn-outline-dark{
+  --bs-btn-color: #212529;
+  --bs-btn-border-color: rgba(33,37,41,.9);
+  --bs-btn-hover-bg: #212529;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-border-color: #212529;
+  --bs-btn-active-bg: #212529;
+  --bs-btn-active-border-color: #212529;
+}
+
+
+/* === Products: offcanvas «жалюзи» — всегда ниже fixed navbar === */
+#productsOffcanvasNav.offcanvas-top {
+  /* на десктопе берём высоту основной шапки */
+  top: var(--main-navbar-height, 67px) !important;
+  height: calc(100vh - var(--main-navbar-height, 67px)) !important;
+  z-index: 1080; /* выше навбара и его коллапса */
+  background: var(--glass-bg) !important;
+  border-bottom: 1px solid var(--glass-border) !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,.12) !important;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
+@media (max-width: 991.98px) {
+  #productsOffcanvasNav.offcanvas-top {
+    /* на мобиле — высота мобильной шапки */
+    top: var(--nav-h, var(--mobile-navbar-height, 56px)) !important;
+    height: calc(100vh - var(--nav-h, var(--mobile-navbar-height, 56px))) !important;
+    background: var(--glass-bg-mobile) !important;
+  }
+}
+
+/* Хедер offcanvas (поиск + крестик) всегда виден */
+#productsOffcanvasNav .offcanvas-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+
+/* Утилита: стеклянная карточка */
+.glass-panel{
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: .75rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,.12);
+}
+@media (max-width: 991.98px){
+  .glass-panel{ background: var(--glass-bg-mobile) !important; }
+}

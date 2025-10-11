@@ -1,0 +1,176 @@
+<% @generations = Generation.order('id ASC').all %>
+
+<div class="contents-block">
+
+  <div class="row px-0 pt-2 pb-5 shadow bg-white mb-5 text-center header-nav">
+
+    <div class="col-5"></div>
+
+    <div class="col-2">
+      <p class="text-center text-muted display-6">
+        Generations
+      </p>
+
+      <i class="fas fa-2x fa-book-open text-muted pt-2"></i>
+    </div>
+
+    <div class="col-3"></div>
+
+    <div class="col-2 mb-5 p-2 shadow toggler">
+
+      <%= link_to generations_table_path, remote: true, class: 'text-decoration-none text-muted' do %>
+
+        <i class="fas fa-table text-muted"></i><br>
+
+        <small class="text-muted">
+          table
+        </small>
+      <% end %>
+    </div>
+  </div>
+
+  <% @generations.each_with_index do |generation, index| %>
+
+    <div class="row phone-content">
+      <div class="col-10 block-controls"></div>
+
+      <div class="col-2 px-3 py-5 shadow bg-white text-center block-controls">
+        <small>
+          <div class="btn-group-vertical">
+            <%= link_to 'Show', generation, class: 'btn btn-sm btn-secondary' %>
+            <%= link_to 'Edit', edit_generation_path(generation), class: 'btn btn-sm btn-secondary' %>
+            <%= link_to 'Destroy', generation, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-secondary' %>
+          </div>
+        </small>
+      </div>
+
+      <% if generation.title.present? %>
+
+        <div class="spacecontainer"></div>
+
+        <div class="row p-5 mb-5 bg-white shadow begin">
+          <span class="title">
+            <small class="display-6 text-muted">
+              <%= link_to generation_title_path(generation), remote: true, class: 'text-decoration-none text-muted' do %>
+                <span id="<%= generation.title %>" class="anchorjs-link anchor">
+                  <%= generation.title %>
+                </span>
+              <% end %>
+            </small>
+          </span>
+        </div>
+      <% end %>
+
+      <% if generation.production_period.present? %>
+
+        <div class="row p-5 bg-white shadow">
+
+          <span class="display-6 mb-5"><%= generation.title %>
+            <span id="production_period" class="anchorjs-link text-muted display-6">
+              production period
+            </span>
+          </span>
+
+          <%= link_to generation_production_period_path(generation), remote: true, class: 'text-decoration-none text-muted' do %>
+            <small class="text-muted">
+              <%= generation.production_period %>
+            </small>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if generation.features.present? %>
+
+        <div class="row p-5 bg-white shadow">
+
+          <span class="display-6 mb-5"><%= generation.title %>
+            <span id="features" class="anchorjs-link text-muted display-6">
+              features
+            </span>
+          </span>
+
+          <%= link_to generation_features_path(generation), remote: true, class: 'text-decoration-none text-muted' do %>
+            <small class="text-muted">
+              <%= generation.features %>
+            </small>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if generation.vulnerability.present? %>
+
+        <div class="row p-5 bg-white shadow">
+
+          <span class="display-6 mb-5"><%= generation.title %>
+            <span id="vulnerability" class="anchorjs-link text-muted display-6">
+              vulnerability
+            </span>
+          </span>
+
+          <%= link_to generation_vulnerability_path(generation), remote: true, class: 'text-decoration-none text-muted' do %>
+            <small class="text-muted">
+              <%= generation.vulnerability %>
+            </small>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if generation.images.present? %>
+
+        <div class="row p-5 mb-5 bg-white shadow">
+
+          <span class="display-6 mb-5"><%= generation.title %>
+            <span id="photos" class="anchorjs-link text-muted display-6">
+              photos
+            </span>
+          </span>
+          <br>
+
+          <%= link_to generation_photo_path(generation), remote: true, class: 'text-decoration-none text-muted' do %>
+
+            <% generation.images.each do |image| %>
+
+              <small class="text-muted mb-5">
+                <%= image.identifier %>
+              </small>
+
+              <div class="col text-center mb-5 mt-5">
+                <%= image_tag(image.url, width: '500', class: 'rounded img-thumbnail p-1 shadow') %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if generation.videos.present? %>
+
+        <div class="row p-5 mb-5 bg-white shadow">
+
+          <span class="display-6 mb-5"><%= generation.title %>
+            <span id="videos" class="anchorjs-link text-muted display-6">
+              videos
+            </span>
+          </span>
+
+          <%= link_to generation_video_path(generation), remote: true, class: 'text-decoration-none text-muted' do %>
+
+            <% generation.videos.each do |video| %>
+
+              <small class="text-muted mb-5">
+                <%= video.identifier %>
+              </small>
+
+              <div class="col text-center mb-5 mt-5">
+                <%= video_tag(video.url, width: '640', height: '380', controls: false, class: 'rounded card p-1 shadow mx-auto mb-5') if phone.videos.present? %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="row p-5 m-5">
+      <div class="row p-5 m-5"></div>
+    </div>
+  <% end %>
+</div>

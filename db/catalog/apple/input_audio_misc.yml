@@ -1,0 +1,79 @@
+# Клавиатуры / мыши / трекпады
+- family: "Accessories"
+  generation_title: "Apple USB Mouse (1998 Hockey Puck)"
+  released_on: 1998-08-15
+  discontinued_on: 2000-01-01
+
+- family: "Accessories"
+  generation_title: "Apple Pro Mouse (2000)"
+  released_on: 2000-07-19
+  discontinued_on: 2005-01-01
+
+- family: "Accessories"
+  generation_title: "Apple Mighty Mouse (2005, USB/Bluetooth)"
+  released_on: 2005-08-02
+  discontinued_on: 2009-12-31
+
+- family: "Accessories"
+  generation_title: "Magic Mouse (2009) / Magic Mouse 2 (2015→, USB-C 2024)"
+  released_on: 2009-10-20
+
+- family: "Accessories"
+  generation_title: "Magic Trackpad (2010) / Magic Trackpad 2 (2015→, USB-C 2024)"
+  released_on: 2010-07-27
+
+- family: "Accessories"
+  generation_title: "Apple Wireless Keyboard (2007)"
+  released_on: 2007-08-07
+  discontinued_on: 2015-10-13
+
+- family: "Accessories"
+  generation_title: "Apple Keyboard USB with NumPad (2007)"
+  released_on: 2007-08-07
+  discontinued_on: 2017-06-05
+
+- family: "Accessories"
+  generation_title: "Magic Keyboard (2015→, 2-gen 2021, USB-C 2024)"
+  released_on: 2015-10-13
+
+# Наушники / аудио
+- family: "Accessories"
+  generation_title: "iPod Earbuds (2001) → EarPods (2012, 3.5mm/Lightning/USB-C)"
+  released_on: 2001-10-23
+
+- family: "Accessories"
+  generation_title: "iPhone Bluetooth Headset (2007)"
+  released_on: 2007-06-29
+  discontinued_on: 2009-03-23
+
+- family: "Accessories"
+  generation_title: "In-Ear Headphones with Remote (2009)"
+  released_on: 2009-09-09
+  discontinued_on: 2018-12-31
+
+- family: "Accessories"
+  generation_title: "iPod Hi-Fi (2006)"
+  released_on: 2006-02-28
+  discontinued_on: 2007-09-05
+
+# Пульты / стилусы / AirTag
+- family: "Accessories"
+  generation_title: "Apple Remote (white 2005 / aluminum 2009)"
+  released_on: 2005-10-12
+
+- family: "Accessories"
+  generation_title: "Siri Remote (2015/2021/2022 USB-C)"
+  released_on: 2015-10-26
+
+- family: "Accessories"
+  generation_title: "Apple Pencil (2015), Pencil (USB-C), Pencil 2 (2018), Pencil Pro (2024)"
+  released_on: 2015-11-11
+
+- family: "Accessories"
+  generation_title: "AirTag (2021)"
+  released_on: 2021-04-30
+
+# Прочее
+- family: "Accessories"
+  generation_title: "Apple Polishing Cloth (2021)"
+  released_on: 2021-10-18

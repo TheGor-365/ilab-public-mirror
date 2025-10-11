@@ -1,0 +1,63 @@
+<div class="p-3">
+  <h5 class="mb-2"><%= defect.try(:title) || "Defect ##{defect.id}" %></h5>
+
+  <% if defect.modules.present? %>
+    <div class="mb-3">
+      <div class="fw-semibold mb-2">Затронутые модули</div>
+      <ul class="list-unstyled mb-2" data-controller="details" data-details-target="list" data-initial="6">
+        <% Array(defect.modules).each do |m| %>
+          <li class="mb-1"><span class="badge bg-dark-subtle text-dark"><%= m %></span></li>
+        <% end %>
+      </ul>
+      <% if Array(defect.modules).size > 6 %>
+        <button class="btn btn-sm btn-outline-dark" data-action="click->details#toggleMore">Показать ещё</button>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if defect.description.present? %>
+    <div class="mb-3">
+      <div class="fw-semibold mb-2">Описание</div>
+      <div class="card card-body"><%= defect.description %></div>
+    </div>
+  <% end %>
+
+  <% if defect.images.present? %>
+    <div class="mb-3">
+      <div class="fw-semibold mb-2">Фото</div>
+      <div class="row g-2">
+        <% defect.images.each do |image| %>
+          <div class="col-6 col-md-4 col-lg-3"><%= image_tag(image.url, class: "img-fluid rounded border") %></div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if defect.videos.present? %>
+    <div class="mb-3">
+      <div class="fw-semibold mb-2">Видео</div>
+      <div class="ratio ratio-16x9">
+        <%= video_tag(defect.videos, controls: true, class: "rounded border") %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="d-flex flex-wrap gap-2">
+    <%= link_to "Открыть полную страницу", defect_path(defect), class: "btn btn-sm btn-outline-white" %>
+    <%= link_to "Редактировать", edit_defect_path(defect), class: "btn btn-sm btn-outline-dark" %>
+
+    <% if turbo_frame_request? %>
+      <a href="#"
+         class="btn btn-sm btn-light ms-auto"
+         data-controller="frame-reset"
+         data-frame-reset-frame-id-value="defect_details"
+         data-frame-reset-placeholder-value='<div class="text-center text-muted py-5"><div class="mb-2">Выберите дефект слева, чтобы увидеть детали.</div><small>Поддерживаются Turbo-frames.</small></div>'
+         data-action="click->frame-reset#toPlaceholder">
+        Назад
+      </a>
+      <a href="#" class="btn btn-sm btn-outline-light text-dark" data-controller="frame-reset" data-action="click->frame-reset#closeModal">
+        Закрыть
+      </a>
+    <% end %>
+  </div>
+</div>

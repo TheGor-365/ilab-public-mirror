@@ -1,0 +1,12 @@
+<% provide :page_title, 'New iPhone Repair' %>
+<% currently_at 'iPhone Repairs' %>
+
+<div class="container py-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h5 class="mb-3">New Repair</h5>
+      <%= render 'form', repair: @repair %>
+      <%= link_to 'Back', repairs_path, class: 'btn btn-link link-dark mt-2' %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+- family: "iPod"
+  generation_title: "iPod (1st generation)"
+  released_on: 2001-10-23
+  discontinued_on: 2002-07-17
+
+- family: "iPod"
+  generation_title: "iPod (2nd generation)"
+  released_on: 2002-07-17
+  discontinued_on: 2003-04-28
+
+- family: "iPod"
+  generation_title: "iPod (3rd generation)"
+  released_on: 2003-04-28
+  discontinued_on: 2004-07-19
+
+- family: "iPod"
+  generation_title: "iPod (4th generation / Photo)"
+  released_on: 2004-07-19
+  discontinued_on: 2005-10-01
+
+- family: "iPod"
+  generation_title: "iPod mini (1st/2nd generation)"
+  released_on: 2004-01-06
+  discontinued_on: 2005-09-07
+
+- family: "iPod"
+  generation_title: "iPod shuffle (1st/2nd/3rd/4th generation)"
+  released_on: 2005-01-11
+  discontinued_on: 2017-07-27
+
+- family: "iPod"
+  generation_title: "iPod nano (1st–7th generation)"
+  released_on: 2005-09-07
+  discontinued_on: 2017-07-27
+
+- family: "iPod"
+  generation_title: "iPod classic (5th/6th generation)"
+  released_on: 2005-10-12
+  discontinued_on: 2014-09-09
+
+- family: "iPod"
+  generation_title: "iPod touch (1st–7th generation)"
+  released_on: 2007-09-05
+  discontinued_on: 2022-05-10

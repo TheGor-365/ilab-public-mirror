@@ -1,0 +1,182 @@
+<%= form_with(model: apple_watch, html: { multipart: true }) do |form| %>
+
+  <% if apple_watch.errors.any? %>
+    <div class="row p-5 shadow bg-white mb-5 border border-danger">
+      <div id="error_explanation" class="danger">
+        <h5><%= pluralize(apple_watch.errors.count, "error") %> <span class="text-muted">prohibited this apple_watch from being saved:</span></h5>
+        <br>
+
+        <ul>
+          <% apple_watch.errors.each do |error| %>
+            <li>
+              <small class="text-muted">
+                <%= error.full_message %>
+              </small>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id, class: 'form-control' %>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <%= form.label :diagonal %>
+    <%= form.text_field :diagonal, class: 'form-control' %>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <%= form.label :model %>
+    <%= form.text_field :model, class: 'form-control' %>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <%= form.label :version %>
+    <%= form.text_field :version, class: 'form-control' %>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <%= form.label :series %>
+    <%= form.text_field :series, class: 'form-control' %>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <%= form.label :production_period %>
+    <%= form.datetime_select :production_period, class: 'form-control' %>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <%= form.label :full_title %>
+    <%= form.text_field :full_title, class: 'form-control' %>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <%= form.label :overview %>
+    <%= form.text_area :overview, class: 'form-control' %>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <div class="mb-3">
+      <%= form.label :product_avatar, class: 'form-label mb-3' %><br>
+      <%= form.file_field :avatar, id: 'new-avatar-field', type: 'file', class: 'form-control' %>
+      <%= form.hidden_field :avatar_cache %>
+    </div>
+
+    <div class="row">
+      <div class="mt-3 mb-3 col">
+        <%= form.label "Current product avatar", class: 'form-label mb-3' %><br>
+
+        <% if apple_watch.avatar.present? %>
+          <%= image_tag(apple_watch.avatar.url, width: '300', class: 'img-thumbnail') %>
+        <% else %>
+          <%= image_tag('default_product_avatar.jpg', width: '300', class: 'img-thumbnail') %>
+        <% end %>
+      </div>
+
+      <div class="mt-3 mb-3 col">
+        <%= form.label "New product avatar preview", class: 'form-label mb-3' %><br>
+        <img id="image-prevew" src="#" width="300" height="200" class="img-thumbnail" />
+      </div>
+    </div>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <div class="mb-3">
+      <%= form.label "Change #{apple_watch.title} images", class: 'anchorjs-link form-label mb-3', id: 'photos' %><br>
+      <%= form.file_field :images, id: 'new-images-field', type: 'file', multiple: true, class: 'form-control' %>
+      <%= form.hidden_field :images_cache %>
+    </div>
+
+    <div class="mt-3 mb-3">
+      <% if apple_watch.images? %>
+        <% apple_watch.images.each do |image| %>
+          <%= image_tag(image.url, width: '100') %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="mt-3 mb-3 col">
+      <%= form.label "Choosed images", class: 'form-label mb-3' %><br>
+      <img id="image-prevew" src="#" width="300" height="200" class="img-thumbnail" />
+    </div>
+  </div>
+
+  <% if apple_watch.images.size > 0 %>
+    <div class="row p-5 shadow bg-white mb-5">
+      <%= form.label "Add more images for #{apple_watch.title}", class: 'form-label mb-3' %><br>
+      <%= form.file_field :images, multiple: true, class: 'form-control' %>
+
+      <div class="mt-3 mb-3">
+        <% if apple_watch.images? %>
+          <% apple_watch.images.each do |image| %>
+            <%= image_tag(image.url, width: '100') %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if apple_watch.images.size > 0 %>
+    <div class="row p-5 shadow bg-white mb-5">
+      <%= form.label "Delete images for #{apple_watch.title}", class: 'form-label mb-3' %><br>
+
+      <% apple_watch.images.each_with_index do |image, index| %>
+        <div class="mt-2 mb-1 col text-center">
+          <%= image_tag(image.url, width: '100', class: 'rounded img-thumbnail shadow') %>
+          <%= link_to "Delete", phone_image_path(@apple_watch, index), method: :delete, data: { confirm: "Are you sure you want to delete this image?" }, class: 'btn btn-sm btn-danger' %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <%= form.label :model_overview, class: 'anchorjs-link mb-3', id: 'overview' %><br>
+    <%= form.rich_text_area :model_overview, class: 'anchorjs-link form-control' %>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <%= form.label "Change #{apple_watch.title} videos", class: 'anchorjs-link form-label mb-3', id: 'videos' %><br>
+    <%= form.file_field :videos, multiple: true, type: 'file', class: 'form-control' %>
+
+    <div class="mt-5">
+      <% if apple_watch.videos? %>
+        <%= video_tag(apple_watch.videos, width: '340', height: '180', controls: true, class: 'rounded card p-1 shadow mx-auto mb-5') %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="mt-5 mb-3 col-8">
+    <%= form.submit class: 'btn btn-sm btn-success' %>
+  </div>
+<% end %>
+
+
+<script type="text/javascript">
+
+  function readURL(input) {
+
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#image-prevew').attr('src', e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $("#new-images-field").change(function(){
+    readURL(this);
+  });
+
+</script>

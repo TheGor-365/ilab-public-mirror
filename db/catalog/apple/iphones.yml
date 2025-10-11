@@ -1,0 +1,406 @@
+# db/catalog/apple/iphones.yml
+# ---- РАННИЕ МОДЕЛИ ----
+- family: "iPhone"
+  generation_title: "iPhone (1st generation)"
+  aliases: ["iPhone 2G", "iPhone 1"]
+  released_on: 2007-06-29
+  discontinued_on:
+  storage_options: ["4GB","8GB","16GB"]
+  color_options: ["Black"]
+  model_variants:
+    - title: "iPhone 1st gen (4 GB)"
+      discontinued_on: 2007-09-05
+    - title: "iPhone 1st gen (8 GB)"
+      discontinued_on: 2008-07-11
+    - title: "iPhone 1st gen (16 GB)"
+      discontinued_on: 2008-07-11
+
+- family: "iPhone"
+  generation_title: "iPhone 3G"
+  released_on: 2008-07-11
+  storage_options: ["8GB","16GB"]
+  color_options: ["Black","White"]
+  model_variants:
+    - title: "iPhone 3G (8 GB)"
+      discontinued_on: 2010-06-07
+    - title: "iPhone 3G (16 GB)"
+      discontinued_on: 2009-06-08
+
+- family: "iPhone"
+  generation_title: "iPhone 3GS"
+  released_on: 2009-06-19
+  storage_options: ["8GB","16GB","32GB"]
+  color_options: ["Black","White"]
+  model_variants:
+    - title: "iPhone 3GS (16/32 GB)"
+      discontinued_on: 2010-06-24
+    - title: "iPhone 3GS (8 GB)"
+      discontinued_on: 2012-09-12
+
+- family: "iPhone"
+  generation_title: "iPhone 4"
+  released_on: 2010-06-24
+  storage_options: ["8GB","16GB","32GB"]
+  color_options: ["Black","White"]
+  model_variants:
+    - title: "iPhone 4 GSM (16/32 GB)"
+      discontinued_on: 2011-10-04
+    - title: "iPhone 4 CDMA (16/32 GB)"
+      discontinued_on: 2011-10-04
+    - title: "iPhone 4 (8 GB)"
+      discontinued_on: 2013-09-10
+
+- family: "iPhone"
+  generation_title: "iPhone 4S"
+  released_on: 2011-10-14
+  storage_options: ["8GB","16GB","32GB","64GB"]
+  color_options: ["Black","White"]
+  model_variants:
+    - title: "iPhone 4S (32/64 GB)"
+      discontinued_on: 2012-09-12
+    - title: "iPhone 4S (16 GB)"
+      discontinued_on: 2013-09-10
+    - title: "iPhone 4S (8 GB)"
+      discontinued_on: 2014-09-09
+
+- family: "iPhone"
+  generation_title: "iPhone 5"
+  released_on: 2012-09-21
+  storage_options: ["16GB","32GB","64GB"]
+  color_options: ["Black","White"]
+  model_variants:
+    - title: "iPhone 5 (16/32 GB)"
+      discontinued_on: 2013-09-10
+    - title: "iPhone 5 (64 GB)"
+      discontinued_on: 2014-09-09
+
+- family: "iPhone"
+  generation_title: "iPhone 5c"
+  released_on: 2013-09-20
+  storage_options: ["8GB","16GB","32GB"]
+  color_options: ["White","Blue","Green","Yellow","Pink"]
+  model_variants:
+    - title: "iPhone 5c (16/32 GB)"
+      discontinued_on: 2014-09-09
+    - title: "iPhone 5c (8 GB)"
+      discontinued_on: 2015-09-09
+
+- family: "iPhone"
+  generation_title: "iPhone 5s"
+  released_on: 2013-09-20
+  storage_options: ["16GB","32GB","64GB"]
+  color_options: ["Space Gray","Silver","Gold"]
+  model_variants:
+    - title: "iPhone 5s (64 GB)"
+      discontinued_on: 2014-09-09
+    - title: "iPhone 5s (16/32 GB)"
+      discontinued_on: 2016-03-21
+
+- family: "iPhone"
+  generation_title: "iPhone 6"
+  released_on: 2014-09-19
+  storage_options: ["16GB","64GB","128GB"]
+  color_options: ["Space Gray","Silver","Gold"]
+  model_variants:
+    - title: "iPhone 6 (16/64 GB)"
+      discontinued_on: 2016-09-07
+    - title: "iPhone 6 (128 GB)"
+      discontinued_on: 2015-09-09
+
+- family: "iPhone"
+  generation_title: "iPhone 6 Plus"
+  released_on: 2014-09-19
+  storage_options: ["16GB","64GB","128GB"]
+  color_options: ["Space Gray","Silver","Gold"]
+  model_variants:
+    - title: "iPhone 6 Plus (16/64 GB)"
+      discontinued_on: 2016-09-07
+    - title: "iPhone 6 Plus (128 GB)"
+      discontinued_on: 2015-09-09
+
+- family: "iPhone"
+  generation_title: "iPhone 6s"
+  released_on: 2015-09-25
+  storage_options: ["16GB","64GB","128GB"]
+  color_options: ["Space Gray","Silver","Gold","Rose Gold"]
+  model_variants:
+    - title: "iPhone 6s (16/64 GB)"
+      discontinued_on: 2016-09-07
+    - title: "iPhone 6s (128 GB)"
+      discontinued_on: 2018-09-12
+
+- family: "iPhone"
+  generation_title: "iPhone 6s Plus"
+  released_on: 2015-09-25
+  storage_options: ["16GB","64GB","128GB"]
+  color_options: ["Space Gray","Silver","Gold","Rose Gold"]
+  model_variants:
+    - title: "iPhone 6s Plus (16/64 GB)"
+      discontinued_on: 2016-09-07
+    - title: "iPhone 6s Plus (128 GB)"
+      discontinued_on: 2018-09-12
+
+- family: "iPhone"
+  generation_title: "iPhone SE (1st generation)"
+  aliases: ["iPhone SE 2016"]
+  released_on: 2016-03-31
+  storage_options: ["16GB","32GB","64GB","128GB"]
+  color_options: ["Space Gray","Silver","Gold","Rose Gold"]
+  model_variants:
+    - title: "iPhone SE 2016 (16/64 GB)"
+      discontinued_on: 2017-03-21
+    - title: "iPhone SE 2016 (32/128 GB)"
+      discontinued_on: 2018-09-12
+
+- family: "iPhone"
+  generation_title: "iPhone 7"
+  released_on: 2016-09-16
+  storage_options: ["32GB","128GB","256GB"]
+  color_options: ["Jet Black","Black","Silver","Gold","Rose Gold","(PRODUCT)RED"]
+  model_variants:
+    - title: "iPhone 7 (256 GB)"
+      discontinued_on: 2017-09-12
+    - title: "iPhone 7 (32/128 GB)"
+      discontinued_on: 2019-09-10
+
+- family: "iPhone"
+  generation_title: "iPhone 7 Plus"
+  released_on: 2016-09-16
+  storage_options: ["32GB","128GB","256GB"]
+  color_options: ["Jet Black","Black","Silver","Gold","Rose Gold","(PRODUCT)RED"]
+  model_variants:
+    - title: "iPhone 7 Plus (256 GB)"
+      discontinued_on: 2017-09-12
+    - title: "iPhone 7 Plus (32/128 GB)"
+      discontinued_on: 2019-09-10
+
+- family: "iPhone"
+  generation_title: "iPhone 8"
+  released_on: 2017-09-22
+  storage_options: ["64GB","128GB","256GB"]
+  color_options: ["Silver","Space Gray","Gold","(PRODUCT)RED"]
+  model_variants:
+    - title: "iPhone 8 (256 GB)"
+      discontinued_on: 2019-09-10
+    - title: "iPhone 8 (64/128 GB)"
+      discontinued_on: 2020-04-15
+
+- family: "iPhone"
+  generation_title: "iPhone 8 Plus"
+  released_on: 2017-09-22
+  storage_options: ["64GB","128GB","256GB"]
+  color_options: ["Silver","Space Gray","Gold","(PRODUCT)RED"]
+  model_variants:
+    - title: "iPhone 8 Plus (256 GB)"
+      discontinued_on: 2019-09-10
+    - title: "iPhone 8 Plus (64/128 GB)"
+      discontinued_on: 2020-04-15
+
+- family: "iPhone"
+  generation_title: "iPhone X"
+  released_on: 2017-11-03
+  storage_options: ["64GB","256GB"]
+  color_options: ["Space Gray","Silver"]
+  discontinued_on: 2018-09-12
+
+- family: "iPhone"
+  generation_title: "iPhone XR"
+  released_on: 2018-10-26
+  storage_options: ["64GB","128GB","256GB"]
+  color_options: ["Black","White","Blue","Yellow","Coral","(PRODUCT)RED"]
+  model_variants:
+    - title: "iPhone XR (256 GB)"
+      discontinued_on: 2019-09-10
+    - title: "iPhone XR (64/128 GB)"
+      discontinued_on: 2021-09-14
+
+- family: "iPhone"
+  generation_title: "iPhone XS"
+  released_on: 2018-09-21
+  storage_options: ["64GB","256GB","512GB"]
+  color_options: ["Space Gray","Silver","Gold"]
+  discontinued_on: 2019-09-10
+
+- family: "iPhone"
+  generation_title: "iPhone XS Max"
+  released_on: 2018-09-21
+  storage_options: ["64GB","256GB","512GB"]
+  color_options: ["Space Gray","Silver","Gold"]
+  discontinued_on: 2019-09-10
+
+- family: "iPhone"
+  generation_title: "iPhone 11"
+  released_on: 2019-09-20
+  storage_options: ["64GB","128GB","256GB"]
+  color_options: ["Black","White","Green","Yellow","Purple","(PRODUCT)RED"]
+  discontinued_on: 2022-09-07
+
+- family: "iPhone"
+  generation_title: "iPhone 11 Pro"
+  released_on: 2019-09-20
+  storage_options: ["64GB","256GB","512GB"]
+  color_options: ["Midnight Green","Space Gray","Silver","Gold"]
+  discontinued_on: 2020-10-13
+
+- family: "iPhone"
+  generation_title: "iPhone 11 Pro Max"
+  released_on: 2019-09-20
+  storage_options: ["64GB","256GB","512GB"]
+  color_options: ["Midnight Green","Space Gray","Silver","Gold"]
+  discontinued_on: 2020-10-13
+
+- family: "iPhone"
+  generation_title: "iPhone SE (2nd generation)"
+  aliases: ["iPhone SE 2020"]
+  released_on: 2020-04-24
+  storage_options: ["64GB","128GB","256GB"]
+  color_options: ["Black","White","(PRODUCT)RED"]
+  discontinued_on: 2022-03-08
+
+- family: "iPhone"
+  generation_title: "iPhone 12"
+  released_on: 2020-10-23
+  storage_options: ["64GB","128GB","256GB"]
+  color_options: ["Black","White","(PRODUCT)RED","Green","Blue","Purple"]
+  discontinued_on: 2023-09-12
+
+- family: "iPhone"
+  generation_title: "iPhone 12 mini"
+  released_on: 2020-11-13
+  storage_options: ["64GB","128GB","256GB"]
+  color_options: ["Black","White","(PRODUCT)RED","Green","Blue","Purple"]
+  discontinued_on: 2022-09-07
+
+- family: "iPhone"
+  generation_title: "iPhone 12 Pro"
+  released_on: 2020-10-23
+  storage_options: ["128GB","256GB","512GB"]
+  color_options: ["Graphite","Silver","Gold","Pacific Blue"]
+  discontinued_on: 2021-09-14
+
+- family: "iPhone"
+  generation_title: "iPhone 12 Pro Max"
+  released_on: 2020-11-13
+  storage_options: ["128GB","256GB","512GB"]
+  color_options: ["Graphite","Silver","Gold","Pacific Blue"]
+  discontinued_on: 2021-09-14
+
+- family: "iPhone"
+  generation_title: "iPhone 13"
+  released_on: 2021-09-24
+  storage_options: ["128GB","256GB","512GB"]
+  color_options: ["Midnight","Starlight","(PRODUCT)RED","Blue","Pink","Green"]
+  discontinued_on: 2024-09-09
+
+- family: "iPhone"
+  generation_title: "iPhone 13 mini"
+  released_on: 2021-09-24
+  storage_options: ["128GB","256GB","512GB"]
+  color_options: ["Midnight","Starlight","(PRODUCT)RED","Blue","Pink","Green"]
+  discontinued_on: 2023-09-12
+
+- family: "iPhone"
+  generation_title: "iPhone 13 Pro"
+  released_on: 2021-09-24
+  storage_options: ["128GB","256GB","512GB","1TB"]
+  color_options: ["Graphite","Silver","Gold","Sierra Blue","Alpine Green"]
+  discontinued_on: 2022-09-07
+
+- family: "iPhone"
+  generation_title: "iPhone 13 Pro Max"
+  released_on: 2021-09-24
+  storage_options: ["128GB","256GB","512GB","1TB"]
+  color_options: ["Graphite","Silver","Gold","Sierra Blue","Alpine Green"]
+  discontinued_on: 2022-09-07
+
+- family: "iPhone"
+  generation_title: "iPhone SE (3rd generation)"
+  aliases: ["iPhone SE 2022"]
+  released_on: 2022-03-18
+  storage_options: ["64GB","128GB","256GB"]
+  color_options: ["Midnight","Starlight","(PRODUCT)RED"]
+  discontinued_on: 2025-02-19
+
+- family: "iPhone"
+  generation_title: "iPhone 14"
+  released_on: 2022-09-16
+  storage_options: ["128GB","256GB","512GB"]
+  color_options: ["Midnight","Starlight","Blue","Purple","Yellow","(PRODUCT)RED"]
+  discontinued_on: 2025-02-19
+
+- family: "iPhone"
+  generation_title: "iPhone 14 Plus"
+  released_on: 2022-10-07
+  storage_options: ["128GB","256GB","512GB"]
+  color_options: ["Midnight","Starlight","Blue","Purple","Yellow","(PRODUCT)RED"]
+  discontinued_on: 2025-02-19
+
+- family: "iPhone"
+  generation_title: "iPhone 14 Pro"
+  released_on: 2022-09-16
+  storage_options: ["128GB","256GB","512GB","1TB"]
+  color_options: ["Deep Purple","Gold","Silver","Space Black"]
+  discontinued_on: 2023-09-12
+
+- family: "iPhone"
+  generation_title: "iPhone 14 Pro Max"
+  released_on: 2022-09-16
+  storage_options: ["128GB","256GB","512GB","1TB"]
+  color_options: ["Deep Purple","Gold","Silver","Space Black"]
+  discontinued_on: 2023-09-12
+
+- family: "iPhone"
+  generation_title: "iPhone 15"
+  released_on: 2023-09-22
+  storage_options: ["128GB","256GB","512GB"]
+  color_options: ["Black","Blue","Green","Yellow","Pink"]
+
+- family: "iPhone"
+  generation_title: "iPhone 15 Plus"
+  released_on: 2023-09-22
+  storage_options: ["128GB","256GB","512GB"]
+  color_options: ["Black","Blue","Green","Yellow","Pink"]
+
+- family: "iPhone"
+  generation_title: "iPhone 15 Pro"
+  released_on: 2023-09-22
+  storage_options: ["128GB","256GB","512GB","1TB"]
+  color_options: ["Natural Titanium","Blue Titanium","White Titanium","Black Titanium"]
+  discontinued_on: 2024-09-09
+
+- family: "iPhone"
+  generation_title: "iPhone 15 Pro Max"
+  released_on: 2023-09-22
+  storage_options: ["128GB","256GB","512GB","1TB"]
+  color_options: ["Natural Titanium","Blue Titanium","White Titanium","Black Titanium"]
+  discontinued_on: 2024-09-09
+
+- family: "iPhone"
+  generation_title: "iPhone 16"
+  released_on: 2024-09-20
+  storage_options: ["128GB","256GB","512GB"]
+  color_options: ["Midnight","Starlight","Blue","Pink","Green"]
+
+- family: "iPhone"
+  generation_title: "iPhone 16 Plus"
+  released_on: 2024-09-20
+  storage_options: ["128GB","256GB","512GB"]
+  color_options: ["Midnight","Starlight","Blue","Pink","Green"]
+
+- family: "iPhone"
+  generation_title: "iPhone 16 Pro"
+  released_on: 2024-09-20
+  storage_options: ["128GB","256GB","512GB","1TB"]
+  color_options: ["Jet Black","Natural","Blue","Silver"]
+
+- family: "iPhone"
+  generation_title: "iPhone 16 Pro Max"
+  released_on: 2024-09-20
+  storage_options: ["128GB","256GB","512GB","1TB"]
+  color_options: ["Jet Black","Natural","Blue","Silver"]
+
+- family: "iPhone"
+  generation_title: "iPhone 16e"
+  released_on: 2025-02-28
+  storage_options: ["128GB","256GB"]
+  color_options: ["Black","White"]

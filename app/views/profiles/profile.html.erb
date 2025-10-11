@@ -1,0 +1,305 @@
+<% provide :page_title, 'Profile' %>
+<% currently_at 'Profile' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'profile_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+
+    <div class="row p-5 shadow bg-white mb-5">
+
+      <div class="col">
+        <%= user_avatar(current_user, 250) %><br>
+      </div>
+
+      <div class="col">
+
+        <p id="profile_info" class="anchorjs-link display-5">
+
+          <%= @user.username %>
+
+          <span class="text-muted display-5">
+            <strong>info</strong>
+          </span>
+        </p>
+
+        <p class="display-5">
+          <%= @user.full_name %>
+        </p>
+
+        <small class="text-muted">
+          <%= @user.email %>
+        </small>
+
+        <div>
+          <small class="text-muted">
+            Borned <%= @user.borned %>
+          </small>
+        </div>
+        <br>
+
+        <div class="list-inline-item mt-3">
+          <%= link_to 'Edit profile', edit_account_path(@user.username), class: 'btn btn-sm btn-secondary' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="user_roles" class="anchorjs-link display-5 mb-4"><%= @user.username %>
+        <span class="text-muted display-5">
+          <strong>roles</strong>
+        </span>
+      </span>
+
+      <% if current_user.repairman? %>
+        <div class="col p-5 shadow bg-light border border-success border-2 rounded-2 m-4">
+          <i class="fas fa-tools fa-5x text-success"></i><br><br>
+          <small class="text-success">repairman</small>
+        </div>
+      <% else %>
+        <div class="col p-5 shadow bg-light border border-secondary border-2 rounded-2 m-4">
+          <i class="fas fa-tools fa-5x text-muted"></i><br><br>
+          <small class="text-muted">repairman</small>
+        </div>
+      <% end %>
+
+      <% if current_user.teacher? %>
+        <div class="col p-5 shadow bg-light border border-success border-2 rounded-2 m-4">
+          <i class="fas fa-chalkboard-teacher fa-5x text-success"></i><br><br>
+          <small class="text-success">teacher</small>
+        </div>
+      <% else %>
+        <div class="col p-5 shadow bg-light border border-secondary border-2 rounded-2 m-4">
+          <i class="fas fa-chalkboard-teacher fa-5x text-muted"></i><br><br>
+          <small class="text-muted">teacher</small>
+        </div>
+      <% end %>
+
+      <% if current_user.student? %>
+        <div class="col p-5 shadow bg-light border border-success border-2 rounded-2 m-4">
+          <i class="fas fa-user-graduate fa-5x text-success"></i><br><br>
+          <small class="text-success">student</small>
+        </div>
+      <% else %>
+        <div class="col p-5 shadow bg-light border border-secondary border-2 rounded-2 m-4">
+          <i class="fas fa-user-graduate fa-5x text-muted"></i><br><br>
+          <small class="text-muted">student</small>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="user_owned_gadgets" class="anchorjs-link display-5 mb-4"><%= @user.username %>
+        <span class="text-muted display-5">
+          <strong>owned gadgets</strong>
+        </span>
+      </span>
+
+      <p class="display-6 mt-5 mb-3">Phones</p>
+
+      <% if @user.phones.size == 0 %>
+
+        <div class="row p-5 shadow bg-white mb-5">
+          <p class="display-6 text-muted">
+            No info
+          </p>
+        </div>
+      <% else %>
+
+        <% @user.phones.each do |phone| %>
+          <div class="row p-5 shadow bg-white mb-5">
+            <%= phone.model_title %><br><br>
+            <%= image_tag(phone.avatar.url, width: '300', height: '200', class: 'img-thumbnail rounded p-1 shadow') if phone.avatar.present? %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <p class="display-6 mt-5 mb-3">MakBooks</p>
+
+      <% if @user.makbooks.size == 0 %>
+
+        <div class="row p-5 shadow bg-white mb-5">
+          <p class="display-6 text-muted">
+            No info
+          </p>
+        </div>
+      <% else %>
+
+        <% @user.makbooks.each do |makbook| %>
+          <div class="row p-5 shadow bg-white mb-5">
+            <%= makbook.full_title %><br><br>
+            <%= image_tag(makbook.avatar.url, width: '300', height: '200', class: 'img-thumbnail rounded p-1 shadow') if makbook.avatar.present? %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <p class="display-6 mt-5 mb-3">iMacs</p>
+
+      <% if @user.imacs.size == 0 %>
+
+        <div class="row p-5 shadow bg-white mb-5">
+          <p class="display-6 text-muted">
+            No info
+          </p>
+        </div>
+      <% else %>
+
+        <% @user.imacs.each do |imac| %>
+          <div class="row p-5 shadow bg-white mb-5">
+            <%= imac.full_title %><br><br>
+            <%= image_tag(imac.avatar.url, width: '300', height: '200', class: 'img-thumbnail rounded p-1 shadow') if imac.avatar.present? %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <p class="display-6 mt-5 mb-3">iPads</p>
+
+      <% if @user.ipads.size == 0 %>
+
+        <div class="row p-5 shadow bg-white mb-5">
+          <p class="display-6 text-muted">
+            No info
+          </p>
+        </div>
+      <% else %>
+
+        <% @user.ipads.each do |ipad| %>
+          <div class="row p-5 shadow bg-white mb-5">
+            <%= ipad.full_title %><br><br>
+            <%= image_tag(ipad.avatar.url, width: '300', height: '200', class: 'img-thumbnail rounded p-1 shadow') if ipad.avatar.present? %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <p class="display-6 mt-5 mb-3">AirPods</p>
+
+      <% if @user.airpods.size == 0 %>
+
+        <div class="row p-5 shadow bg-white mb-5">
+          <p class="display-6 text-muted">
+            No info
+          </p>
+        </div>
+      <% else %>
+
+        <% @user.airpods.each do |airpod| %>
+          <div class="row p-5 shadow bg-white mb-5">
+            <%= airpod.full_title %><br><br>
+            <%= image_tag(airpod.avatar.url, width: '300', height: '200', class: 'img-thumbnail rounded p-1 shadow') if airpod.avatar.present? %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <p class="display-6 mt-5 mb-3">Apple Watches</p>
+
+      <% if @user.apple_watches.size == 0 %>
+
+        <div class="row p-5 shadow bg-white mb-5">
+          <p class="display-6 text-muted">
+            No info
+          </p>
+        </div>
+      <% else %>
+
+        <% @user.apple_watches.each do |apple_watch| %>
+          <div class="row p-5 shadow bg-white mb-5">
+            <%= apple_watch.full_title %><br><br>
+            <%= image_tag(apple_watch.avatar.url, width: '300', height: '200', class: 'img-thumbnail rounded p-1 shadow') if apple_watch.avatar.present? %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <p class="display-6 mt-5 mb-3">All Gadgets</p>
+
+      <% @user.all_gadgets.each do |gadget| %>
+        <div class="row p-5 shadow bg-white mb-5">
+          <%= gadget %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+
+      <span id="user_posts" class="anchorjs-link display-5 mb-5"><%= @user.username %>
+        <span class="text-muted display-5">
+          <strong>posts</strong>
+        </span>
+      </span>
+
+      <% @user.posts.each do |user_post| %>
+        <div class="row p-5 shadow bg-white mb-5">
+          <div class="mb-3">
+            <%= user_post.title %>
+          </div>
+
+          <div class="mb-5 p-3 bg-light">
+            <%= user_post.body %>
+          </div>
+
+          <small>
+            <small class="text-muted b">Post id:</small>    <span class="text-muted"><%= user_post.id %></span><br>
+            <small class="text-muted b">Views:</small>      <span class="text-muted"><%= user_post.views %></span><br>
+            <small class="text-muted b">Created at:</small> <span class="text-muted"><%= user_post.created_at %></span><br>
+          </small>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="user_articles" class="anchorjs-link display-5 mb-5"><%= @user.username %>
+        <span class="text-muted display-5">
+          <strong>articles</strong>
+        </span>
+      </span>
+
+      <% @user.articles.each do |user_article| %>
+        <div class="row p-5 shadow bg-white mb-5">
+          <%= user_article.content %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+      <span id="user_images" class="anchorjs-link display-5"><%= @user.username %>
+        <span class="text-muted display-5">
+          <strong>galery</strong>
+        </span>
+      </span>
+      <br>
+
+      <% @user.images.each do |user_image| %>
+        <div class="col text-center mb-5">
+          <%= image_tag(user_image.url, width: '300', class: 'rounded img-thumbnail shadow') %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="row p-5 shadow bg-white mb-5">
+
+      <span id="user_videos" class="anchorjs-link display-5"><%= @user.username %>
+        <span class="text-muted display-5">
+          <strong>videos</strong>
+        </span>
+      </span>
+      <br>
+
+      <% @user.videos.each do |user_video| %>
+        <small class="text-muted mb-5">
+          <%= user_video.identifier %>
+        </small>
+      <% end %>
+
+      <div class="col">
+        <%= video_tag(@user.videos, width: '640', height: '380', controls: true, class: 'rounded card p-1 shadow mx-auto mb-5') if @user.videos.present? %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-3">
+    <%= render 'profile_info_card' %>
+  </div>
+</div>

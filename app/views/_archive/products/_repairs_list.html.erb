@@ -1,0 +1,7 @@
+<h5 class="text-muted">Возможные ремонты</h5>
+<% repairs.each do |repair| %>
+  <div class="mb-2 border-bottom pb-1">
+    <strong><%= repair.title %></strong>
+    <p class="small text-muted"><%= repair.description %></p>
+  </div>
+<% end %>

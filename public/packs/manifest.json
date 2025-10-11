@@ -1,0 +1,141 @@
+{
+  "_layout_offsets.js": "/packs/js/_layout_offsets-b1714379950804ad4cfb.js",
+  "_layout_offsets.js.map": "/packs/js/_layout_offsets-b1714379950804ad4cfb.js.map",
+  "_product_details.js": "/packs/js/_product_details-944273e03dd473931d34.js",
+  "_product_details.js.map": "/packs/js/_product_details-944273e03dd473931d34.js.map",
+  "_store_nav.js": "/packs/js/_store_nav-34c12d4be8410cff6386.js",
+  "_store_nav.js.map": "/packs/js/_store_nav-34c12d4be8410cff6386.js.map",
+  "application.js": "/packs/js/application-ad4569b121eabd632fa5.js",
+  "application.js.map": "/packs/js/application-ad4569b121eabd632fa5.js.map",
+  "defects.js": "/packs/js/defects-5e6e73ae992c9a25e03d.js",
+  "defects.js.map": "/packs/js/defects-5e6e73ae992c9a25e03d.js.map",
+  "entrypoints": {
+    "_layout_offsets": {
+      "js": [
+        "/packs/js/_layout_offsets-b1714379950804ad4cfb.js"
+      ],
+      "js.map": [
+        "/packs/js/_layout_offsets-b1714379950804ad4cfb.js.map"
+      ]
+    },
+    "_product_details": {
+      "js": [
+        "/packs/js/_product_details-944273e03dd473931d34.js"
+      ],
+      "js.map": [
+        "/packs/js/_product_details-944273e03dd473931d34.js.map"
+      ]
+    },
+    "_store_nav": {
+      "js": [
+        "/packs/js/_store_nav-34c12d4be8410cff6386.js"
+      ],
+      "js.map": [
+        "/packs/js/_store_nav-34c12d4be8410cff6386.js.map"
+      ]
+    },
+    "application": {
+      "js": [
+        "/packs/js/application-ad4569b121eabd632fa5.js"
+      ],
+      "js.map": [
+        "/packs/js/application-ad4569b121eabd632fa5.js.map"
+      ]
+    },
+    "defects": {
+      "js": [
+        "/packs/js/defects-5e6e73ae992c9a25e03d.js"
+      ],
+      "js.map": [
+        "/packs/js/defects-5e6e73ae992c9a25e03d.js.map"
+      ]
+    },
+    "mods": {
+      "js": [
+        "/packs/js/mods-2526865f37f762193d3e.js"
+      ],
+      "js.map": [
+        "/packs/js/mods-2526865f37f762193d3e.js.map"
+      ]
+    },
+    "navbar_offset": {
+      "js": [
+        "/packs/js/navbar_offset-88a3eafc4abecd7e7297.js"
+      ],
+      "js.map": [
+        "/packs/js/navbar_offset-88a3eafc4abecd7e7297.js.map"
+      ]
+    },
+    "rails_admin": {
+      "js": [
+        "/packs/js/rails_admin-07bc005bb5fa51e36753.js"
+      ],
+      "js.map": [
+        "/packs/js/rails_admin-07bc005bb5fa51e36753.js.map"
+      ]
+    },
+    "repairs": {
+      "js": [
+        "/packs/js/repairs-2ba6b8fa82d52aac8257.js"
+      ],
+      "js.map": [
+        "/packs/js/repairs-2ba6b8fa82d52aac8257.js.map"
+      ]
+    },
+    "shapes_decor": {
+      "js": [
+        "/packs/js/shapes_decor-af7022931a513c6f77bd.js"
+      ],
+      "js.map": [
+        "/packs/js/shapes_decor-af7022931a513c6f77bd.js.map"
+      ]
+    },
+    "spare_parts": {
+      "js": [
+        "/packs/js/spare_parts-56273d37917fb25e4292.js"
+      ],
+      "js.map": [
+        "/packs/js/spare_parts-56273d37917fb25e4292.js.map"
+      ]
+    },
+    "store_nav": {
+      "js": [
+        "/packs/js/store_nav-faaa79055f47eaea406b.js"
+      ],
+      "js.map": [
+        "/packs/js/store_nav-faaa79055f47eaea406b.js.map"
+      ]
+    }
+  },
+  "media/webfonts/fa-brands-400.eot": "/packs/media/webfonts/fa-brands-400-89a52ae1.eot",
+  "media/webfonts/fa-brands-400.svg": "/packs/media/webfonts/fa-brands-400-216edb96.svg",
+  "media/webfonts/fa-brands-400.ttf": "/packs/media/webfonts/fa-brands-400-9e138496.ttf",
+  "media/webfonts/fa-brands-400.woff": "/packs/media/webfonts/fa-brands-400-329a95a9.woff",
+  "media/webfonts/fa-brands-400.woff2": "/packs/media/webfonts/fa-brands-400-c1210e5e.woff2",
+  "media/webfonts/fa-regular-400.eot": "/packs/media/webfonts/fa-regular-400-4079ae2d.eot",
+  "media/webfonts/fa-regular-400.svg": "/packs/media/webfonts/fa-regular-400-19e27d34.svg",
+  "media/webfonts/fa-regular-400.ttf": "/packs/media/webfonts/fa-regular-400-1017bce8.ttf",
+  "media/webfonts/fa-regular-400.woff": "/packs/media/webfonts/fa-regular-400-36722648.woff",
+  "media/webfonts/fa-regular-400.woff2": "/packs/media/webfonts/fa-regular-400-68c5af1f.woff2",
+  "media/webfonts/fa-solid-900.eot": "/packs/media/webfonts/fa-solid-900-efbd5d20.eot",
+  "media/webfonts/fa-solid-900.svg": "/packs/media/webfonts/fa-solid-900-13de59f1.svg",
+  "media/webfonts/fa-solid-900.ttf": "/packs/media/webfonts/fa-solid-900-07c3313b.ttf",
+  "media/webfonts/fa-solid-900.woff": "/packs/media/webfonts/fa-solid-900-c6ec0800.woff",
+  "media/webfonts/fa-solid-900.woff2": "/packs/media/webfonts/fa-solid-900-ada6e6df.woff2",
+  "mods.js": "/packs/js/mods-2526865f37f762193d3e.js",
+  "mods.js.map": "/packs/js/mods-2526865f37f762193d3e.js.map",
+  "navbar_offset.js": "/packs/js/navbar_offset-88a3eafc4abecd7e7297.js",
+  "navbar_offset.js.map": "/packs/js/navbar_offset-88a3eafc4abecd7e7297.js.map",
+  "rails_admin.js": "/packs/js/rails_admin-07bc005bb5fa51e36753.js",
+  "rails_admin.js.map": "/packs/js/rails_admin-07bc005bb5fa51e36753.js.map",
+  "repairs.js": "/packs/js/repairs-2ba6b8fa82d52aac8257.js",
+  "repairs.js.map": "/packs/js/repairs-2ba6b8fa82d52aac8257.js.map",
+  "shapes_decor.js": "/packs/js/shapes_decor-af7022931a513c6f77bd.js",
+  "shapes_decor.js.map": "/packs/js/shapes_decor-af7022931a513c6f77bd.js.map",
+  "spare_parts.js": "/packs/js/spare_parts-56273d37917fb25e4292.js",
+  "spare_parts.js.map": "/packs/js/spare_parts-56273d37917fb25e4292.js.map",
+  "store_nav.js": "/packs/js/store_nav-faaa79055f47eaea406b.js",
+  "store_nav.js.map": "/packs/js/store_nav-faaa79055f47eaea406b.js.map",
+  "vendors~actioncable.js": "/packs/js/vendors~actioncable-5f910329c16a7601db87.chunk.js",
+  "vendors~actioncable.js.map": "/packs/js/vendors~actioncable-5f910329c16a7601db87.chunk.js.map"
+}

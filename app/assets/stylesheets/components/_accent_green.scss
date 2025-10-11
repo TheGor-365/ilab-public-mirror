@@ -1,0 +1,192 @@
+/* === Green accents: edges, states, focus ================================= */
+
+/* Палитра-токены */
+:root{
+  --accent:       #22c55e;  /* emerald-500 */
+  --accent-600:   #16a34a;  /* hover/active */
+  --accent-700:   #15803d;  /* текст/актив */
+  --accent-300:   #86efac;  /* лёгкие линии */
+  --accent-20a:   rgba(34,197,94,.20);
+
+  /* альфа-версии для плавного затухания */
+  --acc600-0:   rgba(22,163,74,0);
+  --acc600-20:  rgba(22,163,74,.20);
+  --acc600-40:  rgba(22,163,74,.40);
+  --acc600-60:  rgba(22,163,74,.60);
+}
+
+/* -------------------------------------------------
+   Вариант B — «Акцент-кромки» (чуть заметнее + fade)
+   -------------------------------------------------*/
+.card,
+.card-accent { position: relative; }
+
+.card.no-accent::after { content: none !important; }
+
+.card::after,
+.card-accent::after{
+  content: "";
+  position: absolute; inset: 0; pointer-events: none;
+
+  /* нижняя линия с плавным затуханием по краям + левая «ножка» */
+  background:
+    linear-gradient(90deg,
+      var(--acc600-0)   0%,
+      var(--acc600-40) 12%,
+      var(--accent-600) 50%,
+      var(--acc600-40) 88%,
+      var(--acc600-0) 100%
+    ) 0 100% / 100% 3px no-repeat,     /* низ — 3px с fade */
+    linear-gradient(180deg, transparent, var(--accent))
+      0 0 / 2px 100% no-repeat;        /* левая — 2px (без fade) */
+
+  opacity: .98;
+  transition: opacity .18s ease, filter .18s ease, transform .18s ease;
+  transform: scaleX(.985) scaleY(.992);
+  transform-origin: left bottom;
+}
+.card:hover::after,
+.card-accent:hover::after{
+  opacity: 1; filter: saturate(1.08); transform: none;
+}
+
+/* Стеклянные панели и модалки: внутренняя нижняя кромка с fade */
+.glass-panel, .modal-content { position: relative; }
+.glass-panel::after,
+.modal-content::after{
+  content:""; position:absolute; left:.5rem; right:.5rem; bottom:0; height:2px;
+  background: linear-gradient(90deg,
+    var(--acc600-0)   0%,
+    var(--acc600-60) 15%,
+    var(--accent-600) 50%,
+    var(--acc600-60) 85%,
+    var(--acc600-0) 100%
+  );
+  opacity:.95; pointer-events:none;
+}
+
+/* -------------------------------------------------
+   Хедеры: тонкая зелёная линия снизу с плавным затуханием
+   -------------------------------------------------*/
+:where(.card-header,
+       .modal-header,
+       .offcanvas-header,
+       .sticky-main-header,
+       .page-banner,
+       .section-title,
+       .category-heading){
+  position: relative;
+}
+:where(.card-header,
+       .modal-header,
+       .offcanvas-header,
+       .sticky-main-header,
+       .page-banner,
+       .section-title,
+       .category-heading)::after{
+  content:""; position:absolute; left:.75rem; right:.75rem; bottom:0; height:2px;
+  background: linear-gradient(90deg,
+    var(--acc600-0)   0%,
+    var(--acc600-40) 12%,
+    var(--accent-600) 50%,
+    var(--acc600-40) 88%,
+    var(--acc600-0) 100%
+  );
+  opacity:.9; border-radius: 2px;
+}
+
+/* Аккордеон: актив — нижняя кромка + зелёная иконка */
+.accordion-button{ transition: box-shadow .18s ease; }
+.accordion-button:not(.collapsed){
+  box-shadow: inset 0 -2px 0 var(--accent-600);
+}
+.accordion-button::after{
+  --acc-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2316a34a' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+  background-image: var(--acc-icon) !important;
+}
+.accordion-button:not(.collapsed)::after{
+  background-image: var(--acc-icon) !important;
+}
+
+/* Хлебные крошки: активный — зелёная «[» слева */
+.breadcrumb .breadcrumb-item.active{
+  color: var(--accent-700); position: relative;
+}
+.breadcrumb .breadcrumb-item.active::before{
+  content: "["; color: var(--accent-600); margin-right:.25rem; font-weight:600;
+}
+
+/* -------------------------------------------------
+   Вариант C — «Позитивные статусы»
+   -------------------------------------------------*/
+.badge-accent-outline{
+  color: var(--accent-700) !important;
+  border: 1px solid var(--accent-600) !important;
+  background: transparent !important;
+}
+.badge-in-stock{ @extend .badge-accent-outline; }
+.badge-sale    { @extend .badge-accent-outline; }
+.badge-warranty{ @extend .badge-accent-outline; }
+
+.price-old { text-decoration: line-through; opacity:.6; }
+.price-save, .text-save { color: var(--accent-600) !important; font-weight:600; }
+
+/* -------------------------------------------------
+   Вариант D — «Фокус/UX»: вернуть “стандартный” зелёный Bootstrap
+   -------------------------------------------------*/
+
+/* Глобальные фокус-кольца — мягкая зелёная аура */
+:where(button, .btn, [role="button"], a, .nav-link):focus-visible{
+  outline: 2px solid var(--accent-20a);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--accent-20a);
+}
+
+/* Поля ввода: классический Bootstrap-грин (без нашего подчёркивания) */
+:is(input.form-control, textarea.form-control, select.form-select):focus{
+  border-color: var(--bs-success) !important;
+  box-shadow: 0 0 0 .25rem rgba(var(--bs-success-rgb), .25) !important;
+  outline: 0;
+}
+.input-group:focus-within,
+.form-floating:focus-within{
+  box-shadow: none;
+  border-radius: inherit;
+}
+.form-control.is-valid,
+.form-select.is-valid{
+  border-color: var(--bs-success) !important;
+  box-shadow: 0 0 0 .25rem rgba(var(--bs-success-rgb), .25) !important;
+}
+
+/* === HR: всегда зелёные по всему приложению ============================== */
+:root{
+  --accent:     #22c55e; /* если не определён выше */
+  --accent-600: #16a34a;
+}
+
+/* Обычные <hr> и варианты Bootstrap (.dropdown-divider тоже hr) */
+hr,
+hr.dropdown-divider,
+.dropdown-divider{
+  /* выключаем “наследуемый чёрный” и полупрозрачность */
+  opacity: 1 !important;
+  color: var(--accent-600) !important;
+
+  /* рисуем зелёной именно границей (как в BS) */
+  border: 0 !important;
+  border-top: 1px solid var(--accent-600) !important;
+
+  /* на случай нестандартных сбросов — даём тонкий зелёный фон вместо бордера */
+  height: 1px !important;
+  background: var(--accent-600) !important;
+}
+
+/* В стеклянных/тёмных контейнерах принудительно тот же зелёный */
+.glass-panel hr,
+.modal-content hr,
+.offcanvas hr{
+  color: var(--accent-600) !important;
+  border-top-color: var(--accent-600) !important;
+  background: var(--accent-600) !important;
+}

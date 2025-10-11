@@ -1,0 +1,72 @@
+<div class="p-3">
+  <div class="d-flex align-items-start gap-3 mb-3">
+    <div class="flex-shrink-0">
+      <% if mod.avatar.present? %>
+        <%= image_tag(mod.avatar.url, class: "rounded", width: 88, height: 88) %>
+      <% else %>
+        <%= image_tag("default_product_avatar.jpg", class: "rounded", width: 88, height: 88) %>
+      <% end %>
+    </div>
+    <div class="flex-grow-1">
+      <h5 class="mb-1"><%= mod.try(:title) || mod.try(:name) || "Mod ##{mod.id}" %></h5>
+      <div class="small text-muted d-flex flex-wrap gap-2">
+        <span class="badge bg-light text-dark">Gen: <%= mod.generation_id || "—" %></span>
+        <% if mod.phone_id.present? %><span class="badge bg-light text-dark">Phone: <%= mod.phone_id %></span><% end %>
+        <% if mod.model_id.present? %><span class="badge bg-light text-dark">Model: <%= mod.model_id %></span><% end %>
+      </div>
+    </div>
+  </div>
+
+  <% if mod.manufacturers.present? %>
+    <div class="mb-3">
+      <div class="fw-semibold mb-2">Производители</div>
+      <ul class="list-unstyled mb-2" data-controller="details" data-details-target="list" data-initial="6">
+        <% Array(mod.manufacturers).each do |maker| %>
+          <li class="mb-1"><span class="badge bg-dark-subtle text-dark"><%= maker %></span></li>
+        <% end %>
+      </ul>
+      <% if Array(mod.manufacturers).size > 6 %>
+        <button class="btn btn-sm btn-outline-dark" data-action="click->details#toggleMore">Показать ещё</button>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if mod.images.present? %>
+    <div class="mb-3">
+      <div class="fw-semibold mb-2">Фото</div>
+      <div class="row g-2">
+        <% mod.images.each do |image| %>
+          <div class="col-6 col-md-4 col-lg-3"><%= image_tag(image.url, class: "img-fluid rounded border") %></div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if mod.videos.present? %>
+    <div class="mb-3">
+      <div class="fw-semibold mb-2">Видео</div>
+      <div class="ratio ratio-16x9">
+        <%= video_tag(mod.videos, controls: true, class: "rounded border") %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="d-flex flex-wrap gap-2">
+    <%= link_to "Открыть полную страницу", mod_path(mod), class: "btn btn-sm btn-light" %>
+    <%= link_to "Редактировать", edit_mod_path(mod), class: "btn btn-sm btn-dark" %>
+
+    <% if turbo_frame_request? %>
+      <a href="#"
+         class="btn btn-sm btn-light ms-auto"
+         data-controller="frame-reset"
+         data-frame-reset-frame-id-value="mod_details"
+         data-frame-reset-placeholder-value='<div class="text-center text-muted py-5"><div class="mb-2">Выберите модуль слева, чтобы увидеть детали.</div><small>Поддерживаются Turbo-frames.</small></div>'
+         data-action="click->frame-reset#toPlaceholder">
+        Назад
+      </a>
+      <a href="#" class="btn btn-sm btn-outline-light text-dark" data-controller="frame-reset" data-action="click->frame-reset#closeModal">
+        Закрыть
+      </a>
+    <% end %>
+  </div>
+</div>

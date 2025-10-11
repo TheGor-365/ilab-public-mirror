@@ -1,0 +1,70 @@
+<% provide :page_title, 'Store' %>
+<% currently_at 'Store' %>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="storeOffcanvasNav" aria-labelledby="storeOffcanvasNavLabel">
+  <div class="offcanvas-header glass-panel sticky-top mb-2 mx-2">
+    <h5 class="offcanvas-title" id="storeOffcanvasNavLabel">Store Navigation</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body" id="store_nav_offcanvas">
+    <%= render 'store_show_nav', offcanvas: true %>
+  </div>
+</div>
+
+<!-- Модалка для мобилы (не трогаю — у тебя уже работает) -->
+<div class="modal fade" id="productDetailsModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen-sm-down modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Детали товара</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      <div class="modal-body" id="product-details-modal-body">
+        <!-- Turbo вставит сюда products/_details_panel -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="store-grid-container">
+  <aside class="desktop-sidebar">
+    <div class="sidebar-sticky-content" id="store_nav_desktop">
+      <%= render 'store_show_nav' %>
+    </div>
+  </aside>
+
+  <main>
+    <div id="store_main">
+      <%= render 'store_main' %>
+    </div>
+  </main>
+
+  <aside class="desktop-sidebar">
+    <div class="sidebar-sticky-content">
+      <%= turbo_frame_tag "product_details_frame" do %>
+        <%= render partial: 'store_info_card', locals: { by_section: @by_section, total: @total_products } %>
+      <% end %>
+    </div>
+  </aside>
+</div>
+
+
+<%# ↓ Добавляем вычисление --ui-offset для offcanvas, чтобы он открывался ниже навбара %>
+<script>
+  (function(){
+    function setOffsets(){
+      const nav = document.querySelector('.navbar.fixed-top');
+      const navH = nav ? Math.round(nav.getBoundingClientRect().height) : 0;
+      // можно учесть мобильный локальный заголовок, если виден
+      const mobileHeader = document.querySelector('.mobile-header');
+      const mobH = mobileHeader ? Math.round(mobileHeader.getBoundingClientRect().height) : 0;
+      document.documentElement.style.setProperty('--ui-offset', (navH + mobH) + 'px');
+    }
+    setOffsets();
+    window.addEventListener('resize', setOffsets);
+    document.addEventListener('turbo:load', setOffsets);
+    window.addEventListener('load', setOffsets);
+    document.addEventListener('shown.bs.offcanvas', setOffsets);
+    document.addEventListener('hidden.bs.offcanvas', setOffsets);
+  })();
+</script>

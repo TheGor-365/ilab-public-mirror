@@ -1,0 +1,133 @@
+<%= form_with(model: answer, html: { multipart: true }) do |form| %>
+
+  <% if answer.errors.any? %>
+    <div class="row p-5 shadow bg-white mb-5 border border-danger">
+      <div id="error_explanation" class="danger">
+        <h5><%= pluralize(answer.errors.count, "error") %> <span class="text-muted">prohibited this answer from being saved:</span></h5>
+        <br>
+
+        <ul>
+          <% answer.errors.each do |error| %>
+            <li>
+              <small class="text-muted">
+                <%= error.full_message %>
+              </small>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row p-5 shadow bg-white mb-5 mt-5">
+    <%= form.label :question_id %>
+    <%= form.text_field :question_id, class: 'form-control' %>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5 mt-5">
+    <%= form.label :content %>
+    <%= form.text_area :content, class: 'form-control' %>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5 mt-5">
+    <%= form.label :correct %>
+    <%= form.check_box :correct, class: 'form-control' %>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5 mt-5">
+    <div class="mb-3">
+      <%= form.label :avatar, class: 'form-label mb-3' %><br>
+      <%= form.file_field :avatar, id: 'new-avatar-field', type: 'file', class: 'form-control' %>
+      <%= form.hidden_field :avatar_cache %>
+    </div>
+
+    <div class="row">
+      <div class="mt-3 mb-3 col">
+        <%= form.label "Current answer avatar", class: 'form-label mb-3' %><br>
+
+        <% if answer.avatar.present? %>
+          <%= image_tag(answer.avatar.url, width: '300', class: 'img-thumbnail') %>
+        <% else %>
+          <%= image_tag('default_avatar.jpg', width: '300', class: 'img-thumbnail') %>
+        <% end %>
+      </div>
+
+      <div class="mt-3 mb-3 col">
+        <%= form.label "New answer avatar preview", class: 'form-label mb-3' %><br>
+        <img id="image-preview" src="#" width="300" height="200" class="img-thumbnail" />
+      </div>
+    </div>
+  </div>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <div class="mb-3">
+      <%= form.label "Change answer images", class: 'form-label mb-3' %><br>
+      <%= form.file_field :images, type: 'file', multiple: true, class: 'form-control' %>
+      <%= form.hidden_field :images_cache %>
+    </div>
+
+    <div class="mt-3 mb-3">
+      <% if answer.images? %>
+        <% answer.images.each do |image| %>
+          <%= image_tag(image.url, width: '100') %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="mt-3 mb-3 col">
+      <%= form.label "Choosed images", class: 'form-label mb-3' %><br>
+      <img id="image-preview" src="#" width="300" height="200" class="img-thumbnail" />
+    </div>
+  </div>
+
+  <% if answer.images.size > 0 %>
+    <div class="row p-5 shadow bg-white mb-5">
+      <%= form.label "Add more images for answer", class: 'form-label mb-3' %><br>
+      <%= form.file_field :images, multiple: true, class: 'form-control' %>
+
+      <div class="mt-3 mb-3">
+        <% if answer.images? %>
+          <% answer.images.each do |image| %>
+            <%= image_tag(image.url, width: '100') %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row p-5 shadow bg-white mb-5">
+    <%= form.label "Change answer videos", class: 'form-label mb-3' %><br>
+    <%= form.file_field :videos, multiple: true, type: 'file', class: 'form-control' %>
+
+    <div class="mt-5">
+      <% if answer.videos.present? %>
+        <%= video_tag(answer.videos, width: '340', height: '180', controls: true, class: 'rounded card p-1 shadow mx-auto mb-5') %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="mt-3 mb-3">
+    <%= form.submit class: 'btn btn-success btn-sm' %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+
+  function readURL(input) {
+
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        $('#image-preview').attr('src', e.target.result);
+      }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $("#new-images-field").change(function(){
+    readURL(this);
+  });
+
+</script>

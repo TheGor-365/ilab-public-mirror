@@ -1,0 +1,32 @@
+<% provide :page_title, 'New iPhone' %>
+<% currently_at 'iPhones' %>
+
+<div class="row new-phone">
+
+  <div class="col-2">
+    <%= render 'phones/new_phone_partials/new_phone_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+
+    <div class="contents-block">
+
+      <div class="row px-0 pt-4 pb-4 shadow bg-white mb-5 text-center header-nav">
+        <div>
+          <h1 class="display-6 text-muted">
+            New Phone
+            <br>
+
+            <i class="fas fa-file text-muted pt-4"></i>
+          </h1>
+        </div>
+      </div>
+
+      <%= render 'phones/new_phone_partials/new_phone_form', phone: @phone, generation: @generation %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <%= render 'phones/new_phone_partials/new_phone_info_card', phone: @phone %>
+  </div>
+</div>

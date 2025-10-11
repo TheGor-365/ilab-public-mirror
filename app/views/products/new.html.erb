@@ -1,0 +1,45 @@
+<% provide :page_title, "Выставить товар на продажу" %>
+<% provide :has_banner, true %>
+
+<div class="page-banner">
+  <div class="container page-banner__inner">
+    <!-- слева заголовок -->
+    <div class="page-banner__title">
+      <i class="bi bi-plus-circle"></i>
+      Новый товар
+    </div>
+
+    <!-- справа кнопка Каталог, текст виден и на мобиле -->
+    <div class="d-flex gap-2 ms-auto">
+      <%= link_to products_path, class: "btn btn-sm btn-outline-dark", title: "Каталог" do %>
+        <i class="bi bi-card-list"></i><span class="ms-1">Каталог</span>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="page-banner-spacer"></div>
+
+<%= render "form" %>
+
+<div class="page-bottom-spacer"></div>
+
+<style>
+  /* Под баннером чуть меньше “воздуха”, особенно на десктопе */
+  .page-banner-spacer{ height: calc(var(--ui-offset, 112px) - 12px); }
+  @media (min-width: 992px){
+    .page-banner-spacer{ height: calc(var(--ui-offset, 112px) - 28px); }
+  }
+</style>
+
+<script>
+(function(){
+  function setOffsets(){
+    const nav = document.querySelector('.navbar.fixed-top');
+    const banner = document.querySelector('.page-banner');
+    const navH = nav ? nav.getBoundingClientRect().height : 0;
+    const banH = banner ? banner.getBoundingClientRect().height : 0;
+    document.documentElement.style.setProperty('--ui-offset', (navH + banH) + 'px');
+  }
+  setOffsets(); addEventListener('resize', setOffsets);
+})();
+</script>

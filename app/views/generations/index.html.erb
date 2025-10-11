@@ -1,0 +1,17 @@
+<% provide :page_title, 'iPhone Generations' %>
+<% currently_at 'iPhone Generations' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'generations/index_generations_partials/generations_show_nav' %>
+  </div>
+
+  <div id="generation-index" class="col-6 mt-5 ms-5">
+    <%= @generations.present? ? ( render partial: 'generations/index_generations_partials/generations_block' ) : ( render partial: 'generations/index_generations_partials/generations_table' )  %>
+  </div>
+
+  <div class="col-3">
+    <%= render 'generations/index_generations_partials/generations_info_card', generation: @generation %>
+  </div>
+</div>

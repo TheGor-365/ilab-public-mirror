@@ -1,0 +1,16 @@
+<% provide :page_title, (@defect.try(:title) || "Defect ##{@defect.id}") %>
+<% currently_at 'iPhone Defects' %>
+
+<% if turbo_frame_request? %>
+  <%= turbo_frame_tag turbo_frame_request_id do %>
+    <%= render partial: "details", locals: { defect: @defect } %>
+  <% end %>
+<% else %>
+  <div class="container py-3">
+    <div class="d-flex align-items-center gap-3 mb-3">
+      <%= link_to "← К списку дефектов", defects_path, class: "btn btn-link link-dark p-0" %>
+      <%= link_to "← В магазин", store_path, class: "btn btn-link link-dark p-0" %>
+    </div>
+    <%= render partial: "details", locals: { defect: @defect } %>
+  </div>
+<% end %>

@@ -1,0 +1,32 @@
+<% provide :page_title, 'Edit Category' %>
+<% currently_at 'Chapters' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'category_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+    <div class="row p-5 shadow bg-white mb-5">
+      <h1 class="display-6">
+        Editing Category
+        <span class="text-muted">
+          <%= @category.heading %>
+        </span>
+      </h1>
+    </div>
+
+    <%= render 'form', category: @category %>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Show', @category %>
+      <%= link_to 'Back', categories_path %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <%= render 'category_info_card' %>
+  </div>
+
+</div>

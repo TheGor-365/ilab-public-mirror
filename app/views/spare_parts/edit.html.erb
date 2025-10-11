@@ -1,0 +1,31 @@
+<% provide :page_title, 'Edit iPhone Spare Part' %>
+<% currently_at 'iPhone Spare Parts' %>
+
+<div class="row">
+
+  <div class="col-2">
+    <%= render 'spare_part_show_nav' %>
+  </div>
+
+  <div class="col-6 m-5">
+    <div class="row p-5 shadow bg-white mb-5">
+      <h1 class="display-6 mb-5">
+        Editing Spare Part
+        <span class="text-muted">
+          <%= @spare_part.name %>
+        </span>
+      </h1>
+    </div>
+
+    <%= render 'form', spare_part: @spare_part %>
+
+    <div class="list-inline-item mt-3">
+      <%= link_to 'Show', @spare_part, class: 'text-decoration-none me-3' %>
+      <%= link_to 'Back', spare_parts_path, class: 'text-decoration-none text-dark' %>
+    </div>
+  </div>
+
+  <div class="col-3">
+    <%= render 'spare_part_info_card' %>
+  </div>
+</div>

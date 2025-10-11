@@ -1,0 +1,52 @@
+<% provide :page_title, @product.name %>
+<% currently_at @product.name %>
+
+<div class="container-fluid px-4 py-5">
+  <div class="row">
+
+    <!-- === Левый блок (типовая информация по модели) === -->
+    <div class="col-lg-6 mb-4">
+      <div class="bg-white p-4 shadow rounded">
+        <h2 class="mb-4 border-bottom pb-2">Модель: <%= @product.name %></h2>
+
+        <%= render partial: 'products/generation_info', locals: { generation: @generation } %>
+        <%= render partial: 'products/phone_info', locals: { phone: @phone } %>
+        <%= render partial: 'products/repairs_list', locals: { repairs: @repairs } %>
+        <%= render partial: 'products/defects_list', locals: { defects: @defects } %>
+        <%= render partial: 'products/spare_parts_list', locals: { spare_parts: @spare_parts } %>
+        <%= render partial: 'products/mods_list', locals: { mods: @mods } %>
+      </div>
+    </div>
+
+    <%= render partial: "products/details_kv", locals: { product: @product } %>
+
+    <!-- === Правый блок (индивидуальные характеристики товара) === -->
+    <div class="col-lg-6 mb-4">
+      <div class="bg-white p-4 shadow rounded">
+        <h3 class="mb-3">Экземпляр на продажу</h3>
+
+        <% if @product.avatar.present? %>
+          <div class="mb-3 text-center">
+            <%= image_tag @product.avatar.url, class: 'img-fluid rounded shadow' %>
+          </div>
+        <% end %>
+
+        <p class="text-muted"><%= simple_format(@product.description) %></p>
+        <p class="fs-5 fw-bold text-end text-success">$<%= @product.price %></p>
+
+        <div class="mb-3">
+          <%= form_with model: @order_item, url: order_items_path do |f| %>
+            <%= f.hidden_field :product_id, value: @product.id %>
+            <div class="input-group">
+              <%= f.number_field :quantity, value: 1, min: 1, class: 'form-control' %>
+              <%= f.submit "Добавить в корзину", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+
+        <%= render partial: 'products/product_media', locals: { images: @product.images, videos: @product.videos } %>
+      </div>
+    </div>
+
+  </div>
+</div>
